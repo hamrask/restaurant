@@ -11,5 +11,10 @@ export class ItemSectionComponent implements OnInit {
 
   ngOnInit(): void {
   }
-
+  displayedColumns: string[] = ['position', 'nameofsection', 'printer', 'action'];
+  dataSource = ELEMENT_DATA;
 }
+const ELEMENT_DATA= [
+  {position: 1, nameofsection: 'juice', printer: 'printer 1', action: 'add'},
+  
+];

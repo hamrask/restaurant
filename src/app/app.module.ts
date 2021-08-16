@@ -16,6 +16,14 @@ import {MatSelectModule} from '@angular/material/select';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatTableModule} from '@angular/material/table';
 import { MatOptionModule } from '@angular/material/core';
+import {MatRadioModule} from '@angular/material/radio';
+import {MatInputModule} from '@angular/material/input';
+import {MatIconModule} from '@angular/material/icon';
+import {MatCheckboxModule} from '@angular/material/checkbox';
+
+
+
+
 
 @NgModule({
   declarations: [
@@ -35,7 +43,11 @@ import { MatOptionModule } from '@angular/material/core';
     MatSelectModule,
     MatTableModule,
     MatFormFieldModule,
-    MatOptionModule
+    MatOptionModule,
+    MatRadioModule,
+    MatInputModule,
+    MatIconModule,
+    MatCheckboxModule
   ],
   providers: [],
   bootstrap: [AppComponent]

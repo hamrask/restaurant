@@ -3,6 +3,8 @@ import { RouterModule, Routes } from '@angular/router';
 import { AppComponent } from './app.component';
 import { IteemAddComponent } from './iteem-add/iteem-add.component';
 import { ItemSectionComponent } from './item-section/item-section.component';
+import { UpdateStockComponent } from './update-stock/update-stock.component';
+
 
 const routes: Routes = [
   {
@@ -12,7 +14,7 @@ const routes: Routes = [
     children:[
       {
         path: '',
-        redirectTo:'add-item',
+        redirectTo:'update-stock',
         pathMatch:'full'
       },
       {
@@ -22,6 +24,10 @@ const routes: Routes = [
       {
         path:'add-item',
     component: IteemAddComponent,
+      },
+      {
+        path:'update-stock',
+    component: UpdateStockComponent,
       }
     ]
   }

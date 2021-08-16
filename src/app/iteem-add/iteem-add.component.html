@@ -3,35 +3,102 @@
 <div class="col-md-12 ">
     <h3>Add Item</h3>
 </div>
-<div class="col-md-4">
-    <label for="">Name of Item</label>
-    <input type="text">
+<div class="col-md-3">
+    <h4>Item Name</h4>
+       
+            <mat-form-field class="example-full-width" appearance="fill">
+              <mat-label>Favorite food</mat-label>
+              <input matInput placeholder="Ex. Pizza" value="">
+            </mat-form-field>
+         
+</div>
+<div class="col-md-3">
+    <h4>Availability</h4>
+    <mat-radio-group aria-label="Select an option" class="btn">
+        <mat-radio-button value="1" class="ry">Yes</mat-radio-button>
+        <mat-radio-button value="2" class="rn">No</mat-radio-button>
+      </mat-radio-group>
+      
+</div>
+<div class="col-md-3">
+    <h4>Add Description</h4>
+    
+        <mat-form-field class="example-full-width" appearance="fill">
+          <mat-label>Leave a comment</mat-label>
+          <textarea matInput placeholder="Ex. It makes me feel..."></textarea>
+        </mat-form-field>
+      
+</div>
+<div class="col-md-3">
+    <h4>Amount</h4>
+        <mat-form-field class="full-width" appearance="fill">
+          <mat-label>Amount</mat-label>
+          <input matInput placeholder="100" value="">
+        </mat-form-field>  
 </div>
 <div class="col-md-4">
-    <label for="">Availability</label>
-    <input type="radio">
-    <label for="">Yes</label>
-<input type="radio">
-    <label for="">No</label>
+    <input type="file">
+    <img class="img" [src]="imageUrl" width="250px" height="150px" alt="">
 </div>
-<div class="col-md-4">
-    <label for="">Add Description</label>
-    <textarea name="" id="" cols="20" rows="5"></textarea>
+<div class="col-md-5"></div>
+<div class="col-md-6">
+  <div class="col-md-4">
+    <section>
+        <div class="button-row">
+          <button class="btn1" mat-raised-button color="primary">Add</button>   
+          <button class="btn2" mat-raised-button>Cancel</button>    
+      </div>
+      </section>
 </div>
-<div class="col-md-4">
-    <label for="">Amount</label>
-    <input type="text">
 </div>
-<div class="col-md-4">
-    <label for="">Gst</label>
+</div>
+<div class="row">
+<table mat-table [dataSource]="dataSource" class="w100">
 
-    <input type="text">
+    <!--- Note that these columns can be defined in any order.
+          The actual rendered columns are set as a property on the row definition" -->
+  
+    <!-- Position Column -->
+    <ng-container matColumnDef="position">
+      <th mat-header-cell *matHeaderCellDef> No. </th>
+      <td mat-cell *matCellDef="let element"> {{element.position}} </td>
+    </ng-container>
+  
+    <!-- item Name Column -->
+    <ng-container matColumnDef="itemname">
+      <th mat-header-cell *matHeaderCellDef> Item name</th>
+      <td mat-cell *matCellDef="let element"> {{element.itemname}} </td>
+    </ng-container>
+  
+    <!-- availability Column -->
+    <ng-container matColumnDef="availability">
+      <th mat-header-cell *matHeaderCellDef> Availability</th>
+      <td mat-cell *matCellDef="let element"> {{element.availability}} </td>
+    </ng-container>
+  
+    <!--   description Column -->
+    <ng-container matColumnDef="addescription">
+      <th mat-header-cell *matHeaderCellDef> Add Description</th>
+      <td mat-cell *matCellDef="let element"> {{element.addescription}} </td>
+    </ng-container>
+  <!--   amount Column -->
+  <ng-container matColumnDef="amount">
+    <th mat-header-cell *matHeaderCellDef> Amount</th>
+    <td mat-cell *matCellDef="let element"> {{element.amount}} </td>
+  </ng-container>
+<!--   Gst Column -->
+<ng-container matColumnDef="gst">
+    <th mat-header-cell *matHeaderCellDef> Gst</th>
+    <td mat-cell *matCellDef="let element"> {{element.gst}} </td>
+  </ng-container>
+  <!--   Gst Column -->
+<ng-container matColumnDef="image">
+    <th mat-header-cell *matHeaderCellDef> Image</th>
+    <td mat-cell *matCellDef="let element"> {{element.image}} </td>
+  </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
 </div>
-<div class="col-md-4">
-    <img src="" alt="">
-</div>
-<div class="col-md-4">
-    <button>Add</button>
-    <button>Cancel</button>
-</div>
-</div>
+  
