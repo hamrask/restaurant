@@ -11,5 +11,10 @@ export class TakeOrderComponent implements OnInit {
 
   ngOnInit(): void {
   }
-
+  displayedColumns: string[] = ['position', 'item', 'quandity', 'price'];
+  dataSource = ELEMENT_DATA;
 }
+const ELEMENT_DATA=[
+  {position: 1, item: 'pizza', quandity: '2 Nos', price: '500'},
+  
+];

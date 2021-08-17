@@ -20,6 +20,8 @@ import {MatRadioModule} from '@angular/material/radio';
 import {MatInputModule} from '@angular/material/input';
 import {MatIconModule} from '@angular/material/icon';
 import {MatCheckboxModule} from '@angular/material/checkbox';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import { ItemCategoryComponent } from './item-category/item-category.component';
 
 
 
@@ -33,7 +35,9 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
     UpdateStockComponent,
     TableConfigComponent,
     AddMenuComponent,
-    TakeOrderComponent
+    TakeOrderComponent,
+    ItemCategoryComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -47,7 +51,8 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
     MatRadioModule,
     MatInputModule,
     MatIconModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    MatAutocompleteModule
   ],
   providers: [],
   bootstrap: [AppComponent]

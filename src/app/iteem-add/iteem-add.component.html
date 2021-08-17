@@ -4,43 +4,58 @@
     <h3>Add Item</h3>
 </div>
 <div class="col-md-3">
-    <h4>Item Name</h4>
-       
-            <mat-form-field class="example-full-width" appearance="fill">
+    <label for="">Item Name</label>
+       <br>
+            <mat-form-field class="f-margin" appearance="fill">
               <mat-label>Favorite food</mat-label>
               <input matInput placeholder="Ex. Pizza" value="">
             </mat-form-field>
          
 </div>
 <div class="col-md-3">
-    <h4>Availability</h4>
-    <mat-radio-group aria-label="Select an option" class="btn">
-        <mat-radio-button value="1" class="ry">Yes</mat-radio-button>
-        <mat-radio-button value="2" class="rn">No</mat-radio-button>
-      </mat-radio-group>
-      
-</div>
-<div class="col-md-3">
-    <h4>Add Description</h4>
-    
-        <mat-form-field class="example-full-width" appearance="fill">
+    <label for="">Add Description</label>
+    <br>
+        <mat-form-field class="f-margin" appearance="fill">
           <mat-label>Leave a comment</mat-label>
           <textarea matInput placeholder="Ex. It makes me feel..."></textarea>
         </mat-form-field>
       
 </div>
 <div class="col-md-3">
-    <h4>Amount</h4>
-        <mat-form-field class="full-width" appearance="fill">
+    <label for="">Amount</label>
+    <br>
+        <mat-form-field class="f-margin" appearance="fill">
           <mat-label>Amount</mat-label>
           <input matInput placeholder="100" value="">
         </mat-form-field>  
 </div>
-<div class="col-md-4">
-    <input type="file">
-    <img class="img" [src]="imageUrl" width="250px" height="150px" alt="">
+<div class="row">
+<div class="col-md-3">
+  <mat-form-field appearance="fill" class="d-categry" >
+    <mat-label>Category</mat-label>
+    <select matNativeControl required>
+      <option value="printer 1">juice</option>
+      <option value="printer 2">biriyani</option>
+      <option value="printer 3">ice-cream</option>
+    </select>
+  </mat-form-field>
 </div>
-<div class="col-md-5"></div>
+<div class="col-md-4">
+  <mat-form-field appearance="fill" class="section-m " >
+    <mat-label>Section</mat-label>
+    <select matNativeControl required>
+      <option value="printer 1">juice</option>
+      <option value="printer 2">biriyani</option>
+      <option value="printer 3">ice-cream</option>
+    </select>
+  </mat-form-field>
+</div>
+</div>
+<div class=" c-margin col-md-3">
+  <input type="file">
+  <img class="img" [src]="imageUrl" width="250px" height="150px" alt="">
+</div>
+<div class="col-md-9"></div>
 <div class="col-md-6">
   <div class="col-md-4">
     <section>
@@ -52,6 +67,10 @@
 </div>
 </div>
 </div>
+  
+  
+
+
 <div class="row">
 <table mat-table [dataSource]="dataSource" class="w100">
 
