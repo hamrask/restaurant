@@ -22,6 +22,9 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import { ItemCategoryComponent } from './item-category/item-category.component';
+import { LoginComponent } from './login/login.component';
+import {MatCard, MatCardModule} from '@angular/material/card';
+import { WaiterOrderComponent } from './waiter-order/waiter-order.component';
 
 
 
@@ -37,6 +40,8 @@ import { ItemCategoryComponent } from './item-category/item-category.component';
     AddMenuComponent,
     TakeOrderComponent,
     ItemCategoryComponent,
+    LoginComponent,
+    WaiterOrderComponent,
 
   ],
   imports: [
@@ -52,7 +57,8 @@ import { ItemCategoryComponent } from './item-category/item-category.component';
     MatInputModule,
     MatIconModule,
     MatCheckboxModule,
-    MatAutocompleteModule
+    MatAutocompleteModule,
+    MatCardModule
   ],
   providers: [],
   bootstrap: [AppComponent]
