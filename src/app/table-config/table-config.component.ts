@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-table-config',
@@ -6,10 +7,19 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./table-config.component.scss']
 })
 export class TableConfigComponent implements OnInit {
+  sectionForm: FormGroup;
 
-  constructor() { }
+  constructor(private fb: FormBuilder) { }
 
   ngOnInit(): void {
+    this.initForm()
+  }
+  initForm(){
+    this.sectionForm=this.fb.group({
+      userName:[Validators.required],
+      password:[Validators.required]
+
+    })
   }
 
 }

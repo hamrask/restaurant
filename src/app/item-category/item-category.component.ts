@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-item-category',
@@ -6,10 +7,15 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./item-category.component.scss']
 })
 export class ItemCategoryComponent implements OnInit {
-
-  constructor() { }
-
+sectionForm: FormGroup
+  constructor(private fb:FormBuilder) { }
   ngOnInit(): void {
+    this.initForm();
+  }
+  initForm(){
+    this.sectionForm=this.fb.group({
+      Category:[Validators.required]
+    });
   }
   displayedColumns: string[] = ['position', 'category', 'action'];
   dataSource = ELEMENT_DATA;

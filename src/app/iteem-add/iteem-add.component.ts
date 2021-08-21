@@ -1,4 +1,6 @@
+import { group } from '@angular/animations';
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-iteem-add',
@@ -6,10 +8,22 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./iteem-add.component.scss']
 })
 export class IteemAddComponent implements OnInit {
+  selectionForm: FormGroup;
 
-  constructor() { }
+  constructor(private fb:FormBuilder) { }
 
   ngOnInit(): void {
+    this.initForm();
+  }
+  initForm(){
+    this.selectionForm=this.fb.group({
+      itemName:[Validators.required],
+      availability:[Validators.required],
+      description:[Validators.required],
+      amount:[Validators.required],
+      photoUrl:[Validators.required]
+
+});
   }
   displayedColumns: string[] = ['position', 'itemname', 'availability', 'addescription', 'amount', 'image'];
   dataSource = ELEMENT_DATA;

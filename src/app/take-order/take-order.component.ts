@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-take-order',
@@ -6,10 +7,21 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./take-order.component.scss']
 })
 export class TakeOrderComponent implements OnInit {
+  sectionForm: FormGroup;
 
-  constructor() { }
+  constructor(private fb: FormBuilder) { }
 
   ngOnInit(): void {
+    this.initForm()
+  }
+  initForm(){
+    this.sectionForm=this.fb.group({
+      queueNumber:[Validators.required],
+      tableName:[Validators.required],
+      nameOfItems:[Validators.required],
+      quantity:[Validators.required],
+      printedOrNot:[Validators.required]
+    });
   }
   displayedColumns: string[] = ['position', 'item', 'quandity', 'price'];
   dataSource = ELEMENT_DATA;
