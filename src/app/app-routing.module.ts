@@ -19,7 +19,7 @@ const routes: Routes = [
     children:[
       {
         path: '',
-        redirectTo:'waiter-order',
+        redirectTo:'add-section',
         pathMatch:'full'
       },
       {
