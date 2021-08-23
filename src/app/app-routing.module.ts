@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { AddMenuComponent } from './add-menu/add-menu.component';
 import { AppComponent } from './app.component';
 import { BillReportComponent } from './bill-report/bill-report.component';
+import { HomeComponent } from './home/home.component';
 import { IteemAddComponent } from './iteem-add/iteem-add.component';
 import { ItemCategoryComponent } from './item-category/item-category.component';
 import { ItemSectionComponent } from './item-section/item-section.component';
@@ -23,7 +24,7 @@ const routes: Routes = [
     children:[
       {
         path: '',
-        redirectTo:'bill-report',
+        redirectTo:'home',
         pathMatch:'full'
       },
       {
@@ -73,8 +74,11 @@ const routes: Routes = [
                     {
                       path:'bill-report',
                     component: BillReportComponent,
-                      }
-      
+                      },
+                      {
+                        path:'home',
+                      component: HomeComponent,
+                        }
     ]
   }
 ];

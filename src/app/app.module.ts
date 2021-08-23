@@ -29,6 +29,8 @@ import { UserManagementComponent } from './user-management/user-management.compo
 import { UserAddComponent } from './user-add/user-add.component';
 import { OrderBillComponent } from './order-bill/order-bill.component';
 import { BillReportComponent } from './bill-report/bill-report.component';
+import { HomeComponent } from './home/home.component';
+import {MatToolbarModule} from '@angular/material/toolbar';
 
 
 
@@ -51,6 +53,7 @@ import { BillReportComponent } from './bill-report/bill-report.component';
     UserAddComponent,
     OrderBillComponent,
     BillReportComponent,
+    HomeComponent,
    
 
   ],
@@ -68,7 +71,8 @@ import { BillReportComponent } from './bill-report/bill-report.component';
     MatIconModule,
     MatCheckboxModule,
     MatAutocompleteModule,
-    MatCardModule
+    MatCardModule,
+    MatToolbarModule
   ],
   providers: [],
   bootstrap: [AppComponent]
