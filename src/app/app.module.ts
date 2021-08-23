@@ -27,6 +27,8 @@ import {MatCard, MatCardModule} from '@angular/material/card';
 import { WaiterOrderComponent } from './waiter-order/waiter-order.component';
 import { UserManagementComponent } from './user-management/user-management.component';
 import { UserAddComponent } from './user-add/user-add.component';
+import { OrderBillComponent } from './order-bill/order-bill.component';
+import { BillReportComponent } from './bill-report/bill-report.component';
 
 
 
@@ -47,6 +49,8 @@ import { UserAddComponent } from './user-add/user-add.component';
     WaiterOrderComponent,
     UserManagementComponent,
     UserAddComponent,
+    OrderBillComponent,
+    BillReportComponent,
    
 
   ],

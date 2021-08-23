@@ -2,10 +2,12 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AddMenuComponent } from './add-menu/add-menu.component';
 import { AppComponent } from './app.component';
+import { BillReportComponent } from './bill-report/bill-report.component';
 import { IteemAddComponent } from './iteem-add/iteem-add.component';
 import { ItemCategoryComponent } from './item-category/item-category.component';
 import { ItemSectionComponent } from './item-section/item-section.component';
 import { LoginComponent } from './login/login.component';
+import { OrderBillComponent } from './order-bill/order-bill.component';
 import { TableConfigComponent } from './table-config/table-config.component';
 import { TakeOrderComponent } from './take-order/take-order.component';
 import { UpdateStockComponent } from './update-stock/update-stock.component';
@@ -21,7 +23,7 @@ const routes: Routes = [
     children:[
       {
         path: '',
-        redirectTo:'user-management',
+        redirectTo:'bill-report',
         pathMatch:'full'
       },
       {
@@ -63,7 +65,15 @@ const routes: Routes = [
                 {
                   path:'user-add',
                 component: UserAddComponent,
-                  }
+                  },
+                  {
+                    path:'order-bill',
+                  component: OrderBillComponent,
+                    },
+                    {
+                      path:'bill-report',
+                    component: BillReportComponent,
+                      }
       
     ]
   }
