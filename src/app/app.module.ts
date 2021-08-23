@@ -25,6 +25,9 @@ import { ItemCategoryComponent } from './item-category/item-category.component';
 import { LoginComponent } from './login/login.component';
 import {MatCard, MatCardModule} from '@angular/material/card';
 import { WaiterOrderComponent } from './waiter-order/waiter-order.component';
+import { UserManagementComponent } from './user-management/user-management.component';
+import { UserAddComponent } from './user-add/user-add.component';
+
 
 
 
@@ -42,6 +45,9 @@ import { WaiterOrderComponent } from './waiter-order/waiter-order.component';
     ItemCategoryComponent,
     LoginComponent,
     WaiterOrderComponent,
+    UserManagementComponent,
+    UserAddComponent,
+   
 
   ],
   imports: [

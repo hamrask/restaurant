@@ -9,6 +9,8 @@ import { LoginComponent } from './login/login.component';
 import { TableConfigComponent } from './table-config/table-config.component';
 import { TakeOrderComponent } from './take-order/take-order.component';
 import { UpdateStockComponent } from './update-stock/update-stock.component';
+import { UserAddComponent } from './user-add/user-add.component';
+import { UserManagementComponent } from './user-management/user-management.component';
 import { WaiterOrderComponent } from './waiter-order/waiter-order.component';
 
 const routes: Routes = [
@@ -19,7 +21,7 @@ const routes: Routes = [
     children:[
       {
         path: '',
-        redirectTo:'waiter-order',
+        redirectTo:'user-management',
         pathMatch:'full'
       },
       {
@@ -53,7 +55,15 @@ const routes: Routes = [
             {
               path:'waiter-order',
             component: WaiterOrderComponent,
-              }
+              },
+              {
+                path:'user-management',
+              component: UserManagementComponent,
+                },
+                {
+                  path:'user-add',
+                component: UserAddComponent,
+                  }
       
     ]
   }
