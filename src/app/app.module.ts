@@ -31,7 +31,7 @@ import { OrderBillComponent } from './order-bill/order-bill.component';
 import { BillReportComponent } from './bill-report/bill-report.component';
 import { HomeComponent } from './home/home.component';
 import {MatToolbarModule} from '@angular/material/toolbar';
-
+import {MatMenuModule} from '@angular/material/menu';
 
 
 
@@ -72,7 +72,8 @@ import {MatToolbarModule} from '@angular/material/toolbar';
     MatCheckboxModule,
     MatAutocompleteModule,
     MatCardModule,
-    MatToolbarModule
+    MatToolbarModule,
+    MatMenuModule
   ],
   providers: [],
   bootstrap: [AppComponent]

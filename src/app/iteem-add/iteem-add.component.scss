@@ -17,12 +17,19 @@
     margin-top: 10px;
     border: solid 3px #ccc;
 }
-.amargin{
-    margin-left: 12px;
-}
-.f-margin{
+
+
+.amount -margin{
     padding-top: 10px;
 }
+
+.row{
+    margin: 30px;
+}
+.row-category{
+    display: flex;
+}
 .section-m{
+    flex: auto;
     margin-left: 5px;
 }

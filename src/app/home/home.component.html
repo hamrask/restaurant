@@ -1,23 +1,35 @@
 
     <div class="row">
-        <div class="col0-md-12 col-sm-12">
+        <div class="col-md-12 col-sm-12">
     <mat-toolbar>
         <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
             <mat-icon>menu</mat-icon>
-          </button>
-      <span>My Application</span>
+          </button>     
 
-      <mat-card class="profile">
-        <section>
-            <button class="logout" mat-raised-button>log out</button>    
+      <span class="label">My Application</span>
+          <img [src]="imageUrl" alt="">
+        <section>   
+            <button mat-button class="b-logout">Log out</button>   
         </section>
-      </mat-card>
-
-      
-
     </mat-toolbar>
+    <div class="sidebar "style="overflow-y:  scroll;max-width:950px;height:90%;">
+      <a href="#" routerLink="/login">Login</a>
+      <a href="#" routerLink="/order-bill">Order bill</a>
+      <a href="#" routerLink="/table-config">Table config</a>
+      <a href="#" routerLink="/take-order">Take order</a>
+      <a href="#" routerLink="/update-stock">Update stock</a>
+      <a href="#" routerLink="/user-add">user add</a>
+      <a href="#" routerLink="/waiter-order">Waiter order</a>
+      <a href="#" routerLink="/user-management">User management</a>
+      <a href="#" routerLink="/iteem-add">Item add</a>
+      <a href="#" routerLink="/bill-report">Bill report</a>
+      <a href="#" routerLink="/item-section">Item section</a>
+      <a href="#" routerLink="/item-category">Item scategory</a>
+    </div>
 </div>
 </div>
+
+
 
      
     

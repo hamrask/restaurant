@@ -48,6 +48,14 @@ const routes: Routes = [
       component: ItemCategoryComponent,
         },
         {
+          path:'item-section',
+        component: ItemSectionComponent,
+          },
+          {
+            path:'iteem-add',
+          component: IteemAddComponent,
+            },
+        {
           path:'table-config',
         component: TableConfigComponent,
           },

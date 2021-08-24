@@ -11,5 +11,5 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
   }
-
+imageUrl="https://expertphotography.b-cdn.net/wp-content/uploads/2020/08/social-media-profile-photos-3.jpg"
 }
