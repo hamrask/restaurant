@@ -1,20 +1,36 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-
+import { ItemService } from '../services/item.service';
 @Component({
   selector: 'app-item-category',
   templateUrl: './item-category.component.html',
   styleUrls: ['./item-category.component.scss']
 })
 export class ItemCategoryComponent implements OnInit {
-sectionForm: FormGroup
-  constructor(private fb:FormBuilder) { }
+categoryForm: FormGroup
+categories = [];
+  constructor(private fb:FormBuilder,private itemService: ItemService) { }
   ngOnInit(): void {
     this.initForm();
+    this.getAllCategories();
   }
   initForm(){
-    this.sectionForm=this.fb.group({
-      Category:[Validators.required]
+    this.categoryForm=this.fb.group({
+      Category:['',Validators.required]
+    });
+  }
+  saveCategory() {
+    if (this.categoryForm.valid) {
+      this.itemService.saveCategory(this.categoryForm.value).subscribe(data => {
+        console.log('data is saved');
+      }, error=> {
+        console.log('error occured');
+      })
+    }
+  }
+  getAllCategories(){
+    this.itemService.getAllCategory().subscribe(data =>{
+      this.categories = data;
     });
   }
   displayedColumns: string[] = ['position', 'category', 'action'];

@@ -7,7 +7,7 @@
       <label for="">Name of section</label>
             <mat-form-field class="section-margin" appearance="fill">
               <mat-label>Favorite food</mat-label>
-              <input matInput placeholder="Ex. Pizza" value="">
+              <input formControlName="sectionName" matInput placeholder="Ex. Pizza" value="">
             </mat-form-field>
           
           
@@ -17,7 +17,7 @@
       <br>
       <mat-form-field appearance="fill" class="drop-margin">
         <mat-label>Printer </mat-label>
-        <select matNativeControl required>
+        <select formControlName="printerName"matNativeControl required>
           <option value="printer 1">Printer 1</option>
           <option value="printer 2">Printer 2</option>
           <option value="printer 3">Printer 3</option>
@@ -35,7 +35,7 @@
     </form>
     <div class="row">
     <div class="col-md-6 ">
-        <table mat-table [dataSource]="dataSource" class="w100">
+        <table mat-table [dataSource]="sections" class="w100">
 
             <!--- Note that these columns can be defined in any order.
                   The actual rendered columns are set as a property on the row definition" -->
