@@ -1,4 +1,5 @@
 <div class="row main">
+  <form [formGroup]="sectionForm" (ngSubmit)="saveSection()">
     <div class="col-md-12">
         <h3>Add Item Section</h3>
     </div>
@@ -31,6 +32,7 @@
               <button class="btn2" mat-raised-button>Cancel</button>    
           </section>
     </div>
+    </form>
     <div class="row">
     <div class="col-md-6 ">
         <table mat-table [dataSource]="dataSource" class="w100">

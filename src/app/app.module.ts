@@ -26,6 +26,7 @@ import { LoginComponent } from './login/login.component';
 import { MatCardModule} from '@angular/material/card';
 import { WaiterOrderComponent } from './waiter-order/waiter-order.component';
 import {  HttpClientModule } from '@angular/common/http';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
 
 
@@ -60,7 +61,9 @@ import {  HttpClientModule } from '@angular/common/http';
     MatCheckboxModule,
     MatAutocompleteModule,
     MatCardModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
