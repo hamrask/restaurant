@@ -12,8 +12,8 @@
 <div class="row">
     <section>
         <div class="button-row">
-          <button class="btn1" mat-raised-button color="primary">Add</button>   
-          <button class="btn2" mat-raised-button>Cancel</button>    
+          <button type="submit" class="btn1" mat-raised-button color="primary">Add</button>   
+          <button type="reset" class="btn2" mat-raised-button>Cancel</button>    
       </div>
       </section>
 </div>
@@ -27,7 +27,7 @@
     <!-- Position Column -->
     <ng-container matColumnDef="position">
       <th mat-header-cell *matHeaderCellDef> No. </th>
-      <td mat-cell *matCellDef="let element"> {{element.position}} </td>
+      <td mat-cell *matCellDef="let element;let i = index;"> {{i+1}} </td>
     </ng-container>
   
     <!-- category Column -->
@@ -39,7 +39,11 @@
     <!-- action Column -->
     <ng-container matColumnDef="action">
       <th mat-header-cell *matHeaderCellDef> Action</th>
-      <td mat-cell *matCellDef="let element"> {{element.action}} </td>
+      <td mat-cell *matCellDef="let element"> <button mat-mini-fab color="primary">
+        <mat-icon>edit</mat-icon>
+      </button>&nbsp;<button mat-mini-fab color="warn">
+        <mat-icon>delete</mat-icon>
+      </button></td> 
     </ng-container>
 
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
