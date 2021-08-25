@@ -29,6 +29,7 @@ sections = [];
     if (this.sectionForm.valid) {
       this.itemService.saveSection(this.sectionForm.value).subscribe(data => {
         console.log('data is saved');
+        this.getAllSections();
       }, error=> {
         console.log('error occured');
       })

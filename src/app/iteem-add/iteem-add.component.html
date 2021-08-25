@@ -33,21 +33,18 @@
       <div class="col-md-3">
         <mat-form-field appearance="fill" class="d-categry">
           <mat-label>Category</mat-label>
-          <select formControlName="categoryId" matNativeControl required>
-            <option value="printer 1">juice</option>
-            <option value="printer 2">biriyani</option>
-            <option value="printer 3">ice-cream</option>
-          </select>
+          <mat-select formControlName="categoryId" matNativeControl required>
+            <mat-option *ngFor ="let item of categoryIds" [value]="item._id">{{item.categoryName}}</mat-option>
+          </mat-select>
         </mat-form-field>
       </div>
       <div class="col-md-4">
         <mat-form-field appearance="fill" class="section-m ">
           <mat-label>Section</mat-label>
-          <select formControlName="sectionId" matNativeControl required>
-            <option value="printer 1">juice</option>
-            <option value="printer 2">biriyani</option>
-            <option value="printer 3">ice-cream</option>
-          </select>
+          <mat-select formControlName="sectionId" matNativeControl required>
+            <mat-option *ngFor ="let item of sectionIds"  [value]="item._id">{{item.sectionName}}</mat-option>
+            
+          </mat-select>
         </mat-form-field>
       </div>
     </div>
