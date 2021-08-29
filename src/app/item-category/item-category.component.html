@@ -1,19 +1,24 @@
 <div class="row">
+  <form [formGroup]="categoryForm" (ngSubmit)="saveCategory()">
     <div class="col-md-12">
         <h3>Item category</h3>
     </div>
    
         <mat-form-field class="category" appearance="fill">
           <mat-label>Category Name</mat-label>
-          <input matInput placeholder="juice" value="">
+          <input formControlName="Category"matInput placeholder="juice" value="">
         </mat-form-field>
-   
+
+<div class="row">
     <section>
         <div class="button-row">
-          <button class="btn1" mat-raised-button color="primary">Add</button>   
-          <button class="btn2" mat-raised-button>Cancel</button>    
+          <button type="submit" class="btn1" mat-raised-button color="primary">Add</button>   
+          <button type="reset" class="btn2" mat-raised-button>Cancel</button>    
       </div>
       </section>
+</div>
+</form>
+</div>
 <table mat-table [dataSource]="dataSource" class="w100">
 
     <!--- Note that these columns can be defined in any order.
@@ -22,22 +27,25 @@
     <!-- Position Column -->
     <ng-container matColumnDef="position">
       <th mat-header-cell *matHeaderCellDef> No. </th>
-      <td mat-cell *matCellDef="let element"> {{element.position}} </td>
+      <td mat-cell *matCellDef="let element;let i = index;"> {{i+1}} </td>
     </ng-container>
   
     <!-- category Column -->
     <ng-container matColumnDef="category">
       <th mat-header-cell *matHeaderCellDef> Category</th>
-      <td mat-cell *matCellDef="let element"> {{element.category}} </td>
+      <td mat-cell *matCellDef="let element"> {{element.categoryName}} </td>
     </ng-container>
   
     <!-- action Column -->
     <ng-container matColumnDef="action">
       <th mat-header-cell *matHeaderCellDef> Action</th>
-      <td mat-cell *matCellDef="let element"> {{element.action}} </td>
+      <td mat-cell *matCellDef="let element"> <button mat-mini-fab color="primary">
+        <mat-icon>edit</mat-icon>
+      </button>&nbsp;<button mat-mini-fab color="warn">
+        <mat-icon>delete</mat-icon>
+      </button></td> 
     </ng-container>
 
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
   </table>
-</div>

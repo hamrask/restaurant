@@ -6,8 +6,7 @@
     <div class="col-md-3">
       <label for="">Name of section</label>
             <mat-form-field class="section-margin" appearance="fill">
-              <mat-label>Favorite food</mat-label>
-              <input matInput placeholder="Ex. Pizza" value="">
+              <input formControlName="sectionName" matInput placeholder="Eg.Juice" value="">
             </mat-form-field>
           
           
@@ -17,50 +16,52 @@
       <br>
       <mat-form-field appearance="fill" class="drop-margin">
         <mat-label>Printer </mat-label>
-        <select matNativeControl required>
-          <option value="printer 1">Printer 1</option>
-          <option value="printer 2">Printer 2</option>
-          <option value="printer 3">Printer 3</option>
-        </select>
+        <mat-select formControlName="printerName" matNativeControl required>
+          <mat-option *ngFor ="let item of printers" [value]="item.id">{{item.name}}</mat-option>
+        </mat-select>
       </mat-form-field>
           
     </div>
     <div class="col-md-6"></div>
     <div class="col-md-4">
         <section>
-              <button class="btn1" mat-raised-button color="primary" >Add</button>
-              <button class="btn2" mat-raised-button>Cancel</button>    
+              <button type="submit" class="btn1" mat-raised-button color="primary">Add</button>
+              <button type="reset" class="btn2" mat-raised-button>Cancel</button>    
           </section>
     </div>
     <div class="row-table">
     <div class="col-md-6 ">
-        <table mat-table [dataSource]="dataSource" class="w100">
+        <table mat-table [dataSource]="sections" class="w100">
 
             <!--- Note that these columns can be defined in any order.
                   The actual rendered columns are set as a property on the row definition" -->
           
             <!-- Position Column -->
             <ng-container matColumnDef="position">
-              <th mat-header-cell *matHeaderCellDef> No. </th>
-              <td mat-cell *matCellDef="let element"> {{element.position}} </td>
+              <th mat-header-cell *matHeaderCellDef> No.</th>
+              <td mat-cell *matCellDef="let element;let i = index;">{{i+1}}</td>
             </ng-container>
           
             <!-- Name Column -->
             <ng-container matColumnDef="nameofsection">
-              <th mat-header-cell *matHeaderCellDef> name of section </th>
-              <td mat-cell *matCellDef="let element"> {{element.nameofsection}} </td>
+              <th mat-header-cell *matHeaderCellDef> Name of Section </th>
+              <td mat-cell *matCellDef="let element"> {{element.sectionName}} </td>
             </ng-container>
           
             <!-- Weight Column -->
             <ng-container matColumnDef="printer">
               <th mat-header-cell *matHeaderCellDef>  Printer</th>
-              <td mat-cell *matCellDef="let element"> {{element.printer}} </td>
+              <td mat-cell *matCellDef="let element"> {{element.printerName}} </td>
             </ng-container>
           
             <!-- Symbol Column -->
             <ng-container matColumnDef="action">
               <th mat-header-cell *matHeaderCellDef> Action </th>
-              <td mat-cell *matCellDef="let element"> {{element.action}} </td>
+              <td mat-cell *matCellDef="let element">  <button mat-mini-fab color="primary">
+                <mat-icon>edit</mat-icon>
+              </button>&nbsp;<button mat-mini-fab color="warn">
+                <mat-icon>delete</mat-icon>
+              </button></td>
             </ng-container>
           
             <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
