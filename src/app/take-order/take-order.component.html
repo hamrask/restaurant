@@ -1,15 +1,14 @@
 <div class="row">
   <h3>Take Order</h3>
     <div class="col-md-12 col-sm-12"></div>
-        <h3>Take Order</h3>
     <div class="col-md-4">
         <mat-form-field class="example-full-width" appearance="fill">
             <mat-label>Oder Number</mat-label>
             <input matInput placeholder="" value="">
           </mat-form-field>
         </div>
-    </div>
-          <div class="row">
+    
+          <div class="row-dropdown">
         <div class="col-md-12 col-sm-12">
             <mat-radio-group aria-label="Select an option" class="order-margin">
                 <mat-radio-button value="1" class="r-btn1">Take away </mat-radio-button>
@@ -53,7 +52,7 @@
                 <button class="print" mat-raised-button  >Print</button>    
             </section>
           </div>
-          <div class="row">
+          <div class="row-table">
               <div class="col-md-8">
                 <table mat-table [dataSource]="dataSource" class="order-table">
 
@@ -93,4 +92,5 @@
 </div>
 <div class="col-md-10">
   <label for="" class="total">Total 5000</label>
+</div>
 </div>

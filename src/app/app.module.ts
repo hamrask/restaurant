@@ -27,6 +27,13 @@ import { MatCardModule} from '@angular/material/card';
 import { WaiterOrderComponent } from './waiter-order/waiter-order.component';
 import {  HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { UserManagementComponent } from './user-management/user-management.component';
+import { UserAddComponent } from './user-add/user-add.component';
+import { OrderBillComponent } from './order-bill/order-bill.component';
+import { BillReportComponent } from './bill-report/bill-report.component';
+import { HomeComponent } from './home/home.component';
+import {MatToolbarModule} from '@angular/material/toolbar';
+import {MatMenuModule} from '@angular/material/menu';
 
 
 
@@ -44,6 +51,12 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
     ItemCategoryComponent,
     LoginComponent,
     WaiterOrderComponent,
+    UserManagementComponent,
+    UserAddComponent,
+    OrderBillComponent,
+    BillReportComponent,
+    HomeComponent,
+   
 
   ],
   imports: [
@@ -63,7 +76,9 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
     MatCardModule,
     HttpClientModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatToolbarModule,
+    MatMenuModule
   ],
   providers: [],
   bootstrap: [AppComponent]
