@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
 import { ItemService } from '../../shared/services/item.service';
 @Component({
   selector: 'app-item-category',
@@ -7,24 +8,29 @@ import { ItemService } from '../../shared/services/item.service';
   styleUrls: ['./item-category.component.scss']
 })
 export class ItemCategoryComponent implements OnInit {
-categoryForm: FormGroup
+categoryForm: FormGroup;
 categories = [];
-  constructor(private fb:FormBuilder,private itemService: ItemService) { }
+displayedColumns: string[] = ['position', 'category', 'action'];
+  constructor(private fb:FormBuilder,private itemService: ItemService, private toastr: ToastrService) { }
   ngOnInit(): void {
     this.initForm();
     this.getAllCategories();
   }
   initForm(){
     this.categoryForm=this.fb.group({
-      Category:['',Validators.required]
+      _id:[null],
+      categoryName:['',Validators.required]
     });
   }
   saveCategory() {
     if (this.categoryForm.valid) {
       this.itemService.saveCategory(this.categoryForm.value).subscribe(data => {
-        console.log('data is saved');
+        this.getAllCategories();
+        this.categoryForm.reset();
+        this.toastr.success('Success', 'Category added successfully');
       }, error=> {
-        console.log('error occured');
+        console.log(error);
+        this.toastr.error('Error', error?.error?.message);
       })
     }
   }
@@ -33,10 +39,13 @@ categories = [];
       this.categories = data;
     });
   }
-  displayedColumns: string[] = ['position', 'category', 'action'];
-  dataSource = ELEMENT_DATA;
+  deleteCategory(categoryId) {
+    this.itemService.deleteCategoryById(categoryId).subscribe(data => {
+      this.getAllCategories();
+    });
+  }
+  editCategory(categoryDetails) {
+    this.categoryForm.patchValue(categoryDetails);
+  }
 }
-const ELEMENT_DATA= [
-  {position: 1, category: 'juice', action: 'yes'},
-  
-];
+
