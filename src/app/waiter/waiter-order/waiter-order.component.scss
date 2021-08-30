@@ -1,0 +1,64 @@
+.item-margin{
+    width: 75%;
+}
+.list-table{
+    margin-left:30px;
+    
+}
+.button{
+    margin-top: 10px;
+}
+.btn1{
+    width: 90px;
+}
+.btn{
+    margin-left: 10px;
+    margin-top: 10px;
+    width: 100px;
+}
+.cards{
+    margin-top: 20px;
+
+}
+.item-card{
+    margin-top: 20px;
+    width: 210px;
+    float: left;
+}
+.item-card1{
+    margin-top: 20px;
+    margin-left: 10px;
+    width: 210px;
+    float: left ;
+} 
+.btn-print{
+    flex: auto;
+    margin-left: 35%;
+    margin-top: 15px;
+}
+.total{
+    padding-left: 90px;
+}
+/* width */
+::-webkit-scrollbar {
+    width: 5px;
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track { 
+    border-radius: 5px;
+  }
+   
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #ccc; 
+    border-radius: 5px;
+  }
+.mr0 {
+    margin: 0px;
+}
+.center-align {
+    display: flex;
+    align-items: baseline;
+    justify-content: center;
+}

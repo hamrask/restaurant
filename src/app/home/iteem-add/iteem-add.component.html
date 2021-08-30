@@ -1,0 +1,120 @@
+<div class="row">
+  <form [formGroup]="itemForm" (ngSubmit)="saveItem()">
+    <div class="col-md-12 ">
+      <h3>Add Item</h3>
+    </div>
+    <div class="col-md-3">
+      <label for="">Item Name</label>
+      <br>
+      <mat-form-field class="f-margin" appearance="fill">
+        <mat-label>Favorite food</mat-label>
+        <input formControlName="itemName" matInput placeholder="Ex. Pizza" value="">
+      </mat-form-field>
+
+    </div>
+    <div class="col-md-3">
+      <label for="">Add Description</label>
+      <br>
+      <mat-form-field class="f-margin" appearance="fill">
+        <mat-label>Leave a comment</mat-label>
+        <textarea formControlName="description" matInput placeholder="Ex. It makes me feel..."></textarea>
+      </mat-form-field>
+
+    </div>
+    <div class="col-md-3">
+      <label for="">Amount</label>
+      <br>
+      <mat-form-field class="f-margin" appearance="fill">
+        <mat-label>Amount</mat-label>
+        <input formControlName="amount"matInput placeholder="100" value="">
+      </mat-form-field>
+    </div>
+    <div class="row">
+      <div class="col-md-3">
+        <mat-form-field appearance="fill" class="d-categry">
+          <mat-label>Category</mat-label>
+          <mat-select formControlName="categoryId" matNativeControl required>
+            <mat-option *ngFor ="let item of categoryIds" [value]="item._id">{{item.categoryName}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="col-md-4">
+        <mat-form-field appearance="fill" class="section-m ">
+          <mat-label>Section</mat-label>
+          <mat-select formControlName="sectionId" matNativeControl required>
+            <mat-option *ngFor ="let item of sectionIds"  [value]="item._id">{{item.sectionName}}</mat-option>
+            
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </div>
+    <div class=" c-margin col-md-3">
+      <input type="file">
+      <img class="img" [src]="imageUrl" width="250px" height="150px" alt="">
+    </div>
+    <div class="col-md-9"></div>
+    <div class="col-md-6">
+      <div class="col-md-4">
+        <section>
+          <div class="button-row">
+            <button type="submit" class="btn1" mat-raised-button color="primary">Add</button>
+            <button type="reset" class="btn2" mat-raised-button>Cancel</button>
+          </div>
+        </section>
+      </div>
+    </div>
+  </form>
+</div>
+
+
+
+
+<div class="row">
+  <table mat-table [dataSource]="dataSource" class="w100">
+
+    <!--- Note that these columns can be defined in any order.
+          The actual rendered columns are set as a property on the row definition" -->
+
+    <!-- Position Column -->
+    <ng-container matColumnDef="position">
+      <th mat-header-cell *matHeaderCellDef> No. </th>
+      <td mat-cell *matCellDef="let element;let i = index;"> {{i+1}} </td>
+    </ng-container>
+
+    <!-- item Name Column -->
+    <ng-container matColumnDef="itemname">
+      <th mat-header-cell *matHeaderCellDef> Item name</th>
+      <td mat-cell *matCellDef="let element"> {{element.itemname}} </td>
+    </ng-container>
+
+    <!-- availability Column -->
+    <ng-container matColumnDef="availability">
+      <th mat-header-cell *matHeaderCellDef> Availability</th>
+      <td mat-cell *matCellDef="let element"> {{element.availability}} </td>
+    </ng-container>
+
+    <!--   description Column -->
+    <ng-container matColumnDef="addescription">
+      <th mat-header-cell *matHeaderCellDef> Add Description</th>
+      <td mat-cell *matCellDef="let element"> {{element.addescription}} </td>
+    </ng-container>
+    <!--   amount Column -->
+    <ng-container matColumnDef="amount">
+      <th mat-header-cell *matHeaderCellDef> Amount</th>
+      <td mat-cell *matCellDef="let element"> {{element.amount}} </td>
+    </ng-container>
+    <!--   Gst Column -->
+    <ng-container matColumnDef="gst">
+      <th mat-header-cell *matHeaderCellDef> Gst</th>
+      <td mat-cell *matCellDef="let element"> {{element.gst}} </td>
+    </ng-container>
+    <!--   Gst Column -->
+    <ng-container matColumnDef="image">
+      <th mat-header-cell *matHeaderCellDef> Image</th>
+      <td mat-cell *matCellDef="let element"> {{element.image}} </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+</div>

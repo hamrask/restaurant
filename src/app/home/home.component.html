@@ -1,0 +1,27 @@
+<div class="row">
+  <div class="col-md-12 col-sm-12">
+    <mat-toolbar>
+      <span class="label">LM Restaurant</span>
+      <img [src]="imageUrl" alt="" />
+      <section>
+        <button mat-button class="b-logout">Log out</button>
+      </section>
+    </mat-toolbar>
+    <div
+      class="sidebar"
+      style="overflow-y: scroll; max-width: 950px; height: 90%"
+    >
+      <a href="#" routerLink="table-config">Table configuration</a>
+      <a href="#" routerLink="order">Take order</a>
+      <a href="#" routerLink="stock">Update stock</a>
+      <a href="#" routerLink="user-management">User management</a>
+      <a href="#" routerLink="item">Items</a>
+      <a href="#" routerLink="bill-report">Bill report</a>
+      <a href="#" routerLink="section">Section</a>
+      <a href="#" routerLink="category">Category</a>
+    </div>
+    <div class="container">
+        <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>
