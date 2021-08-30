@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
 import { ItemService } from '../../shared/services/item.service';
 
 
@@ -13,8 +14,8 @@ export class IteemAddComponent implements OnInit {
   items = [];
   categoryIds = [];
   sectionIds = [];
-  constructor(private fb:FormBuilder,private itemService: ItemService) { }
-
+  displayedColumns: string[] = ['position', 'itemname', 'availability', 'addescription', 'amount', 'image'];
+  constructor(private fb:FormBuilder,private itemService: ItemService , private toastr: ToastrService) { }
   ngOnInit(): void {
     this.initForm();
     this.getAllItems();
@@ -36,9 +37,14 @@ export class IteemAddComponent implements OnInit {
   saveItem() {
     if (this.itemForm.valid) {
       this.itemService.saveItem(this.itemForm.value).subscribe(data => {
-        console.log('data is saved');
+        this.getAllItems();
+        this.getAllCategoryIds();
+        this.getAllSectionsIds();
+        this.itemForm.reset();
+        this.toastr.success('Success', 'Item added successfully');
       }, error=> {
-        console.log('error occured');
+        console.log(error);
+        this.toastr.error('Error', error?.error?.message);
       })
     }
   }
@@ -57,7 +63,16 @@ export class IteemAddComponent implements OnInit {
       this.sectionIds = data;
     });
   }
-  displayedColumns: string[] = ['position', 'itemname', 'availability', 'addescription', 'amount', 'image'];
+  deleteItem(itemId) {
+    this.itemService.deleteItemById(itemId).subscribe(data => {
+      this.getAllItems();
+      this.getAllCategoryIds();
+      this.getAllSectionsIds();
+    });
+  }
+  editItem(itemDetails)  {
+    this.itemForm.patchValue(itemDetails);
+  }
   dataSource = ELEMENT_DATA;
   imageUrl="https://www.helpguide.org/wp-content/uploads/closeup-salad-in-bowl-held-in-hand-768.jpg";
 }

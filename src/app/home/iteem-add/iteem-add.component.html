@@ -8,7 +8,12 @@
       <br>
       <mat-form-field class="f-margin" appearance="fill">
         <mat-label>Favorite food</mat-label>
-        <input formControlName="itemName" matInput placeholder="Ex. Pizza" value="">
+        <input 
+        formControlName="itemName" 
+        matInput 
+        placeholder="Eg: Pizza" 
+        (keyup.enter)="saveItem()"
+        />
       </mat-form-field>
 
     </div>
