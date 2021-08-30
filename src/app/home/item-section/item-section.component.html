@@ -6,7 +6,12 @@
     <div class="col-md-3">
       <label for="">Name of section</label>
             <mat-form-field class="section-margin" appearance="fill">
-              <input formControlName="sectionName" matInput placeholder="Eg.Juice" value="">
+              <input 
+              formControlName="sectionName" 
+              matInput 
+              placeholder="Eg.Juice" 
+              (keyup.enter)="saveSection()"
+              />
             </mat-form-field>
           
           
