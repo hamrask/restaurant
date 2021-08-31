@@ -48,7 +48,7 @@ export class ItemService {
   }
   saveCategory(body){
     const url=environment.apiurl +'/category';
-    return this.http.post<any>(url,body);
+     return this.http.post<any>(url,body);
   }
   getCategoryById(id){
     const url=environment.apiurl + '/category/getById/' + id;

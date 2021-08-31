@@ -4,7 +4,7 @@
   </div>
   <div class="col-md-4">
   <section>
-    <button class="btn" mat-raised-button>New User</button>    
+    <button class="btn" mat-raised-button routerLink="/home/add-user">New User</button>    
 </section>
 </div>
 <div class="col-md-8">
@@ -15,7 +15,7 @@
 
 </div>
       <div class="col-md-12">
-      <table mat-table [dataSource]="dataSource" class="user-table">
+      <table mat-table [dataSource]="userDetails" class="user-table">
 
         <!--- Note that these columns can be defined in any order.
               The actual rendered columns are set as a property on the row definition" -->
@@ -23,7 +23,7 @@
        
         <ng-container matColumnDef="position">
           <th mat-header-cell *matHeaderCellDef> No. </th>
-          <td mat-cell *matCellDef="let element"> {{element.position}} </td>
+          <td mat-cell *matCellDef="let element; let i = index"> {{i + 1}} </td>
         </ng-container>
       
        
@@ -48,11 +48,19 @@
           <td mat-cell *matCellDef="let element"> {{element.active}} </td>
         </ng-container>
 
-        
-        <ng-container matColumnDef="action">
-            <th mat-header-cell *matHeaderCellDef> Action</th>
-            <td mat-cell *matCellDef="let element"> {{element.action}} </td>
-          </ng-container>
+      
+  <!-- action Column -->
+  <ng-container matColumnDef="action">
+    <th mat-header-cell *matHeaderCellDef>Action</th>
+    <td mat-cell *matCellDef="let element">
+      <button mat-mini-fab color="primary" (click)="editUser(element)">
+        <mat-icon>edit</mat-icon></button
+      >&nbsp;
+      <button mat-mini-fab color="warn" (click)="deleteUser(element._id)">
+        <mat-icon>delete</mat-icon>
+      </button>
+    </td>
+  </ng-container>
       
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>

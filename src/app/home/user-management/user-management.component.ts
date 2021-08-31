@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { UserManagementService } from 'src/app/shared/services/user-management.service';
 
 @Component({
   selector: 'app-user-management',
@@ -6,15 +7,16 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./user-management.component.scss']
 })
 export class UserManagementComponent implements OnInit {
-
-  constructor() { }
+  displayedColumns: string[] = ['position', 'username', 'password', 'roll', 'active','action'];
+  userDetails = [];
+  constructor(private user: UserManagementService) { }
 
   ngOnInit(): void {
+    this.getAllUsers();
   }
-  displayedColumns: string[] = ['position', 'username', 'password', 'roll', 'active','action'];
-  dataSource = ELEMENT_DATA;
+  getAllUsers() {
+    this.user.getAllUser().subscribe(data => {
+     this.userDetails = data;
+    });
+  }
 }
-const ELEMENT_DATA= [
-  {position: 1, username: 'Alex', password: 'alex123',roll:'waiter', active:'yes', action:'aa'},
-  
-];

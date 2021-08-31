@@ -8,9 +8,10 @@ import { ItemService } from '../../shared/services/item.service';
   styleUrls: ['./item-category.component.scss']
 })
 export class ItemCategoryComponent implements OnInit {
+  title = 'Category';
 categoryForm: FormGroup;
 categories = [];
-displayedColumns: string[] = ['position', 'category', 'action'];
+displayedColumns: string[] = [ 'action','position', 'category'];
   constructor(private fb:FormBuilder,private itemService: ItemService, private toastr: ToastrService) { }
   ngOnInit(): void {
     this.initForm();
@@ -45,7 +46,7 @@ displayedColumns: string[] = ['position', 'category', 'action'];
     });
   }
   editCategory(categoryDetails) {
-    this.categoryForm.patchValue(categoryDetails);
+    this.categoryForm.patchValue(categoryDetails);    
   }
 }
 

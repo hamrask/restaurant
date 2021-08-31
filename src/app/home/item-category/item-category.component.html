@@ -1,7 +1,7 @@
 <div class="row">
   <form [formGroup]="categoryForm" (ngSubmit)="saveCategory()">
     <div class="col-md-12">
-      <h3>Item category</h3>
+      <h3>{{title}}</h3>
     </div>
 
     <mat-form-field class="category" appearance="fill">
@@ -9,7 +9,7 @@
       <input
         formControlName="categoryName"
         matInput
-        placeholder="eg: Rise"
+        placeholder="eg: Rice"
         (keyup.enter)="saveCategory()"
       />
     </mat-form-field>
@@ -40,7 +40,7 @@
   <ng-container matColumnDef="category">
     <th mat-header-cell *matHeaderCellDef>Category</th>
     <td mat-cell *matCellDef="let element">{{ element.categoryName }}</td>
-  </ng-container>
+  </ng-container>                                               
 
   <!-- action Column -->
   <ng-container matColumnDef="action">

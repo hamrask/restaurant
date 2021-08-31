@@ -34,7 +34,7 @@
         <mat-form-field appearance="fill" class="d-categry">
           <mat-label>Category</mat-label>
           <mat-select formControlName="categoryId" matNativeControl required>
-            <mat-option *ngFor ="let item of categoryIds" [value]="item._id">{{item.categoryName}}</mat-option>
+            <mat-option *ngFor="let item of categoryIds" [value]="item._id">{{item.categoryName}}</mat-option>
           </mat-select>
         </mat-form-field>
       </div>
