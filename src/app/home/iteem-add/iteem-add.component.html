@@ -31,7 +31,7 @@
       <br>
       <mat-form-field class="f-margin" appearance="fill">
         <mat-label>Amount</mat-label>
-        <input formControlName="amount"matInput placeholder="100" value="">
+        <input formControlName="amount" matInput placeholder="100" >
       </mat-form-field>
     </div>
     <div class="row">
@@ -48,15 +48,15 @@
           <mat-label>Section</mat-label>
           <mat-select formControlName="sectionId" matNativeControl required>
             <mat-option *ngFor ="let item of sectionIds"  [value]="item._id">{{item.sectionName}}</mat-option>
-            
           </mat-select>
         </mat-form-field>
       </div>
     </div>
+    <!--
     <div class=" c-margin col-md-3">
       <input type="file">
       <img class="img" [src]="imageUrl" width="250px" height="150px" alt="">
-    </div>
+    </div> -->
     <div class="col-md-9"></div>
     <div class="col-md-6">
       <div class="col-md-4">
@@ -75,7 +75,7 @@
 
 
 <div class="row">
-  <table mat-table [dataSource]="dataSource" class="w100">
+  <table mat-table [dataSource]="items" class="w100">
 
     <!--- Note that these columns can be defined in any order.
           The actual rendered columns are set as a property on the row definition" -->
@@ -89,7 +89,7 @@
     <!-- item Name Column -->
     <ng-container matColumnDef="itemname">
       <th mat-header-cell *matHeaderCellDef> Item name</th>
-      <td mat-cell *matCellDef="let element"> {{element.itemname}} </td>
+      <td mat-cell *matCellDef="let element"> {{element.itemName}} </td>
     </ng-container>
 
     <!-- availability Column -->
@@ -101,23 +101,30 @@
     <!--   description Column -->
     <ng-container matColumnDef="addescription">
       <th mat-header-cell *matHeaderCellDef> Add Description</th>
-      <td mat-cell *matCellDef="let element"> {{element.addescription}} </td>
+      <td mat-cell *matCellDef="let element"> {{element.description}} </td>
     </ng-container>
     <!--   amount Column -->
     <ng-container matColumnDef="amount">
       <th mat-header-cell *matHeaderCellDef> Amount</th>
       <td mat-cell *matCellDef="let element"> {{element.amount}} </td>
     </ng-container>
-    <!--   Gst Column -->
-    <ng-container matColumnDef="gst">
-      <th mat-header-cell *matHeaderCellDef> Gst</th>
-      <td mat-cell *matCellDef="let element"> {{element.gst}} </td>
-    </ng-container>
-    <!--   Gst Column -->
+    <!--
     <ng-container matColumnDef="image">
       <th mat-header-cell *matHeaderCellDef> Image</th>
       <td mat-cell *matCellDef="let element"> {{element.image}} </td>
-    </ng-container>
+    </ng-container>-->
+    <!-- action Column -->
+  <ng-container matColumnDef="action">
+    <th mat-header-cell *matHeaderCellDef>Action</th>
+    <td mat-cell *matCellDef="let element">
+      <button mat-mini-fab color="primary" (click)="editItem(element)">
+        <mat-icon>edit</mat-icon></button
+      >&nbsp;
+      <button mat-mini-fab color="warn" (click)="deleteItem(element._id)">
+        <mat-icon>delete</mat-icon>
+      </button>
+    </td>
+  </ng-container>
 
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>

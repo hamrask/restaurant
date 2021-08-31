@@ -62,9 +62,10 @@
             <!-- Symbol Column -->
             <ng-container matColumnDef="action">
               <th mat-header-cell *matHeaderCellDef> Action </th>
-              <td mat-cell *matCellDef="let element">  <button mat-mini-fab color="primary">
+              <td mat-cell *matCellDef="let element">  
+              <button mat-mini-fab color="primary" (click)="editSection(element)">
                 <mat-icon>edit</mat-icon>
-              </button>&nbsp;<button mat-mini-fab color="warn">
+              </button>&nbsp;<button mat-mini-fab color="warn" (click)="deleteSection(element._id)">
                 <mat-icon>delete</mat-icon>
               </button></td>
             </ng-container>

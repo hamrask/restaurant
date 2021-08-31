@@ -14,51 +14,49 @@ export class IteemAddComponent implements OnInit {
   items = [];
   categoryIds = [];
   sectionIds = [];
-  displayedColumns: string[] = ['position', 'itemname', 'availability', 'addescription', 'amount', 'image'];
-  constructor(private fb:FormBuilder,private itemService: ItemService , private toastr: ToastrService) { }
+  displayedColumns: string[] = ['position', 'itemname', 'availability', 'addescription', 'amount','action'];
+  constructor(private fb: FormBuilder, private itemService: ItemService, private toastr: ToastrService) { }
   ngOnInit(): void {
     this.initForm();
     this.getAllItems();
     this.getAllCategoryIds();
     this.getAllSectionsIds();
   }
-  initForm(){
-    this.itemForm=this.fb.group({
-      itemName:['',Validators.required],
-      availability:['true',Validators.required],
-      description:['',Validators.required],
-      amount:['',Validators.required],
-      categoryId:['',Validators.required],
-      sectionId:['',Validators.required],
-      photoUrl:['',Validators.required]
-
-});
+  initForm() {
+    this.itemForm = this.fb.group({
+      _id: [null],
+      itemName: ['', Validators.required],
+      availability: ['true', Validators.required],
+      description: ['', Validators.required],
+      amount: ['', Validators.required],
+      categoryId: ['', Validators.required],
+      sectionId: ['', Validators.required],
+      photoUrl: ['']
+    });
   }
   saveItem() {
     if (this.itemForm.valid) {
       this.itemService.saveItem(this.itemForm.value).subscribe(data => {
         this.getAllItems();
-        this.getAllCategoryIds();
-        this.getAllSectionsIds();
         this.itemForm.reset();
         this.toastr.success('Success', 'Item added successfully');
-      }, error=> {
+      }, error => {
         console.log(error);
         this.toastr.error('Error', error?.error?.message);
       })
     }
   }
-  getAllItems(){
+  getAllItems() {
     this.itemService.getAllItem().subscribe(data => {
       this.items = data;
     });
   }
-  getAllCategoryIds(){
+  getAllCategoryIds() {
     this.itemService.getAllCategory().subscribe(data => {
       this.categoryIds = data;
     });
   }
-  getAllSectionsIds(){
+  getAllSectionsIds() {
     this.itemService.getAllSection().subscribe(data => {
       this.sectionIds = data;
     });
@@ -66,18 +64,11 @@ export class IteemAddComponent implements OnInit {
   deleteItem(itemId) {
     this.itemService.deleteItemById(itemId).subscribe(data => {
       this.getAllItems();
-      this.getAllCategoryIds();
-      this.getAllSectionsIds();
     });
   }
-  editItem(itemDetails)  {
+  editItem(itemDetails) {
     this.itemForm.patchValue(itemDetails);
   }
-  dataSource = ELEMENT_DATA;
-  imageUrl="https://www.helpguide.org/wp-content/uploads/closeup-salad-in-bowl-held-in-hand-768.jpg";
+  imageUrl = "https://www.helpguide.org/wp-content/uploads/closeup-salad-in-bowl-held-in-hand-768.jpg";
 }
-const ELEMENT_DATA= [
-  {position: 1, itemname: 'juice', availability: 'yes', addescription: 'banana', amount:'100',  image:'img'},
-  
-];
 

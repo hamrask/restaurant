@@ -30,7 +30,6 @@ displayedColumns: string[] = ['position', 'nameofsection', 'printer', 'action'];
     if (this.sectionForm.valid) {
       this.itemService.saveSection(this.sectionForm.value).subscribe(data => {
         this.getAllSections();
-        this.getAllPrinters();
         this.sectionForm.reset();
         this.toastr.success('Success', 'Section added successfully');
       }, error=> {
@@ -52,10 +51,9 @@ displayedColumns: string[] = ['position', 'nameofsection', 'printer', 'action'];
   deleteSection(sectionId){
     this.itemService.deleteSectionById(sectionId).subscribe(data => {
       this.getAllSections();
-      this.getAllPrinters();
     });
   }
-  editCategory(sectionDetails) {
+  editSection(sectionDetails) {
     this.sectionForm.patchValue(sectionDetails);
   }
 
