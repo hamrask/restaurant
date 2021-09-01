@@ -3,6 +3,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { ItemService } from '../../shared/services/item.service';
 
+
+
 @Component({
   selector: 'app-item-section',
   templateUrl: './item-section.component.html',
@@ -13,7 +15,7 @@ sectionForm: FormGroup;
 printers = [];
 sections = [];
 displayedColumns: string[] = ['position', 'nameofsection', 'printer', 'action'];
-  constructor(private fb: FormBuilder, private itemService: ItemService, private toastr :ToastrService ) { }
+  constructor(private fb: FormBuilder, private itemService: ItemService, private toastr :ToastrService) { }
   ngOnInit(): void {
     this.initForm();
     this.getAllPrinters();
@@ -56,5 +58,5 @@ displayedColumns: string[] = ['position', 'nameofsection', 'printer', 'action'];
   editSection(sectionDetails) {
     this.sectionForm.patchValue(sectionDetails);
   }
-
 }
+   

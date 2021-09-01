@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit ,Inject} from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { ItemService } from '../../shared/services/item.service';
+import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
+import { UpdateStockComponent } from '../update-stock/update-stock.component';
 
 
 @Component({
@@ -14,8 +16,8 @@ export class IteemAddComponent implements OnInit {
   items = [];
   categoryIds = [];
   sectionIds = [];
-  displayedColumns: string[] = ['position', 'itemname', 'availability', 'addescription', 'amount','action'];
-  constructor(private fb: FormBuilder, private itemService: ItemService, private toastr: ToastrService) { }
+  displayedColumns: string[] = ['position', 'itemname', 'availability', 'addescription', 'amount','action','stock'];
+  constructor(private fb: FormBuilder, private itemService: ItemService, private toastr: ToastrService,public dialog: MatDialog) { }
   ngOnInit(): void {
     this.initForm();
     this.getAllItems();
@@ -69,6 +71,19 @@ export class IteemAddComponent implements OnInit {
   editItem(itemDetails) {
     this.itemForm.patchValue(itemDetails);
   }
+  updateStock(itemDetails): void {
+    itemDetails._id=itemDetails.itemId;
+    const dialogRef = this.dialog.open(UpdateStockComponent, {
+      width: '450px',
+      data: itemDetails
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      this.getAllItems();
+    });
+  }
+
   imageUrl = "https://www.helpguide.org/wp-content/uploads/closeup-salad-in-bowl-held-in-hand-768.jpg";
 }
 
