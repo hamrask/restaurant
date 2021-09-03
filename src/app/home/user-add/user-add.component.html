@@ -1,15 +1,24 @@
 <div class="row">
 <div class="col-md-12 col-sm-12">
-    <h3>User Add</h3>
+    <h3>{{title}}</h3>
 </div>
 <div class="col-md-6">
-    <mat-form-field class="name" appearance="fill">
+    <mat-form-field class="user" appearance="fill">
         <mat-label>Name</mat-label>
-        <input matInput placeholder="Alex" value="">
+        <input
+        formControlName="Name" 
+        matInput placeholder="eg:john" 
+        (keyup.enter)="saveUser()"
+        />
       </mat-form-field> 
+
       <mat-form-field class="user" appearance="fill">
         <mat-label> User Name</mat-label>
-        <input matInput placeholder="Alex" value="">
+        <input
+        formControlName="userName" 
+        matInput placeholder="eg:john123"
+        (keyup.enter)="saveUser()"
+        />
       </mat-form-field> 
 
         
@@ -18,23 +27,40 @@
          <div class="col-md-6">
             <mat-form-field class="password" appearance="fill">
                 <mat-label>Password</mat-label>
-                <input matInput placeholder="Alex" value="">
+                <input 
+                formControlName = "password"
+                matInput placeholder="eg:123456"
+                (keyup.enter)="saveUser()"
+                />
               </mat-form-field>
               <mat-form-field class="c-password" appearance="fill">
                 <mat-label>Confirm Password</mat-label>
-                <input matInput placeholder="Alex" value="">
+                <input
+                formControlName = "c-password"
+                 matInput placeholder="eg:123456"
+                 (keyup.enter)="saveUser"
+                  />
               </mat-form-field>
             </div>
         <div class="col-md-6"></div>
               <div class="col-md-6">
                 <mat-form-field class="number" appearance="fill">
                     <mat-label>Phone Number</mat-label>
-                    <input matInput placeholder="Alex" value="">
+                    <input 
+                    formControleName = "phoneNumber"
+                    matInput placeholder="eg:1234567890"
+                    (keyup.enter)="saveUser"
+                    />
                   </mat-form-field>
                   
-                  <mat-form-field appearance="fill" class="user-roll " >
-                    <mat-label>User Roll</mat-label>
-                    <select matNativeControl required>
+                  <mat-form-field appearance="fill" class="user-role " >
+                    <mat-label>User Role</mat-label>
+                    <select 
+                      formControlName = "user-role"
+                      matInput placeholder ="choose-role"
+                      (keyup.enter)="saveUser"
+                      matNativeControl required>
+                      
                       <option value="printer 1">waiter</option>
                       <option value="printer 2">tea maker</option>
                       <option value="printer 3">juice maker</option>
