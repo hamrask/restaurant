@@ -22,6 +22,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatDialogModule } from '@angular/material/dialog';
 
 
 @NgModule({
@@ -50,7 +51,8 @@ import { MatToolbarModule } from '@angular/material/toolbar';
     MatIconModule,
     MatRadioModule,
     MatCheckboxModule,
-    MatToolbarModule
+    MatToolbarModule,
+    MatDialogModule
   ]
 })
 export class HomeModule { }

@@ -5,7 +5,7 @@
         <div class=" main col-md-3">
             <mat-form-field class="section-margin" appearance="fill">
               <mat-label>Number of Table</mat-label>
-              <input matInput placeholder="Ex. Pizza" value="">
+              <input matInput placeholder="Ex. Pizza" [formControl]="tableNumber">
             </mat-form-field>
             <section>
                 <button class="add-btn" mat-raised-button >Add</button>
@@ -28,3 +28,11 @@
             </div>
         </div>
     </div>
+    <div
+        *ngFor="let asdfgh of table">
+    <input type="text">
+    </div>
+        
+<th> 
+       /<div>
+
