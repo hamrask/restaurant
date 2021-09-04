@@ -67,7 +67,8 @@ export class ItemService {
     return  this.http.get<any>(url);
   }
   getAllPrinter() {
-    this.
+    const url = environment.apiurl + 'printer';
+    return this.http.get(url);
   }
 }
 
