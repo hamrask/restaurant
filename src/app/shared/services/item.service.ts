@@ -66,7 +66,9 @@ export class ItemService {
     const url = environment.apiurl + '/item/available';
     return  this.http.get<any>(url);
   }
-  
+  getAllPrinter() {
+    this.
+  }
 }
 
 
