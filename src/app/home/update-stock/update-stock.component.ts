@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-update-stock',
@@ -7,18 +8,22 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./update-stock.component.scss']
 })
 export class UpdateStockComponent implements OnInit {
-  sectionForm: FormGroup;
+  stockForm: FormGroup;
 
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder, @Inject(MAT_DIALOG_DATA) public data: any) { }
 
   ngOnInit(): void {
-    this.initForm()
+    this.initForm();
+    if (this.data) {
+      this.stockForm.patchValue(this.data);
+    }
   }
   initForm(){
-    this.sectionForm=this.fb.group({
-      itemId:[Validators.required],
-      quantity:[Validators.required],
-      isAvailable:[Validators.required]
+    this.stockForm=this.fb.group({
+      itemName:['',Validators.required],
+      itemId:['',Validators.required],
+      quantity:['',Validators.required],
+      isAvailable:['',Validators.required]
     });
   }
 

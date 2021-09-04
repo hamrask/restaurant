@@ -1,4 +1,5 @@
 <div class="row">
+  <form [formGroup]="stockForm" >
     <div class="col-md-12">
         <h3>Update Stock</h3>
     </div>
@@ -7,7 +8,10 @@
         <br>
             <mat-form-field class="item-margin" appearance="fill">
               <mat-label>Item</mat-label>
-              <input matInput placeholder="Ex. Pizza" value="">
+              <input 
+              formControlName="itemName"
+              matInput placeholder="Eg. Pizza" 
+              value="">
             </mat-form-field>
     </div>
     
@@ -34,4 +38,3 @@
             </div>
           </section>
         </div>
-</div>

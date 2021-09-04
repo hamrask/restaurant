@@ -1,6 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit ,Inject} from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
 import { ItemService } from '../../shared/services/item.service';
+import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
+import { UpdateStockComponent } from '../update-stock/update-stock.component';
 
 
 @Component({
@@ -13,56 +16,74 @@ export class IteemAddComponent implements OnInit {
   items = [];
   categoryIds = [];
   sectionIds = [];
-  constructor(private fb:FormBuilder,private itemService: ItemService) { }
-
+  displayedColumns: string[] = ['position', 'itemname', 'availability', 'addescription', 'amount','action','stock'];
+  constructor(private fb: FormBuilder, private itemService: ItemService, private toastr: ToastrService,public dialog: MatDialog) { }
   ngOnInit(): void {
     this.initForm();
     this.getAllItems();
     this.getAllCategoryIds();
     this.getAllSectionsIds();
   }
-  initForm(){
-    this.itemForm=this.fb.group({
-      itemName:['',Validators.required],
-      availability:['true',Validators.required],
-      description:['',Validators.required],
-      amount:['',Validators.required],
-      categoryId:['',Validators.required],
-      sectionId:['',Validators.required],
-      photoUrl:['',Validators.required]
-
-});
+  initForm() {
+    this.itemForm = this.fb.group({
+      _id: [null],
+      itemName: ['', Validators.required],
+      availability: ['true', Validators.required],
+      description: ['', Validators.required],
+      amount: ['', Validators.required],
+      categoryId: ['', Validators.required],
+      sectionId: ['', Validators.required],
+      photoUrl: ['']
+    });
   }
   saveItem() {
     if (this.itemForm.valid) {
       this.itemService.saveItem(this.itemForm.value).subscribe(data => {
-        console.log('data is saved');
-      }, error=> {
-        console.log('error occured');
+        this.getAllItems();
+        this.itemForm.reset();
+        this.toastr.success('Success', 'Item added successfully');
+      }, error => {
+        console.log(error);
+        this.toastr.error('Error', error?.error?.message);
       })
     }
   }
-  getAllItems(){
+  getAllItems() {
     this.itemService.getAllItem().subscribe(data => {
       this.items = data;
     });
   }
-  getAllCategoryIds(){
+  getAllCategoryIds() {
     this.itemService.getAllCategory().subscribe(data => {
       this.categoryIds = data;
     });
   }
-  getAllSectionsIds(){
+  getAllSectionsIds() {
     this.itemService.getAllSection().subscribe(data => {
       this.sectionIds = data;
     });
   }
-  displayedColumns: string[] = ['position', 'itemname', 'availability', 'addescription', 'amount', 'image'];
-  dataSource = ELEMENT_DATA;
-  imageUrl="https://www.helpguide.org/wp-content/uploads/closeup-salad-in-bowl-held-in-hand-768.jpg";
+  deleteItem(itemId) {
+    this.itemService.deleteItemById(itemId).subscribe(data => {
+      this.getAllItems();
+    });
+  }
+  editItem(itemDetails) {
+    this.itemForm.patchValue(itemDetails);
+  }
+  updateStock(itemDetails): void {
+    itemDetails._id=itemDetails.itemId;
+    const dialogRef = this.dialog.open(UpdateStockComponent, {
+      width: '450px',
+      data: itemDetails
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      this.getAllItems();
+    });
+  }
+
+  imageUrl = "https://www.helpguide.org/wp-content/uploads/closeup-salad-in-bowl-held-in-hand-768.jpg";
 }
-const ELEMENT_DATA= [
-  {position: 1, itemname: 'juice', availability: 'yes', addescription: 'banana', amount:'100',  image:'img'},
-  
-];
 
