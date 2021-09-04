@@ -53,6 +53,10 @@ const routes: Routes = [
         component: UserAddComponent,
       },
       {
+        path: 'add-user/:userId',
+        component: UserAddComponent,
+      },
+      {
         path: 'bill-report',
         component: BillReportComponent,
       }

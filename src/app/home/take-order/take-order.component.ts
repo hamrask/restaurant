@@ -1,32 +1,57 @@
+import { listLazyRoutes } from '@angular/compiler/src/aot/lazy_routes';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ItemService } from 'src/app/shared/services/item.service';
+import { OrderService } from 'src/app/shared/services/order.service';
 
 @Component({
   selector: 'app-take-order',
   templateUrl: './take-order.component.html',
   styleUrls: ['./take-order.component.scss']
 })
-export class TakeOrderComponent implements OnInit {
-  sectionForm: FormGroup;
 
-  constructor(private fb: FormBuilder) { }
+export class TakeOrderComponent implements OnInit {
+  title = 'Take Order'
+  orderForm: FormGroup;
+  orderDetails = [];
+  itemDetails = [];
+  displayedColumns: string[] = ['position', 'item', 'quantity', 'price'];
+  constructor(private fb: FormBuilder, private orderService :OrderService, private itemService :ItemService) { }
 
   ngOnInit(): void {
     this.initForm()
+    this.availableItemForOrder();
+    
   }
+
   initForm(){
-    this.sectionForm=this.fb.group({
-      queueNumber:[Validators.required],
-      tableName:[Validators.required],
-      nameOfItems:[Validators.required],
-      quantity:[Validators.required],
-      printedOrNot:[Validators.required]
+    this.orderForm=this.fb.group({
+      queueNumber:[null, Validators.required],
+      tableName:[null,Validators.required],
+      itemId: [null, Validators.required],
+      itemName:[null, Validators.required],
+      rate: [null, Validators.required],
+      quantity:[null, Validators.required],
+      amount: [null, Validators.required],
+      printedOrNot:[null]
     });
+    
   }
-  displayedColumns: string[] = ['position', 'item', 'quandity', 'price'];
-  dataSource = ELEMENT_DATA;
+availableItemForOrder(){
+  this.itemService.getAllAvailableItems().subscribe(data =>{
+    this.itemDetails = data;
+  });
+}  
+saveOrder(){
+  const itemData = this.orderForm.value;
+  const itemDetails = itemData.itemName;
+  itemData.itemId = itemDetails._id;
+  itemData.itemAmount = itemDetails.amount;
+  itemData.itemRate = itemDetails.amount * itemDetails.quantity;
+  itemData.itemName = itemDetails.item;
+  this.orderService.saveOrder(itemData).subscribe(data=>{
+    this.orderService.getAllOrder();
+  });
 }
-const ELEMENT_DATA=[
-  {position: 1, item: 'pizza', quandity: '2 Nos', price: '500'},
-  
-];
+}  
+
