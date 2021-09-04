@@ -15,7 +15,7 @@ export class UserManagementService {
   }
   
   deleteUserById(id){
-    const url = environment.apiurl + '/user/ById' + id;
+    const url = environment.apiurl + '/user/ById/' + id;
     return this.http.delete<any>(url);
   }
 
@@ -25,7 +25,11 @@ export class UserManagementService {
   }
 
   getUserById(id) {
-    const url =environment.apiurl + '/user/getById' + id;
+    const url =environment.apiurl + '/user/getById/' + id;
     return this.http.get<any>(url);
   }  
+  getAllRoles(){
+    const url = environment.apiurl + '/role';
+    return this.http.get<any>(url);
+  }
 }

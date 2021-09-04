@@ -32,7 +32,7 @@ export class UpdateStockComponent implements OnInit {
   saveStock(){
     if(this.stockForm.valid) {
       this.itemService.saveStock(this.stockForm.value).subscribe(data => {
-        this.dialog.close()
+        this.dialog.close();
         this.toastr.success('Success', 'Section added successfully');
       }, error=> {
         console.log(error);

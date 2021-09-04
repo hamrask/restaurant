@@ -66,5 +66,8 @@ export class ItemService {
     const url = environment.apiurl + '/item/updatestock';
     return this.http.post<any>(url, body);
   }
-}
-
+  getAllAvailableItems() {
+    const url =environment.apiurl + '/item/available';
+    return this.http.get<any>(url);
+  }
+}  

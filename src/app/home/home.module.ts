@@ -23,6 +23,7 @@ import { MatRadioModule } from '@angular/material/radio';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatDialogModule } from '@angular/material/dialog';
+import { PrinterComponent } from './printer/printer.component';
 
 
 @NgModule({
@@ -36,7 +37,8 @@ import { MatDialogModule } from '@angular/material/dialog';
     TableConfigComponent,
     UserManagementComponent,
     UserAddComponent,
-    BillReportComponent
+    BillReportComponent,
+    PrinterComponent
   ],
   imports: [
     CommonModule,

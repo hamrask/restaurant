@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 import { UserManagementService } from 'src/app/shared/services/user-management.service';
 
 
@@ -12,35 +13,47 @@ export class UserAddComponent implements OnInit {
   title = 'Add User'
   userForm: FormGroup;
   userDetails =[];
-  displayedColumns: string[] = ['position', 'user name', 'password', 'role', 'action' ];
-  constructor(private fb:FormBuilder, private userManagementService:UserManagementService) { }
+  roleDetails = [];
+  displayedColumns: string[] = ['position', 'user name', 'password', 'confirm password', 'role', 'action' ];
+  constructor(private fb:FormBuilder, private userManagementService:UserManagementService, private router:Router, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
     this.initForm();
-    this.getAllUsers();
+    this.getAllRole();
+    const userId = this.route.snapshot.params.userId;
+    if (userId) {
+      this.getUserById(userId);
+    }
   }
   initForm(){
     this.userForm = this.fb.group({
       _id:[null],
-      userName:['',Validators.required]
-    });
+      fullName:['',Validators.required],
+      userName:['',Validators.required],
+      password:['',Validators.required],
+      confirmPassword:['',Validators.required],
+      phoneNumber:['',Validators.required],
+      userRoleCode:['',Validators.required],
+      active:[true]
+   });
   }
   saveUser(){
     if(this.userForm.valid) {
       this.userManagementService.saveUser(this.userForm.value).subscribe(data =>{
-        this.getAllUsers();
         this.userForm.reset();
+        this.router.navigate(["/home/user-management"]);
       })
     }
   }
-  getAllUsers(){
-    this.userManagementService.getAllUser().subscribe(data =>{
-      this.userDetails = data; 
+  getAllRole(){
+    this.userManagementService.getAllRoles().subscribe(data =>{
+      this.roleDetails = data;
     });
   }
-  deleteUser(userId) {
-    this.userManagementService.deleteUserById(userId).subscribe(data =>{
-      this.getAllUsers();
+  getUserById(userId) {
+    this.userManagementService.getUserById(userId).subscribe(data=>{
+      data.confirmPassword = data.password;
+      this.userForm.patchValue(data);
     });
   }
 } 
