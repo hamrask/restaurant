@@ -1,6 +1,8 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { ToastrService } from 'ngx-toastr';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { ItemService } from '../../shared/services/item.service';
 
 @Component({
   selector: 'app-update-stock',
@@ -10,7 +12,8 @@ import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 export class UpdateStockComponent implements OnInit {
   stockForm: FormGroup;
 
-  constructor(private fb: FormBuilder, @Inject(MAT_DIALOG_DATA) public data: any) { }
+  constructor(private fb: FormBuilder,private itemService: ItemService , @Inject(MAT_DIALOG_DATA) public data: any,
+  private dialog: MatDialogRef<UpdateStockComponent>,private toastr :ToastrService) { }
 
   ngOnInit(): void {
     this.initForm();
@@ -25,6 +28,18 @@ export class UpdateStockComponent implements OnInit {
       quantity:['',Validators.required],
       isAvailable:['',Validators.required]
     });
+  }
+  saveStock(){
+    if(this.stockForm.valid) {
+      this.itemService.saveStock(this.stockForm.value).subscribe(data => {
+        this.dialog.close()
+        this.toastr.success('Success', 'Section added successfully');
+      }, error=> {
+        console.log(error);
+        this.toastr.error('Error', error?.error?.message);
+
+      }) 
+    }
   }
 
 }
