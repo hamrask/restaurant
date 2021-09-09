@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { UserManagementService } from 'src/app/shared/services/user-management.service';
 
 @Component({
@@ -7,9 +8,9 @@ import { UserManagementService } from 'src/app/shared/services/user-management.s
   styleUrls: ['./user-management.component.scss']
 })
 export class UserManagementComponent implements OnInit {
-  displayedColumns: string[] = ['position', 'username', 'password', 'roll', 'active','action'];
+  displayedColumns: string[] = ['position', 'username', 'password', 'role', 'active','action'];
   userDetails = [];
-  constructor(private user: UserManagementService) { }
+  constructor(private user: UserManagementService, private router: Router) { }
 
   ngOnInit(): void {
     this.getAllUsers();
@@ -18,5 +19,13 @@ export class UserManagementComponent implements OnInit {
     this.user.getAllUser().subscribe(data => {
      this.userDetails = data;
     });
+  }
+  deleteUser(userId){
+    this.user.deleteUserById(userId).subscribe(data =>{
+      this.getAllUsers();
+    });
+  }
+  editUser(userDetails){
+    this.router.navigate(['/home/add-user', userDetails._id]);
   }
 }
