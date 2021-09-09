@@ -11,7 +11,7 @@ export class ItemCategoryComponent implements OnInit {
   title = 'Category';
 categoryForm: FormGroup;
 categories = [];
-displayedColumns: string[] = [ 'action','position', 'category'];
+displayedColumns: string[] = ['position', 'category', 'action'];
   constructor(private fb:FormBuilder,private itemService: ItemService, private toastr: ToastrService) { }
   ngOnInit(): void {
     this.initForm();
