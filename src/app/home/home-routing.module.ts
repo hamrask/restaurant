@@ -10,6 +10,7 @@ import { TakeOrderComponent } from './take-order/take-order.component';
 import { UpdateStockComponent } from './update-stock/update-stock.component';
 import { UserAddComponent } from './user-add/user-add.component';
 import { UserManagementComponent } from './user-management/user-management.component';
+import { PrinterComponent } from './printer/printer.component';
 
 const routes: Routes = [
   {
@@ -59,6 +60,10 @@ const routes: Routes = [
       {
         path: 'bill-report',
         component: BillReportComponent,
+      },
+      {
+        path: 'printer',
+        component: PrinterComponent,
       }
     ]
   }
