@@ -24,6 +24,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatDialogModule } from '@angular/material/dialog';
 import { PrinterComponent } from './printer/printer.component';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
 
 
 @NgModule({
@@ -54,7 +55,8 @@ import { PrinterComponent } from './printer/printer.component';
     MatRadioModule,
     MatCheckboxModule,
     MatToolbarModule,
-    MatDialogModule
+    MatDialogModule,
+    MatAutocompleteModule
   ]
 })
 export class HomeModule { }

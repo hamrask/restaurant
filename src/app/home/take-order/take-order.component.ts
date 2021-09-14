@@ -1,6 +1,7 @@
-import { listLazyRoutes } from '@angular/compiler/src/aot/lazy_routes';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Observable} from 'rxjs';
+import { startWith,map } from 'rxjs/operators';
 import { ItemService } from 'src/app/shared/services/item.service';
 import { OrderService } from 'src/app/shared/services/order.service';
 
@@ -16,6 +17,7 @@ export class TakeOrderComponent implements OnInit {
   orderDetails = [];
   itemDetails = [];
   displayedColumns: string[] = ['position', 'item', 'quantity', 'price'];
+  filteredOptions: Observable<any[]>;
   constructor(private fb: FormBuilder, private orderService :OrderService, private itemService :ItemService) { }
 
   ngOnInit(): void {
@@ -27,15 +29,29 @@ export class TakeOrderComponent implements OnInit {
   initForm(){
     this.orderForm=this.fb.group({
       queueNumber:[null, Validators.required],
-      tableName:[null,Validators.required],
+      orderType:['HOME_DELIVERY', Validators.required],
+      tableName:[null],
       itemId: [null, Validators.required],
       itemName:[null, Validators.required],
       rate: [null, Validators.required],
-      quantity:[null, Validators.required],
+      quantity:[1, Validators.required],
       amount: [null, Validators.required],
       printedOrNot:[null]
     });
-    
+    this.orderForm.get('orderType').valueChanges.subscribe(data => {
+      console.log(data);
+    });
+    this.filteredOptions = this.orderForm.get('itemName').valueChanges.pipe(
+      startWith(''),
+      map(value => this._filter(value))
+    );
+  }
+  private _filter(value: string): any[] {
+    if (!value) {
+      return [];
+    }
+    const filterValue = value.toLowerCase();
+    return this.itemDetails.filter(option => option.itemName.toLowerCase().includes(filterValue));
   }
 availableItemForOrder(){
   this.itemService.getAllAvailableItems().subscribe(data =>{
@@ -44,6 +60,7 @@ availableItemForOrder(){
 }  
 saveOrder(){
   const itemData = this.orderForm.value;
+  console.log(itemData);
   const itemDetails = itemData.itemName;
   itemData.itemId = itemDetails._id;
   itemData.itemAmount = itemDetails.amount;
@@ -52,6 +69,9 @@ saveOrder(){
   this.orderService.saveOrder(itemData).subscribe(data=>{
     this.orderService.getAllOrder();
   });
+}
+displayFn(item): string {
+  return item && item.itemName ? item.itemName : '';
 }
 }  
 
