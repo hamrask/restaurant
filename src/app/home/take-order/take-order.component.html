@@ -31,8 +31,9 @@
                    aria-label="Number"
                    matInput
                    formControlName="itemName"
-                   [matAutocomplete]="auto">
-            <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete" [displayWith]="displayFn">
+                   [matAutocomplete]="auto"
+                   autofocus>
+            <mat-autocomplete (optionSelected)="jumpToQuantity()" autoActiveFirstOption #auto="matAutocomplete" [displayWith]="displayFn">
               <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
                 <span>{{option.itemName}} | {{option.amount}} ₹</span>
               </mat-option>
@@ -48,6 +49,9 @@
               matInput
               placeholder="Quantity"
               (keyup.enter)="saveOrder()"
+              type="number"
+              autocomplete="off"
+              #quantityInput
             />
           </mat-form-field>
         </div>

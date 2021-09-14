@@ -1,3 +1,4 @@
+import { ElementRef, ViewChild } from '@angular/core';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Observable} from 'rxjs';
@@ -18,6 +19,7 @@ export class TakeOrderComponent implements OnInit {
   itemDetails = [];
   displayedColumns: string[] = ['position', 'item', 'quantity', 'price'];
   filteredOptions: Observable<any[]>;
+  @ViewChild('quantityInput') quantityInput: ElementRef;
   constructor(private fb: FormBuilder, private orderService :OrderService, private itemService :ItemService) { }
 
   ngOnInit(): void {
@@ -41,6 +43,11 @@ export class TakeOrderComponent implements OnInit {
     this.orderForm.get('orderType').valueChanges.subscribe(data => {
       console.log(data);
     });
+    this.orderForm.get('quantity').valueChanges.subscribe(data => {
+      if (data && data < 1 || data == 0) {
+        this.orderForm.get('quantity').setValue(1);
+      }
+    });
     this.filteredOptions = this.orderForm.get('itemName').valueChanges.pipe(
       startWith(''),
       map(value => this._filter(value))
@@ -49,6 +56,9 @@ export class TakeOrderComponent implements OnInit {
   private _filter(value: string): any[] {
     if (!value) {
       return [];
+    }
+    if (typeof value == 'object') {
+      return;
     }
     const filterValue = value.toLowerCase();
     return this.itemDetails.filter(option => option.itemName.toLowerCase().includes(filterValue));
@@ -72,6 +82,11 @@ saveOrder(){
 }
 displayFn(item): string {
   return item && item.itemName ? item.itemName : '';
+}
+jumpToQuantity() {
+  if (this.quantityInput && this.quantityInput.nativeElement) {
+    this.quantityInput.nativeElement.focus();
+  }
 }
 }  
 
