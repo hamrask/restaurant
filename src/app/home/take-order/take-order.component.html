@@ -1,114 +1,110 @@
 <div class="row">
-  <form [formGroup]="orderForm" (ngSubmit)="saveOrder()">
-    <div class="col-md-12 col-sm-12"></div>
-    <h3>{{ title }}</h3>
-    <div class="col-md-4"></div>
-
-    <mat-form-field class="order" appearance="fill">
-      <mat-label>Order Number</mat-label>
-      <input
-        formControlName="queueNumber"
-        matInput
-        placeholder="eg:123"
-        (keyup.enter)="saveOrder()"
-      />
-    </mat-form-field>
-
-    <div class="row-dropdown">
-      <div class="col-md-12 col-sm-12">
-        <mat-radio-group aria-label="Select an option" class="order-margin">
-          <mat-radio-button value="1" class="r-btn1">Take Away</mat-radio-button>
-          <mat-radio-button value="2" class="r-btn2">Dining</mat-radio-button>
-          <mat-radio-button value="2" class="r-btn3">Home Delivery</mat-radio-button>
-        </mat-radio-group>
-      </div>
-      <div class="auto col-md-3 col-sm-12">
-        <br />
-      </div>
-      <div class="item col-md-4 col-sm-12">
-        <br />
-
-        <mat-form-field class="item" appearance="fill">
-          <mat-label>Item</mat-label>
-          <mat-select
-            formControlName="itemName"
-            matInput
-            placeholder="choose-item"
-            (keyup.enter)="saveOrder()"
-            required
-          >
-            <mat-option
-              *ngFor ="let item of itemDetails"
-              [value]="item"
-              >{{ item.itemName }}</mat-option
-            >
-          </mat-select>
-        </mat-form-field>
-      </div>
-      <div class="col-md-5"></div>
-      <div class="col-md-4 col-sm-12">
-        <mat-form-field class="" appearance="fill">
-          <mat-label>quantity</mat-label>
-          <input
-            formControlName="quantity"
-            matInput
-            placeholder="Quantity"
-            (keyup.enter)="saveOrder()"
-          />
-        </mat-form-field>
-      </div>
-      <div class="col-md-8"></div>
-      <div class="col-md-4">
-        <section>
-          <button class="btn1" mat-raised-button color="primary">Add</button>
-          <button class="btn2" mat-raised-button>Cancel</button>
-        </section>
-      </div>
-      <div class="col-md-8"></div>
+  <div class="col-md-9">
+    <form [formGroup]="orderForm" (ngSubmit)="saveOrder()">
+      <div class="col-md-12 col-sm-12"></div>
+      <h3>{{ title }}</h3>
       <div class="col-md-4"></div>
-      <div class="col-md-8">
-        <section>
-          <button class="print" mat-raised-button>Print</button>
-        </section>
-      </div>
-      <div class="row-table">
-        <div class="col-md-8">
-          <table mat-table [dataSource]="orderDetails" class="order-table">
-            <!--- Note that these columns can be defined in any order.
-                          The actual rendered columns are set as a property on the row definition" -->
-
-            <!-- Position Column -->
-            <ng-container matColumnDef="position">
-              <th mat-header-cell *matHeaderCellDef>No.</th>
-              <td mat-cell *matCellDef="let element">{{ element.position }}</td>
-            </ng-container>
-
-            <!-- item Column -->
-            <ng-container matColumnDef="item">
-              <th mat-header-cell *matHeaderCellDef>Item</th>
-              <td mat-cell *matCellDef="let element">{{ element.itemName }}</td>
-            </ng-container>
-
-            <!-- quantity Column -->
-            <ng-container matColumnDef="quantity">
-              <th mat-header-cell *matHeaderCellDef>Quantity</th>
-              <td mat-cell *matCellDef="let element">{{ element.quantity }}</td>
-            </ng-container>
-
-            <!-- price Column -->
-            <ng-container matColumnDef="price">
-              <th mat-header-cell *matHeaderCellDef>Price</th>
-              <td mat-cell *matCellDef="let element">{{ element.price }}</td>
-            </ng-container>
-
-            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-            <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
-          </table>
+  
+      <mat-form-field class="order" appearance="fill">
+        <mat-label>Order Number</mat-label>
+        <input
+          formControlName="queueNumber"
+          matInput
+          placeholder="eg:123"
+          (keyup.enter)="saveOrder()"
+        />
+      </mat-form-field>
+  
+      <div class="row-dropdown">
+        <div class="col-md-12 col-sm-12">
+          <mat-radio-group aria-label="Select an option" class="order-margin" formControlName="orderType">
+            <mat-radio-button value="TAKE_AWAY" class="r-btn1">Take Away</mat-radio-button>
+            <mat-radio-button value="DINING" class="r-btn2">Dining</mat-radio-button>
+            <mat-radio-button value="HOME_DELIVERY" class="r-btn3">Home Delivery</mat-radio-button>
+          </mat-radio-group>
+        </div>
+        <div class="item col-md-6 col-sm-12">
+          <mat-form-field class="example-full-width" appearance="fill">
+            <mat-label>Item</mat-label>
+            <input type="text"
+                   placeholder="Pick one"
+                   aria-label="Number"
+                   matInput
+                   formControlName="itemName"
+                   [matAutocomplete]="auto">
+            <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete" [displayWith]="displayFn">
+              <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+                <span>{{option.itemName}} | {{option.amount}} ₹</span>
+              </mat-option>
+            </mat-autocomplete>
+          </mat-form-field>
+        </div>
+        <div class="col-md-5"></div>
+        <div class="col-md-4 col-sm-12">
+          <mat-form-field class="" appearance="fill">
+            <mat-label>quantity</mat-label>
+            <input
+              formControlName="quantity"
+              matInput
+              placeholder="Quantity"
+              (keyup.enter)="saveOrder()"
+            />
+          </mat-form-field>
+        </div>
+        <div class="col-md-8"></div>
+        <div class="col-md-4">
+          <section>
+            <button class="btn1" mat-raised-button color="primary">Add</button>
+            <button class="btn2" mat-raised-button>Cancel</button>
+          </section>
+        </div>
+        <div class="col-md-8"></div>
+        <div class="col-md-4"></div>
+        <div class="col-md-8" style="text-align: right;">
+            <button class="print" mat-raised-button>Close & Print</button>
+        </div>
+        <div class="row-table">
+          <div class="col-md-8">
+            <table mat-table [dataSource]="orderDetails" class="order-table">
+              <!--- Note that these columns can be defined in any order.
+                            The actual rendered columns are set as a property on the row definition" -->
+  
+              <!-- Position Column -->
+              <ng-container matColumnDef="position">
+                <th mat-header-cell *matHeaderCellDef>No.</th>
+                <td mat-cell *matCellDef="let element">{{ element.position }}</td>
+              </ng-container>
+  
+              <!-- item Column -->
+              <ng-container matColumnDef="item">
+                <th mat-header-cell *matHeaderCellDef>Item</th>
+                <td mat-cell *matCellDef="let element">{{ element.itemName }}</td>
+              </ng-container>
+  
+              <!-- quantity Column -->
+              <ng-container matColumnDef="quantity">
+                <th mat-header-cell *matHeaderCellDef>Quantity</th>
+                <td mat-cell *matCellDef="let element">{{ element.quantity }}</td>
+              </ng-container>
+  
+              <!-- price Column -->
+              <ng-container matColumnDef="price">
+                <th mat-header-cell *matHeaderCellDef>Price</th>
+                <td mat-cell *matCellDef="let element">{{ element.price }}</td>
+              </ng-container>
+  
+              <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+              <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+            </table>
+          </div>
         </div>
       </div>
-    </div>
-    <div class="col-md-10">
-      <label for="" class="total">Total</label>
-    </div>
-  </form>
+      <div class="col-md-10">
+        <label for="" class="total">Total</label>
+      </div>
+    </form>
+  </div>
+  <div class="col-md-3">
+    <p>this is order list</p>
+  </div>
 </div>
