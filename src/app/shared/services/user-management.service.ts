@@ -1,5 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -7,7 +9,7 @@ import { environment } from 'src/environments/environment';
 })
 export class UserManagementService {
 
-  constructor(private http:HttpClient) { }
+  constructor(private http:HttpClient, private router: Router) { }
 
   getAllUser() {
     const url = environment.apiurl + '/user';
@@ -31,5 +33,24 @@ export class UserManagementService {
   getAllRoles(){
     const url = environment.apiurl + '/role';
     return this.http.get<any>(url);
+  }
+   // login
+   login(body): Observable<any> {
+    const url = environment.apiurl + 'auth';
+    return this.http.post(url, body);
+  }
+  // set auth token
+  setAuthToken(token): void {
+    sessionStorage.setItem('isLoggedIn', 'true');
+    sessionStorage.setItem('token', token);
+  }
+  // logout
+  logout(): void {
+    sessionStorage.clear();
+    this.router.navigate(['/login']);
+  }
+  // get token
+  getAuthToken(): string {
+    return sessionStorage.getItem('token');
   }
 }

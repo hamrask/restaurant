@@ -25,6 +25,8 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatDialogModule } from '@angular/material/dialog';
 import { PrinterComponent } from './printer/printer.component';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { ProfileComponent } from './profile/profile.component';
+import { AddCustomerComponent } from './add-customer/add-customer.component';
 
 
 @NgModule({
@@ -39,7 +41,9 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
     UserManagementComponent,
     UserAddComponent,
     BillReportComponent,
-    PrinterComponent
+    PrinterComponent,
+    ProfileComponent,
+    AddCustomerComponent
   ],
   imports: [
     CommonModule,

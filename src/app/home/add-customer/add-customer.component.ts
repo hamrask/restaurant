@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialogRef } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-add-customer',
@@ -7,9 +8,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AddCustomerComponent implements OnInit {
 
-  constructor() { }
+  constructor(private popup: MatDialogRef<AddCustomerComponent>) { }
 
   ngOnInit(): void {
   }
-
+  closePopup() {
+    this.popup.close();
+  }
 }
