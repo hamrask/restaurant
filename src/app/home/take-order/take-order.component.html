@@ -32,7 +32,7 @@
                    [matAutocomplete]="auto"
                    #item
                    autofocus>
-            <mat-autocomplete (optionSelected)="jumpToQuantity()" autoActiveFirstOption #auto="matAutocomplete" [displayWith]="displayFn">
+            <mat-autocomplete (optionSelected)="jumpToQuantity($event)" autoActiveFirstOption #auto="matAutocomplete" [displayWith]="displayFn">
               <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
                 <span>{{option.itemName}} | {{option.amount}} ₹</span>
               </mat-option>

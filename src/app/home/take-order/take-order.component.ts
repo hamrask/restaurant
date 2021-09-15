@@ -44,7 +44,7 @@ export class TakeOrderComponent implements OnInit {
       itemId: [null, Validators.required],
       itemName:[null, Validators.required],
       rate: [null, Validators.required],
-      quantity:[1, Validators.required],
+      quantity:[null, Validators.required],
       amount: [null, Validators.required],
       printedOrNot:[null],
       customerId: [null]
@@ -57,8 +57,8 @@ export class TakeOrderComponent implements OnInit {
       }
     });
     this.orderForm.get('quantity').valueChanges.subscribe(data => {
-      if (data && data < 1 || data == 0) {
-        this.orderForm.get('quantity').setValue(1);
+      if (data && data < 1) {
+        this.orderForm.get('quantity').setValue(0);
       }
     });
     this.filteredOptions = this.orderForm.get('itemName').valueChanges.pipe(
@@ -84,19 +84,29 @@ availableItemForOrder(){
 saveOrder(){
     const itemData = this.orderForm.value;
     const itemDetails = itemData.itemName;
+    if(typeof itemDetails == 'string' || !itemDetails) {
+      this.orderForm.get('itemName').reset();
+      return;
+    }
     itemData.itemId = itemDetails._id;
-    itemData.itemAmount = itemDetails.amount;
-    itemData.itemRate = itemDetails.amount * itemData.quantity;
+    itemData.rate = itemDetails.amount;
+    itemData.amount = itemDetails.amount * itemData.quantity;
     itemData.itemName = itemDetails.itemName;
-    this.orderService.saveOrder(itemData).subscribe(data=>{
-      this.orderService.getAllOrder();
-    });
-    this.orderForm.reset();
+    this.orderForm.setValue(itemData);
+    if (this.orderForm.valid) {
+      this.orderService.saveOrder(itemData).subscribe(data=>{
+        this.orderService.getAllOrder();
+      });
+      this.orderForm.reset();
+    }
 }
 displayFn(item): string {
   return item && item.itemName ? item.itemName : '';
 }
-jumpToQuantity() {
+jumpToQuantity(value) {
+  if (value?.option?.value) {
+    this.orderForm.get('itemName').setValue(value.option.value);
+  }
   if (this.quantityInput && this.quantityInput.nativeElement) {
     this.quantityInput.nativeElement.focus();
   }
@@ -105,6 +115,9 @@ getOrderNumber() {
   this.orderService.getOrderNumber().subscribe(data => {
     this.orderForm.get('orderNumber').setValue(data.orderNumber);
   });
+}
+getOrdersByOrderNumber(orderNumber) {
+  
 }
 }  
 
