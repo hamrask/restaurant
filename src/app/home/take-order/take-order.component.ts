@@ -18,10 +18,12 @@ export class TakeOrderComponent implements OnInit {
   orderForm: FormGroup;
   orderDetails = [];
   itemDetails = [];
+  recentOrdersList = [];
   displayedColumns: string[] = ['position', 'item', 'quantity', 'price'];
   filteredOptions: Observable<any[]>;
   @ViewChild('quantityInput') quantityInput: ElementRef;
   @ViewChild('item') item: ElementRef;
+  totalAmount;
   constructor(private fb: FormBuilder,
               private orderService :OrderService,
               private itemService :ItemService,
@@ -31,6 +33,7 @@ export class TakeOrderComponent implements OnInit {
     this.initForm()
     this.availableItemForOrder();
     this.getOrderNumber();
+    this.getRecentOrders();
   }
   ngAfterViewInit() {
     this.item.nativeElement.focus();
@@ -95,9 +98,10 @@ saveOrder(){
     this.orderForm.setValue(itemData);
     if (this.orderForm.valid) {
       this.orderService.saveOrder(itemData).subscribe(data=>{
+        this.getOrdersByOrderNumber(this.orderForm.get('orderNumber').value);
         this.orderService.getAllOrder();
+        this.orderForm.reset();
       });
-      this.orderForm.reset();
     }
 }
 displayFn(item): string {
@@ -117,7 +121,19 @@ getOrderNumber() {
   });
 }
 getOrdersByOrderNumber(orderNumber) {
-  
+  this.orderService.getOrdersByOrderNumber(orderNumber).subscribe(data => {
+    this.orderDetails = data;
+    this.totalAmount = 0;
+    this.orderDetails.forEach(x => {
+      this.totalAmount += Number(x.amount);
+    });
+    this.totalAmount.toFixed(2);
+  });
+}
+getRecentOrders() {
+  this.orderService.getRecentOrderList().subscribe(data => {
+    this.recentOrdersList = data;
+  });
 }
 }  
 

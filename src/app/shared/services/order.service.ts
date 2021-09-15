@@ -31,7 +31,11 @@ export class OrderService {
   }
   getOrdersByOrderNumber(orderNumber) {
     const url = environment.apiurl + '/order/getOrderByOrderNumber/' + orderNumber;
-    return this.http.get(url);
+    return this.http.get<any>(url);
+  }
+  getRecentOrderList() {
+    const url = environment.apiurl + '/order/getRecentOrders';
+    return this.http.get<any>(url);
   }
 }
 
