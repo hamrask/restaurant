@@ -62,7 +62,7 @@ export class ItemService {
     const url = environment.apiurl + '/print/getAllPrinters';
     return this.http.get<any>(url);
   }
-  saveStock(body){
+  updateStock(body){
     const url = environment.apiurl + '/item/updatestock';
     return this.http.post<any>(url, body);
   }

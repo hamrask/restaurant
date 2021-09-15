@@ -1,57 +1,66 @@
-<div class="row">
-  <form [formGroup]="itemForm" (ngSubmit)="saveItem()">
-    <div class="col-md-12 ">
+<form [formGroup]="itemForm" (ngSubmit)="saveItem()">
+  <div class="row">
+    <div class="col-md-12">
       <h3>Add Item</h3>
     </div>
+  </div>
+  <div class="row">
     <div class="col-md-3">
       <label for="">Item Name</label>
-      <br>
+      <br />
       <mat-form-field class="f-margin" appearance="fill">
         <mat-label>Favorite food</mat-label>
-        <input 
-        formControlName="itemName" 
-        matInput 
-        placeholder="Eg: Pizza" 
-        (keyup.enter)="saveItem()"
+        <input
+          formControlName="itemName"
+          matInput
+          placeholder="Eg: Pizza"
+          (keyup.enter)="saveItem()"
         />
       </mat-form-field>
-
-    </div>
-    <div class="col-md-3">
-      <label for="">Add Description</label>
-      <br>
-      <mat-form-field class="f-margin" appearance="fill">
-        <mat-label>Leave a comment</mat-label>
-        <textarea formControlName="description" matInput placeholder="Ex. It makes me feel..."></textarea>
-      </mat-form-field>
-
     </div>
     <div class="col-md-3">
       <label for="">Amount</label>
-      <br>
       <mat-form-field class="f-margin" appearance="fill">
         <mat-label>Amount</mat-label>
-        <input formControlName="amount" matInput placeholder="100" >
+        <input formControlName="amount" matInput placeholder="100" />
       </mat-form-field>
     </div>
-    <div class="row">
-      <div class="col-md-3">
-        <mat-form-field appearance="fill" class="d-categry">
-          <mat-label>Category</mat-label>
-          <mat-select formControlName="categoryId" matNativeControl required>
-            <mat-option *ngFor="let item of categoryIds" [value]="item._id">{{item.categoryName}}</mat-option>
-          </mat-select>
-        </mat-form-field>
-      </div>
-      <div class="col-md-4">
-        <mat-form-field appearance="fill" class="section-m ">
-          <mat-label>Section</mat-label>
-          <mat-select formControlName="sectionId" matNativeControl required>
-            <mat-option *ngFor ="let item of sectionIds"  [value]="item._id">{{item.sectionName}}</mat-option>
-          </mat-select>
-        </mat-form-field>
-      </div>
+
+    <div class="col-md-3">
+      <label>Category</label>
+      <mat-form-field appearance="fill" class="d-categry">
+        <mat-label>Category</mat-label>
+        <mat-select placeholder="Category" formControlName="categoryId" matNativeControl required>
+          <mat-option *ngFor="let item of categoryIds" [value]="item._id">{{
+            item.categoryName
+          }}</mat-option>
+        </mat-select>
+      </mat-form-field>
     </div>
+    <div class="col-md-3">
+      <label>Section</label>
+      <mat-form-field appearance="fill" class="section-m">
+        <mat-label>Section</mat-label>
+        <mat-select formControlName="sectionId" matNativeControl required>
+          <mat-option *ngFor="let item of sectionIds" [value]="item._id">{{
+            item.sectionName
+          }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div class="col-md-3">
+      <label for="">Add Description</label>
+      <br />
+      <mat-form-field class="f-margin" appearance="fill">
+        <mat-label>Leave a comment</mat-label>
+        <textarea
+          formControlName="description"
+          matInput
+          placeholder="Ex. It makes me feel..."
+        ></textarea>
+      </mat-form-field>
+    </div>
+
     <!--
     <div class=" c-margin col-md-3">
       <input type="file">
@@ -62,78 +71,90 @@
       <div class="col-md-4">
         <section>
           <div class="button-row">
-            <button type="submit" class="btn1" mat-raised-button color="primary">Add</button>
+            <button
+              type="submit"
+              class="btn1"
+              mat-raised-button
+              color="primary"
+            >
+              Add
+            </button>
             <button type="reset" class="btn2" mat-raised-button>Cancel</button>
           </div>
         </section>
       </div>
     </div>
-  </form>
-</div>
-
-
-
-
-<div class="row">
-  <table mat-table [dataSource]="items" class="w100">
-
-    <!--- Note that these columns can be defined in any order.
+  </div>
+</form>
+  <div class="row">
+    <table mat-table [dataSource]="items" class="w100">
+      <!--- Note that these columns can be defined in any order.
           The actual rendered columns are set as a property on the row definition" -->
 
-    <!-- Position Column -->
-    <ng-container matColumnDef="position">
-      <th mat-header-cell *matHeaderCellDef> No. </th>
-      <td mat-cell *matCellDef="let element;let i = index;"> {{i+1}} </td>
-    </ng-container>
+      <!-- Position Column -->
+      <ng-container matColumnDef="position">
+        <th mat-header-cell *matHeaderCellDef>No.</th>
+        <td mat-cell *matCellDef="let element; let i = index">{{ i + 1 }}</td>
+      </ng-container>
 
-    <!-- item Name Column -->
-    <ng-container matColumnDef="itemname">
-      <th mat-header-cell *matHeaderCellDef> Item name</th>
-      <td mat-cell *matCellDef="let element"> {{element.itemName}} </td>
-    </ng-container>
+      <!-- item Name Column -->
+      <ng-container matColumnDef="itemname">
+        <th mat-header-cell *matHeaderCellDef>Item name</th>
+        <td mat-cell *matCellDef="let element">{{ element.itemName }}</td>
+      </ng-container>
 
-    <!-- availability Column -->
-    <ng-container matColumnDef="availability">
-      <th mat-header-cell *matHeaderCellDef> Availability</th>
-      <td mat-cell *matCellDef="let element"> {{element.availability}} </td>
-    </ng-container>
+      <!-- availability Column -->
+      <ng-container matColumnDef="availability">
+        <th mat-header-cell *matHeaderCellDef>Availability</th>
+        <td mat-cell *matCellDef="let element">
+          <span *ngIf="element.isAvailabile" style="color:green;">Available</span>
+          <span *ngIf="!element.isAvailabile" style="color:red;">Not Available</span>
+        </td>
+      </ng-container>
 
-    <!--   description Column -->
-    <ng-container matColumnDef="addescription">
-      <th mat-header-cell *matHeaderCellDef> Add Description</th>
-      <td mat-cell *matCellDef="let element"> {{element.description}} </td>
-    </ng-container>
-    <!--   amount Column -->
-    <ng-container matColumnDef="amount">
-      <th mat-header-cell *matHeaderCellDef> Amount</th>
-      <td mat-cell *matCellDef="let element"> {{element.amount}} </td>
-    </ng-container>
-    <!--
+      <!--   description Column -->
+      <ng-container matColumnDef="addescription">
+        <th mat-header-cell *matHeaderCellDef>Add Description</th>
+        <td mat-cell *matCellDef="let element">{{ element.description }}</td>
+      </ng-container>
+      <!--   amount Column -->
+      <ng-container matColumnDef="amount">
+        <th mat-header-cell *matHeaderCellDef>Amount</th>
+        <td mat-cell *matCellDef="let element">{{ element.amount }}</td>
+      </ng-container>
+      <!--
     <ng-container matColumnDef="image">
       <th mat-header-cell *matHeaderCellDef> Image</th>
       <td mat-cell *matCellDef="let element"> {{element.image}} </td>
     </ng-container>-->
-    <!-- action Column -->
-  <ng-container matColumnDef="action">
-    <th mat-header-cell *matHeaderCellDef>Action</th>
-    <td mat-cell *matCellDef="let element">
-      <button mat-mini-fab color="primary" (click)="editItem(element)">
-        <mat-icon>edit</mat-icon></button
-      >&nbsp;
-      <button mat-mini-fab color="warn" (click)="deleteItem(element._id)">
-        <mat-icon>delete</mat-icon>
-      </button>
-    </td>
-  </ng-container>
-  <ng-container matColumnDef="stock">
-    <th mat-header-cell *matHeaderCellDef> Stock </th>
-    <td mat-cell *matCellDef="let element">
-    <button mat-flat-button color="primary" (click)="updateStock(element)">add stock
-        <mat-icon>update</mat-icon>  
-      </button></td>
-    </ng-container>
+      <!-- action Column -->
+      <ng-container matColumnDef="action">
+        <th mat-header-cell *matHeaderCellDef>Action</th>
+        <td mat-cell *matCellDef="let element">
+          <button mat-mini-fab color="primary" (click)="editItem(element)">
+            <mat-icon>edit</mat-icon></button
+          >&nbsp;
+          <button mat-mini-fab color="warn" (click)="deleteItem(element._id)">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="stock">
+        <th mat-header-cell *matHeaderCellDef>Stock</th>
+        <td mat-cell *matCellDef="let element">
+          <button
+            mat-flat-button
+            color="primary"
+            (click)="updateStock(element)"
+          >
+            add stock
+            <mat-icon>update</mat-icon>
+          </button>
+        </td>
+      </ng-container>
 
-    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-  </table>
-</div>
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+    </table>
+  </div>
+
