@@ -31,12 +31,13 @@ export class IteemAddComponent implements OnInit {
     this.itemForm = this.fb.group({
       _id: [null],
       itemName: ['', Validators.required],
-      availability: ['true', Validators.required],
+      isAvailable: ['true', Validators.required],
       description: ['', Validators.required],
       amount: ['', Validators.required],
       categoryId: ['', Validators.required],
       sectionId: ['', Validators.required],
-      photoUrl: ['']
+      photoUrl: [''],
+      quantity: [1]
     });
   }
   saveItem() {
@@ -75,7 +76,7 @@ export class IteemAddComponent implements OnInit {
     this.itemForm.patchValue(itemDetails);
   }
   updateStock(itemDetails): void {
-    itemDetails._id=itemDetails.itemId;
+    itemDetails.itemId = itemDetails._id;
     const dialogRef = this.dialog.open(UpdateStockComponent, {
       width: '450px',
       data: itemDetails,
