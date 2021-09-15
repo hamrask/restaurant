@@ -67,8 +67,14 @@ export class ItemService {
     return  this.http.get<any>(url);
   }
   getAllPrinter() {
-    this.
+    const url = environment.apiurl + '/printer';
+    return this.http.get<any>(url);
+  }
+  savePrinter(body){
+    const url = environment.apiurl + '/printer';
+    return this.http.post<any>(url,body);
   }
 }
+
 
 

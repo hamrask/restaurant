@@ -1,4 +1,3 @@
-import { listLazyRoutes } from '@angular/compiler/src/aot/lazy_routes';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ItemService } from 'src/app/shared/services/item.service';
@@ -34,9 +33,9 @@ export class TakeOrderComponent implements OnInit {
       quantity:[null, Validators.required],
       amount: [null, Validators.required],
       printedOrNot:[null]
-    });
-    
+    });    
   }
+  
 availableItemForOrder(){
   this.itemService.getAllAvailableItems().subscribe(data =>{
     this.itemDetails = data;
