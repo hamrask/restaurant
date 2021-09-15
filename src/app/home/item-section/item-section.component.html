@@ -16,14 +16,14 @@
     </div>
     <div class="col-md-3">
       <label for="" class="pmargin">Printer IP</label>
-      <br />
+      <br/>
       <mat-form-field class="section-margin" appearance="fill">
         <input 
         formControlName="printerIP" 
         matInput 
-        placeholder="Eg.Juice" 
+        placeholder="Eg: 192.168.1.1" 
         (keyup.enter)="saveSection()"
-        />
+        autocomplete="off"/>
       </mat-form-field>
     </div>
     <div class="col-md-3" style="margin-bottom: 10px;">
@@ -58,10 +58,15 @@
           
             <!-- Weight Column -->
             <ng-container matColumnDef="printer">
-              <th mat-header-cell *matHeaderCellDef>  Printer</th>
-              <td mat-cell *matCellDef="let element"> {{element.printerName}} </td>
+              <th mat-header-cell *matHeaderCellDef>  Printer IP</th>
+              <td mat-cell *matCellDef="let element"> {{element.printerIP}} </td>
             </ng-container>
-          
+            <!--Printer Column-->
+            <ng-container matColumnDef="mainprinter">
+              <th mat-header-cell *matHeaderCellDef> Main Printer</th>
+              <td mat-cell *matCellDef="let element"><span *ngIf="element.isMainPrinter">YES</span> 
+                <span *ngIf = "!element.isMainPrinter">NO</span></td>
+            </ng-container>
             <!-- Symbol Column -->
             <ng-container matColumnDef="action">
               <th mat-header-cell *matHeaderCellDef> Action </th>

@@ -13,8 +13,8 @@ import { ItemService } from '../../shared/services/item.service';
 export class ItemSectionComponent implements OnInit {
 sectionForm: FormGroup;
 printers = [];
-sections = [];
-displayedColumns: string[] = ['position', 'nameofsection', 'printer', 'action'];
+sections = [];  
+displayedColumns: string[] = ['position', 'nameofsection', 'printer','mainprinter', 'action'];
   constructor(private fb: FormBuilder, private itemService: ItemService, private toastr :ToastrService) { }
   ngOnInit(): void {
     this.initForm();
