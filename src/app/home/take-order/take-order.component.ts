@@ -91,7 +91,7 @@ saveOrder(){
     this.orderService.saveOrder(itemData).subscribe(data=>{
       this.orderService.getAllOrder();
     });
-  
+    this.orderForm.reset();
 }
 displayFn(item): string {
   return item && item.itemName ? item.itemName : '';
