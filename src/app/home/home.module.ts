@@ -24,6 +24,9 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatDialogModule } from '@angular/material/dialog';
 import { PrinterComponent } from './printer/printer.component';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { ProfileComponent } from './profile/profile.component';
+import { AddCustomerComponent } from './add-customer/add-customer.component';
 
 
 @NgModule({
@@ -38,7 +41,9 @@ import { PrinterComponent } from './printer/printer.component';
     UserManagementComponent,
     UserAddComponent,
     BillReportComponent,
-    PrinterComponent
+    PrinterComponent,
+    ProfileComponent,
+    AddCustomerComponent
   ],
   imports: [
     CommonModule,
@@ -54,7 +59,8 @@ import { PrinterComponent } from './printer/printer.component';
     MatRadioModule,
     MatCheckboxModule,
     MatToolbarModule,
-    MatDialogModule
+    MatDialogModule,
+    MatAutocompleteModule
   ]
 })
 export class HomeModule { }

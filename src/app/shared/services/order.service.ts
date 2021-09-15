@@ -25,4 +25,9 @@ export class OrderService {
     const url=environment.apiurl + '/order/ById/' + id;
     return this.http.delete(url);
   }
+  getOrderNumber() {
+    const url = environment.apiurl + '/order/getOrderNumber';
+    return this.http.get<any>(url);
+  }
 }
+

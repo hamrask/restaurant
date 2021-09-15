@@ -2,7 +2,7 @@ import { Component, OnInit ,Inject} from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { ItemService } from '../../shared/services/item.service';
-import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
+import {MatDialog} from '@angular/material/dialog';
 import { UpdateStockComponent } from '../update-stock/update-stock.component';
 
 
@@ -17,7 +17,10 @@ export class IteemAddComponent implements OnInit {
   categoryIds = [];
   sectionIds = [];
   displayedColumns: string[] = ['position', 'itemname', 'availability', 'addescription', 'amount','action','stock'];
-  constructor(private fb: FormBuilder, private itemService: ItemService, private toastr: ToastrService,public dialog: MatDialog) { }
+  constructor(private fb: FormBuilder,
+              private itemService: ItemService,
+              private toastr: ToastrService,
+              public dialog: MatDialog) { }
   ngOnInit(): void {
     this.initForm();
     this.getAllItems();
@@ -75,7 +78,8 @@ export class IteemAddComponent implements OnInit {
     itemDetails._id=itemDetails.itemId;
     const dialogRef = this.dialog.open(UpdateStockComponent, {
       width: '450px',
-      data: itemDetails
+      data: itemDetails,
+      disableClose: true
     });
 
     dialogRef.afterClosed().subscribe(result => {

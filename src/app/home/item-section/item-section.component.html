@@ -13,22 +13,23 @@
               (keyup.enter)="saveSection()"
               />
             </mat-form-field>
-          
-          
     </div>
     <div class="col-md-3">
-      <label for="" class="pmargin">Choose Printer</label>
+      <label for="" class="pmargin">Printer IP</label>
       <br />
-      <mat-form-field appearance="fill" class="drop-margin">
-        <mat-label>Printer </mat-label>
-        <mat-select formControlName="printerName" matNativeControl required>
-          <mat-option *ngFor="let item of printers" [value]="item.id">{{
-            item.name
-          }}</mat-option>
-        </mat-select>
+      <mat-form-field class="section-margin" appearance="fill">
+        <input 
+        formControlName="printerIP" 
+        matInput 
+        placeholder="Eg.Juice" 
+        (keyup.enter)="saveSection()"
+        />
       </mat-form-field>
     </div>
-    <div class="col-md-6"></div>
+    <div class="col-md-3" style="margin-bottom: 10px;">
+      <mat-checkbox formControlName="isMainPrinter">is Main Printer</mat-checkbox>
+    </div>
+    <div class="col-md-3"></div>
     <div class="col-md-4">
       <section>
         <button type="submit" class="btn1" mat-raised-button color="primary">

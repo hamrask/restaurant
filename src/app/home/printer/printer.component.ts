@@ -12,7 +12,9 @@ export class PrinterComponent implements OnInit {
   title = "Add Printer"
   printerForm:FormGroup;
   printerDetails: [];
-  displayedColumns: string[] = ['printer name', 'printer Id'];
+  displayedColumns: string[] = ['position','printername', 'printerIp','action'];
+  dataSource = [];
+ 
   constructor(private fb:FormBuilder, private itemService:ItemService) { }
 
   ngOnInit(): void {
@@ -25,6 +27,7 @@ export class PrinterComponent implements OnInit {
       printerIp:[null, Validators.required]  
     });
   } 
+  
 
 }
 

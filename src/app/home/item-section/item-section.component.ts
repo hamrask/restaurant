@@ -25,7 +25,8 @@ displayedColumns: string[] = ['position', 'nameofsection', 'printer', 'action'];
      this.sectionForm = this.fb.group({
        _id:[null],
       sectionName:['',Validators.required],
-      printerName:['',Validators.required]
+      printerIP:['',Validators.required],
+      isMainPrinter: [false, Validators.required]
      });
   }
   saveSection() {
