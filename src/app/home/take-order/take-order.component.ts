@@ -79,6 +79,7 @@ export class TakeOrderComponent implements OnInit {
     const filterValue = value.toLowerCase();
     return this.itemDetails.filter(option => option.itemName.toLowerCase().includes(filterValue));
   }
+  
 availableItemForOrder(){
   this.itemService.getAllAvailableItems().subscribe(data =>{
     this.itemDetails = data;

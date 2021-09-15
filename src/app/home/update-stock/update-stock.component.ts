@@ -25,7 +25,7 @@ export class UpdateStockComponent implements OnInit {
     if (this.data) {
       this.stockForm.patchValue(this.data);
     }
-  }
+    }
   initForm() {
     this.stockForm = this.fb.group({
       itemName: ['', Validators.required],
@@ -47,6 +47,7 @@ export class UpdateStockComponent implements OnInit {
       }
     });
   }
+  
   saveStock() {
     if (this.stockForm.valid) {
       this.itemService.updateStock(this.stockForm.value).subscribe(
