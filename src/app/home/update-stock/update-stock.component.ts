@@ -33,6 +33,19 @@ export class UpdateStockComponent implements OnInit {
       quantity: ['', Validators.required],
       isAvailable: [false, Validators.required],
     });
+    this.stockForm.get('isAvailable').valueChanges.subscribe(data => {
+      if (!data) {
+        this.stockForm.get('quantity').setValue(0);
+      }
+    });
+    this.stockForm.get('quantity').valueChanges.subscribe(data => {
+      if (data < 0) {
+        this.stockForm.get('quantity').setValue(0);
+      }
+      if (data > 0) {
+        this.stockForm.get('isAvailable').setValue(true);
+      }
+    });
   }
   
   saveStock() {
@@ -40,7 +53,7 @@ export class UpdateStockComponent implements OnInit {
       this.itemService.updateStock(this.stockForm.value).subscribe(
         (data) => {
           this.dialog.close();
-          this.toastr.success('Success', 'Section added successfully');
+          this.toastr.success('Success', 'Stock updated successfully');
         },
         (error) => {
           console.log(error);
