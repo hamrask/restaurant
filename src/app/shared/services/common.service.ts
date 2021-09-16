@@ -1,12 +1,14 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CommonService {
   isLoading = new Subject<boolean>();
-  constructor() { }
+  constructor(private http: HttpClient) { }
 
   showLoader(): void {
     this.isLoading.next(true);
@@ -34,5 +36,13 @@ export class CommonService {
     } else {
       return null;
     }
+  }
+  getRestaurantProfile() {
+    const url = environment.apiurl + '/profile';
+    return this.http.get(url);
+  }
+  saveRestaurantProfile(body) {
+    const url = environment.apiurl + '/profile';
+    return this.http.post(url, body);
   }
 }

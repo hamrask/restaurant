@@ -53,7 +53,7 @@ export class UpdateStockComponent implements OnInit {
       this.itemService.updateStock(this.stockForm.value).subscribe(
         (data) => {
           this.dialog.close();
-          this.toastr.success('Success', 'Section added successfully');
+          this.toastr.success('Success', 'Stock updated successfully');
         },
         (error) => {
           console.log(error);

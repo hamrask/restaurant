@@ -19,7 +19,7 @@ export class TakeOrderComponent implements OnInit {
   orderDetails = [];
   itemDetails = [];
   recentOrdersList = [];
-  displayedColumns: string[] = ['position', 'item', 'quantity', 'price'];
+  displayedColumns: string[] = ['position', 'item', 'rate', 'quantity', 'price', 'action'];
   filteredOptions: Observable<any[]>;
   @ViewChild('quantityInput') quantityInput: ElementRef;
   @ViewChild('item') item: ElementRef;
@@ -41,6 +41,7 @@ export class TakeOrderComponent implements OnInit {
 
   initForm(){
     this.orderForm=this.fb.group({
+      _id:[null],
       orderNumber:[null, Validators.required],
       orderType:['TAKE_AWAY', Validators.required],
       tableName:[null],
@@ -50,13 +51,16 @@ export class TakeOrderComponent implements OnInit {
       quantity:[null, Validators.required],
       amount: [null, Validators.required],
       printedOrNot:[null],
-      customerId: [null]
+      customer: [null],
+      sectionId: [null, Validators.required]
     });
     this.orderForm.get('orderType').valueChanges.subscribe(data => {
       if (data == 'HOME_DELIVERY') {
         this.dialog.open(AddCustomerComponent, {data: null, width:'600px', disableClose: true}).afterClosed().subscribe(data => {
-
+          this.orderForm.get('customer').setValue(data);
         });
+      } else {
+        this.orderForm.get('customer').setValue(null);
       }
     });
     this.orderForm.get('quantity').valueChanges.subscribe(data => {
@@ -96,12 +100,15 @@ saveOrder(){
     itemData.rate = itemDetails.amount;
     itemData.amount = itemDetails.amount * itemData.quantity;
     itemData.itemName = itemDetails.itemName;
+    itemData.sectionId = itemDetails.sectionId;
     this.orderForm.setValue(itemData);
     if (this.orderForm.valid) {
       this.orderService.saveOrder(itemData).subscribe(data=>{
         this.getOrdersByOrderNumber(this.orderForm.get('orderNumber').value);
         this.orderService.getAllOrder();
-        this.orderForm.reset();
+        this.orderForm.get('itemName').reset();
+        this.orderForm.get('quantity').reset();
+        this.item.nativeElement.focus();
       });
     }
 }
@@ -135,6 +142,14 @@ getRecentOrders() {
   this.orderService.getRecentOrderList().subscribe(data => {
     this.recentOrdersList = data;
   });
+}
+deleteItem(item) {
+  this.orderService.deleteOrderById(item._id).subscribe(data => {
+    this.getOrdersByOrderNumber(item.orderNumber);
+  });
+}
+print() {
+  
 }
 }  
 

@@ -68,11 +68,11 @@ const routes: Routes = [
         component: PrinterComponent,
       },
       {
-        path:'profile',
+        path:'restaurant',
         component: ProfileComponent
       },
       {
-      path:'add-customer',
+        path:'add-customer',
         component: AddCustomerComponent
       }
     ]
