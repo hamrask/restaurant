@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./waiter-order.component.scss']
 })
 export class WaiterOrderComponent implements OnInit {
-
+primary="primary"
 constructor() { }
 
   ngOnInit(): void {

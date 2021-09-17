@@ -1,34 +1,31 @@
 .item-margin{
-    width: 75%;
+    width: 48%;
 }
+
 .list-table{
-    margin-left:30px;
+    margin-left:10px;
+    width: 35%;
     
 }
 .button{
     margin-top: 10px;
 }
-.btn1{
-    width: 90px;
-}
 .btn{
     margin-left: 10px;
-    margin-top: 10px;
-    width: 100px;
+   
 }
-.cards{
-    margin-top: 20px;
 
-}
+
+
 .item-card{
-    margin-top: 20px;
-    width: 210px;
+    margin-top: 10px;
+    width: 162px;
     float: left;
 }
 .item-card1{
-    margin-top: 20px;
+    margin-top: 10px;
     margin-left: 10px;
-    width: 210px;
+    width: 162px;
     float: left ;
 } 
 .btn-print{
@@ -55,10 +52,15 @@
     border-radius: 5px;
   }
 .mr0 {
-    margin: 0px;
+    margin-top: 10px;
 }
 .center-align {
     display: flex;
     align-items: baseline;
     justify-content: center;
+}
+.table{
+    display: flex;
+    justify-content: center;
+   
 }

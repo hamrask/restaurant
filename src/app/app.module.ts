@@ -13,6 +13,8 @@ import {MatButtonModule} from '@angular/material/button';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { CommonService } from './shared/services/common.service';
 import { RequestInterceptor } from './shared/util/request.interceptor';
+import {MatIconModule} from '@angular/material/icon';
+
 
 
 

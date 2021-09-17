@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { OrderBillComponent } from './component/order-bill/order-bill.component';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
 export { OrderBillComponent } from './component/order-bill/order-bill.component';
 
 
@@ -11,7 +12,8 @@ export { OrderBillComponent } from './component/order-bill/order-bill.component'
   imports: [
     CommonModule,
     MatInputModule,
-    MatButtonModule
+    MatButtonModule,
+    MatIconModule
   ],
   exports: [OrderBillComponent]
 })
