@@ -2,6 +2,7 @@ import { ElementRef, ViewChild } from '@angular/core';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
+import { ToastrService } from 'ngx-toastr';
 import { Observable} from 'rxjs';
 import { startWith,map } from 'rxjs/operators';
 import { ItemService } from 'src/app/shared/services/item.service';
@@ -27,7 +28,8 @@ export class TakeOrderComponent implements OnInit {
   constructor(private fb: FormBuilder,
               private orderService :OrderService,
               private itemService :ItemService,
-              private dialog: MatDialog) { }
+              private dialog: MatDialog,
+              private toastr: ToastrService) { }
 
   ngOnInit(): void {
     this.initForm()
@@ -58,6 +60,7 @@ export class TakeOrderComponent implements OnInit {
       if (data == 'HOME_DELIVERY') {
         this.dialog.open(AddCustomerComponent, {data: null, width:'600px', disableClose: true}).afterClosed().subscribe(data => {
           this.orderForm.get('customer').setValue(data);
+          this.item.nativeElement.focus();
         });
       } else {
         this.orderForm.get('customer').setValue(null);
@@ -92,18 +95,20 @@ availableItemForOrder(){
 saveOrder(){
     const itemData = this.orderForm.value;
     const itemDetails = itemData.itemName;
+    console.log(itemDetails);
     if(typeof itemDetails == 'string' || !itemDetails) {
       this.orderForm.get('itemName').reset();
       return;
     }
-    itemData.itemId = itemDetails._id;
-    itemData.rate = itemDetails.amount;
-    itemData.amount = itemDetails.amount * itemData.quantity;
-    itemData.itemName = itemDetails.itemName;
-    itemData.sectionId = itemDetails.sectionId;
-    this.orderForm.setValue(itemData);
+    this.orderForm.patchValue({
+      itemId:itemDetails._id,
+      rate: itemDetails.amount,
+      amount: itemDetails.amount * itemData.quantity,
+      itemName: itemDetails.itemName,
+      sectionId: itemDetails.sectionId
+    });
     if (this.orderForm.valid) {
-      this.orderService.saveOrder(itemData).subscribe(data=>{
+      this.orderService.saveOrder(this.orderForm.value).subscribe(data=>{
         this.getOrdersByOrderNumber(this.orderForm.get('orderNumber').value);
         this.orderService.getAllOrder();
         this.orderForm.get('itemName').reset();
@@ -135,6 +140,7 @@ getOrdersByOrderNumber(orderNumber) {
     this.orderDetails.forEach(x => {
       this.totalAmount += Number(x.amount);
     });
+    this.orderForm.get('orderNumber').setValue(orderNumber);
     this.totalAmount.toFixed(2);
   });
 }
@@ -149,7 +155,11 @@ deleteItem(item) {
   });
 }
 print() {
-  
+  this.orderService.printOrderByOrderNumber(this.orderForm.get('orderNumber').value).subscribe(data => {
+    this.orderDetails = [];
+    this.getOrderNumber();
+    this.toastr.success('Success', 'Bill Printed successfully');
+  });
 }
 }  
 

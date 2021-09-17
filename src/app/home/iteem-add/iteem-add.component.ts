@@ -1,5 +1,5 @@
-import { Component, OnInit ,Inject} from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Component, OnInit ,Inject, ElementRef, ViewChild} from '@angular/core';
+import { FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { ItemService } from '../../shared/services/item.service';
 import {MatDialog} from '@angular/material/dialog';
@@ -16,6 +16,7 @@ export class IteemAddComponent implements OnInit {
   items = [];
   categoryIds = [];
   sectionIds = [];
+  @ViewChild('form') private form: NgForm;
   displayedColumns: string[] = ['position', 'itemname', 'availability', 'addescription', 'amount','action','stock'];
   constructor(private fb: FormBuilder,
               private itemService: ItemService,
@@ -32,7 +33,7 @@ export class IteemAddComponent implements OnInit {
       _id: [null],
       itemName: ['', Validators.required],
       isAvailable: ['true', Validators.required],
-      description: ['', Validators.required],
+      description: [''],
       amount: ['', Validators.required],
       categoryId: ['', Validators.required],
       sectionId: ['', Validators.required],
@@ -45,6 +46,8 @@ export class IteemAddComponent implements OnInit {
       this.itemService.saveItem(this.itemForm.value).subscribe(data => {
         this.getAllItems();
         this.itemForm.reset();
+        this.itemForm.get('isAvailable').setValue(true);
+        this.form.resetForm();
         this.toastr.success('Success', 'Item added successfully');
       }, error => {
         console.log(error);

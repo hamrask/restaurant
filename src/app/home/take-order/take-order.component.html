@@ -64,7 +64,7 @@
         <div class="col-md-8"></div>
         <div class="col-md-4"></div>
         <div class="col-md-12" style="text-align: right;">
-            <button class="print" mat-raised-button>Close & Print</button>
+            <button class="print" mat-raised-button (click)="print()">Close & Print</button>
         </div>
           <div class="col-md-12">
             <table mat-table [dataSource]="orderDetails" class="order-table" style="width: 100%;">
@@ -121,7 +121,7 @@
   <div class="col-md-2">
     <h3>Recent Orders</h3>
     <div class="order-list" *ngFor="let item of recentOrdersList" (click)="getOrdersByOrderNumber(item.orderNumber)">
-      <mat-label>{{item.orderNumber}}</mat-label>
+      <mat-label>{{item.orderNumber}} | {{item.orderDate | date: 'hh:mm:ss a'}}</mat-label>
     </div>    
   </div>
 </div>

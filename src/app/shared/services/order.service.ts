@@ -37,5 +37,9 @@ export class OrderService {
     const url = environment.apiurl + '/order/getRecentOrders';
     return this.http.get<any>(url);
   }
+  printOrderByOrderNumber(orderNumber) {
+    const url = environment.apiurl + '/order/printOrder/'+ orderNumber;
+    return this.http.put(url, {});
+  }
 }
 
