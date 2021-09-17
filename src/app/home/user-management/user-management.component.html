@@ -8,13 +8,15 @@
 <div class="col-md-8" style="text-align: right;">
 <mat-form-field  appearance="fill" >
   <mat-label>Search</mat-label>
-  <input matInput placeholder="Alex" value="">
+  <input matInput placeholder="eg:Alex"  [formControl]="searchText"
+  autocomplete = "off">
 </mat-form-field>
 </div>
       <div class="col-md-12">
-      <table mat-table [dataSource]="userDetails" class="user-table">
+      <table mat-table [dataSource] ="filteredUser" class="user-table">
 
-        <!--- Note that these columns can be defined in any order.
+        <!--- Note that these columns can be de
+          ined in any order.
               The actual rendered columns are set as a property on the row definition" -->
       
        

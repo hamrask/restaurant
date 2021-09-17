@@ -15,7 +15,8 @@ export class BillReportComponent implements OnInit {
   dataSource = ELEMENT_DATA;
 }
 const ELEMENT_DATA= [
-  {position: 1, time: '10.30', billno: 'a-212', tableno: '21', total:'1300',  user:'fahad', action:'dd'},
-  
+  {position: 1, time: '10.30', billno: 'a-212', tableno: '21', total:'1300',  user:'fahad', action:'dd'}  
 ];
+
+
 
