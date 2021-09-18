@@ -29,10 +29,10 @@ export class CommonService {
     }
     return null;
   }
-  getUserRole(): string {
+  getUserData(): string {
     const userData = this.parseJwt() as any;
-    if (userData && userData.role) {
-        return userData.role;
+    if (userData && userData.userRoleCode) {
+        return userData.userRoleCode;
     } else {
       return null;
     }

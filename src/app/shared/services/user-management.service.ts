@@ -36,7 +36,7 @@ export class UserManagementService {
   }
    // login
    login(body): Observable<any> {
-    const url = environment.apiurl + 'auth';
+    const url = environment.apiurl + '/user/auth';
     return this.http.post(url, body);
   }
   // set auth token
