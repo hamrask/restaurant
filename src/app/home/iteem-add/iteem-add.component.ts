@@ -1,9 +1,11 @@
 import { Component, OnInit ,Inject, ElementRef, ViewChild} from '@angular/core';
-import { FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { ItemService } from '../../shared/services/item.service';
 import {MatDialog} from '@angular/material/dialog';
 import { UpdateStockComponent } from '../update-stock/update-stock.component';
+import { MatTableDataSource } from '@angular/material/table';
+import { MatPaginator } from '@angular/material/paginator';
 
 
 @Component({
@@ -13,11 +15,14 @@ import { UpdateStockComponent } from '../update-stock/update-stock.component';
 })
 export class IteemAddComponent implements OnInit {
   itemForm: FormGroup;
-  items = [];
+  items:any;
+  allItems = [];
   categoryIds = [];
   sectionIds = [];
   @ViewChild('form') private form: NgForm;
   displayedColumns: string[] = ['position', 'itemname', 'availability', 'addescription', 'amount','action','stock'];
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  searchTextControl = new FormControl('');
   constructor(private fb: FormBuilder,
               private itemService: ItemService,
               private toastr: ToastrService,
@@ -40,6 +45,14 @@ export class IteemAddComponent implements OnInit {
       photoUrl: [''],
       quantity: [1]
     });
+    this.searchTextControl.valueChanges.subscribe(data => {
+      this.filterItems(data);
+    });
+  }
+  filterItems(searchText) {
+    const filter = this.allItems.filter(x => x.itemName.toLowerCase().includes(searchText.toLowerCase()));
+    this.items = new MatTableDataSource<Element>(filter);
+    this.items.paginator = this.paginator;
   }
   saveItem() {
     if (this.itemForm.valid) {
@@ -57,7 +70,10 @@ export class IteemAddComponent implements OnInit {
   }
   getAllItems() {
     this.itemService.getAllItem().subscribe(data => {
+      this.allItems = data;
       this.items = data;
+      this.items = new MatTableDataSource<Element>(data);
+      this.items.paginator = this.paginator;
     });
   }
   getAllCategoryIds() {

@@ -13,13 +13,13 @@ export class UserAddComponent implements OnInit {
   title = 'Add User'
   userForm: FormGroup;
   userDetails =[];
-  roleDetails = [];
+  roleDetails = [{roleCode: 'ADMIN',roleName: 'Admin'}, {roleCode: 'WAITER',roleName: 'Waiter'}];
   displayedColumns: string[] = ['position', 'user name', 'password', 'confirm password', 'role', 'action' ];
   constructor(private fb:FormBuilder, private userManagementService:UserManagementService, private router:Router, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
     this.initForm();
-    this.getAllRole();
+    // this.getAllRole();
     const userId = this.route.snapshot.params.userId;
     if (userId) {
       this.getUserById(userId);
@@ -31,7 +31,6 @@ export class UserAddComponent implements OnInit {
       fullName:['',Validators.required],
       userName:['',Validators.required],
       password:['',Validators.required],
-      confirmPassword:['',Validators.required],
       phoneNumber:['',Validators.required],
       userRoleCode:['',Validators.required],
       active:[true]

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ReportService } from 'src/app/shared/services/report.service';
 
 @Component({
   selector: 'app-bill-report',
@@ -7,16 +8,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BillReportComponent implements OnInit {
 
-  constructor() { }
+  constructor(private report: ReportService) { }
 
   ngOnInit(): void {
+    this.getReport();
   }
-  displayedColumns: string[] = ['position', 'time', 'billno', 'tableno', 'total', 'user', 'action'];
-  dataSource = ELEMENT_DATA;
+  displayedColumns: string[] = ['position', 'item', 'total'];
+  dataSource = [];
+  getReport() {
+    this.report.getReport().subscribe(data => {
+      this.dataSource = data;
+    });
+  }
 }
-const ELEMENT_DATA= [
-  {position: 1, time: '10.30', billno: 'a-212', tableno: '21', total:'1300',  user:'fahad', action:'dd'}  
-];
+
 
 
 

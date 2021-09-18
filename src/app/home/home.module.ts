@@ -27,6 +27,7 @@ import { PrinterComponent } from './printer/printer.component';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { ProfileComponent } from './profile/profile.component';
 import { AddCustomerComponent } from './add-customer/add-customer.component';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 
 @NgModule({
@@ -60,7 +61,8 @@ import { AddCustomerComponent } from './add-customer/add-customer.component';
     MatCheckboxModule,
     MatToolbarModule,
     MatDialogModule,
-    MatAutocompleteModule
+    MatAutocompleteModule,
+    MatPaginatorModule
   ]
 })
 export class HomeModule { }
