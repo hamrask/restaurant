@@ -113,6 +113,10 @@ saveOrder(){
         this.orderForm.get('itemName').reset();
         this.orderForm.get('quantity').reset();
         this.orderForm.get('rate').reset();
+        this.orderForm.get('itemName').setErrors(null);
+        this.orderForm.get('itemName').markAsPristine();
+        this.orderForm.get('itemName').updateValueAndValidity();
+        this.item.nativeElement.reset();
         this.item.nativeElement.focus();
       });
     }
