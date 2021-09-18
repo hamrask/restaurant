@@ -110,7 +110,6 @@ saveOrder(){
     if (this.orderForm.valid) {
       this.orderService.saveOrder(this.orderForm.value).subscribe(data=>{
         this.getOrdersByOrderNumber(this.orderForm.get('orderNumber').value);
-        this.orderService.getAllOrder();
         this.orderForm.get('itemName').reset();
         this.orderForm.get('quantity').reset();
         this.orderForm.get('rate').reset();
@@ -131,6 +130,7 @@ jumpToQuantity(value) {
   }
 }
 getOrderNumber() {
+  console.log('order nnumber');
   this.orderService.getOrderNumber().subscribe(data => {
     this.orderForm.get('orderNumber').setValue(data.orderNumber);
   });
@@ -164,6 +164,7 @@ print() {
   this.orderService.printOrderByOrderNumber(this.orderForm.get('orderNumber').value).subscribe(data => {
     this.orderDetails = [];
     this.getOrderNumber();
+    this.totalAmount = null;
     this.toastr.success('Success', 'Bill Printed successfully');
   });
 }
