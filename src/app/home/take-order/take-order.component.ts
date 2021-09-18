@@ -25,6 +25,7 @@ export class TakeOrderComponent implements OnInit {
   @ViewChild('quantityInput') quantityInput: ElementRef;
   @ViewChild('item') item: ElementRef;
   totalAmount;
+  tables = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15];
   constructor(private fb: FormBuilder,
               private orderService :OrderService,
               private itemService :ItemService,
@@ -46,7 +47,7 @@ export class TakeOrderComponent implements OnInit {
       _id:[null],
       orderNumber:[null, Validators.required],
       orderType:['TAKE_AWAY', Validators.required],
-      tableName:[null],
+      tableNumber:[null],
       itemId: [null, Validators.required],
       itemName:[null, Validators.required],
       rate: [null, Validators.required],
@@ -91,19 +92,18 @@ availableItemForOrder(){
   this.itemService.getAllAvailableItems().subscribe(data =>{
     this.itemDetails = data;
   });
-}  
+}
+
 saveOrder(){
     const itemData = this.orderForm.value;
     const itemDetails = itemData.itemName;
-    console.log(itemDetails);
     if(typeof itemDetails == 'string' || !itemDetails) {
       this.orderForm.get('itemName').reset();
       return;
     }
     this.orderForm.patchValue({
       itemId:itemDetails._id,
-      rate: itemDetails.amount,
-      amount: itemDetails.amount * itemData.quantity,
+      amount: this.orderForm.get('rate').value * itemData.quantity,
       itemName: itemDetails.itemName,
       sectionId: itemDetails.sectionId
     });
@@ -113,6 +113,7 @@ saveOrder(){
         this.orderService.getAllOrder();
         this.orderForm.get('itemName').reset();
         this.orderForm.get('quantity').reset();
+        this.orderForm.get('rate').reset();
         this.item.nativeElement.focus();
       });
     }
@@ -123,6 +124,7 @@ displayFn(item): string {
 jumpToQuantity(value) {
   if (value?.option?.value) {
     this.orderForm.get('itemName').setValue(value.option.value);
+    this.orderForm.get('rate').setValue(value.option.value.amount);
   }
   if (this.quantityInput && this.quantityInput.nativeElement) {
     this.quantityInput.nativeElement.focus();
@@ -141,6 +143,10 @@ getOrdersByOrderNumber(orderNumber) {
       this.totalAmount += Number(x.amount);
     });
     this.orderForm.get('orderNumber').setValue(orderNumber);
+    if (data && data.length > 0) {
+      this.orderForm.get('orderType').setValue(data[0].orderType);
+      this.orderForm.get('tableNumber').setValue(Number(data[0].tableNumber));
+    }
     this.totalAmount.toFixed(2);
   });
 }
@@ -160,6 +166,10 @@ print() {
     this.getOrderNumber();
     this.toastr.success('Success', 'Bill Printed successfully');
   });
+}
+refreshOrderList() {
+  this.orderDetails = [];
+  this.getOrderNumber();
 }
 }  
 

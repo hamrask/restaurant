@@ -41,5 +41,9 @@ export class OrderService {
     const url = environment.apiurl + '/order/printOrder/'+ orderNumber;
     return this.http.put(url, {});
   }
+  setOrderCustomer(orderNumber, customerDetails) {
+    const url = environment.apiurl + '/order/setCustomer/'+ orderNumber;
+    return this.http.put(url, customerDetails);
+  }
 }
 
