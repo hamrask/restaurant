@@ -14,12 +14,14 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { CommonService } from './shared/services/common.service';
 import { RequestInterceptor } from './shared/util/request.interceptor';
 import {MatIconModule} from '@angular/material/icon';
+import { DeleteconfermComponent } from './deleteconferm/deleteconferm.component';
+
 
 
 
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [DeleteconfermComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
