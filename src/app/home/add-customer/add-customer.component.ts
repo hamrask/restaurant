@@ -1,6 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MatDialogRef } from '@angular/material/dialog';
 import { CustomerService } from 'src/app/shared/services/customer.service';
 
 @Component({
@@ -10,14 +9,13 @@ import { CustomerService } from 'src/app/shared/services/customer.service';
 })
 export class AddCustomerComponent implements OnInit {
   customerForm: FormGroup;
-  constructor(private popup: MatDialogRef<AddCustomerComponent>, private fb: FormBuilder, private customerService: CustomerService) { }
+  @Output() customerData = new EventEmitter();
+  constructor(private fb: FormBuilder, private customerService: CustomerService) { }
 
   ngOnInit(): void {
     this.initForm();
   }
-  closePopup() {
-    this.popup.close();
-  }
+  
   initForm() {
     this.customerForm = this.fb.group({
       _id: [null],
@@ -34,7 +32,7 @@ export class AddCustomerComponent implements OnInit {
   saveCustomer() {
     if (this.customerForm.valid) {
       this.customerService.saveCustomer(this.customerForm.value).subscribe(data => {
-        this.popup.close(data);
+        this.customerData.emit(data);
       })
     }
   }
@@ -44,5 +42,8 @@ export class AddCustomerComponent implements OnInit {
         this.customerForm.patchValue(data);
       }
     });
+  }
+  goback() {
+    this.customerData.emit(null);
   }
 }

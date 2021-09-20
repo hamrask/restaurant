@@ -19,8 +19,10 @@ profileForm: FormGroup;
     this.profileForm = this.fb.group({
       _id:[null],
       heading:[null, Validators.required],
+      heading2:[null, Validators.required],
       subHeading1:[null, Validators.required],
-      subHeading2:[null, Validators.required]
+      subHeading2:[null, Validators.required],
+      bottomText: ['']
     })
   }
   getRestaurantProfile() {

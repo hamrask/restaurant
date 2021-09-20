@@ -28,8 +28,14 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { ProfileComponent } from './profile/profile.component';
 import { AddCustomerComponent } from './add-customer/add-customer.component';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { SharedModule } from '../shared/shared.module';
+import { WaiterOrderComponent } from './waiter-order/waiter-order.component';
+import { MatCardModule } from '@angular/material/card';
+import { OrderHomeComponent } from './order-home/order-home.component';
+import { MatStepperModule } from '@angular/material/stepper';
 
-
+import { MatChipsModule } from '@angular/material/chips';
+import { AuthModule } from '../auth/auth.module';
 @NgModule({
   declarations: [
     HomeComponent,
@@ -44,7 +50,9 @@ import { MatPaginatorModule } from '@angular/material/paginator';
     BillReportComponent,
     PrinterComponent,
     ProfileComponent,
-    AddCustomerComponent
+    AddCustomerComponent,
+    WaiterOrderComponent,
+    OrderHomeComponent
   ],
   imports: [
     CommonModule,
@@ -62,7 +70,12 @@ import { MatPaginatorModule } from '@angular/material/paginator';
     MatToolbarModule,
     MatDialogModule,
     MatAutocompleteModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    SharedModule,
+    MatCardModule,
+    MatStepperModule,
+    MatChipsModule,
+    AuthModule
   ]
 })
 export class HomeModule { }

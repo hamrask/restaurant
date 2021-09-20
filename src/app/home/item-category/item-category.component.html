@@ -1,5 +1,5 @@
 <div class="row">
-  <form [formGroup]="categoryForm" (ngSubmit)="saveCategory()" #form>
+  <form [formGroup]="categoryForm" (ngSubmit)="saveCategory()" #form novalidate>
     <div class="col-md-12">
       <h3>{{ title }}</h3>
     </div>
@@ -10,7 +10,7 @@
         formControlName="categoryName"
         matInput
         placeholder="Eg: Rice"
-        (keyup.enter)="form.submit()"
+        autocomplete="off"
       />
     </mat-form-field>
 

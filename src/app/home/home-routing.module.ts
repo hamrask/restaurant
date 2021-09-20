@@ -13,12 +13,19 @@ import { UserManagementComponent } from './user-management/user-management.compo
 import { PrinterComponent } from './printer/printer.component';
 import { ProfileComponent } from './profile/profile.component';
 import { AddCustomerComponent } from './add-customer/add-customer.component';
+import { WaiterOrderComponent } from './waiter-order/waiter-order.component';
+import { OrderHomeComponent } from './order-home/order-home.component';
 
 const routes: Routes = [
   {
     path: '',
     component: HomeComponent,
     children: [
+      {
+        path: '',
+        redirectTo: 'order',
+        pathMatch: 'full'
+      },
       {
         path: 'section',
         component: ItemSectionComponent,
@@ -33,7 +40,7 @@ const routes: Routes = [
       },
       {
         path: 'order',
-        component: TakeOrderComponent,
+        component: OrderHomeComponent,
       },
       {
         path: 'category',
