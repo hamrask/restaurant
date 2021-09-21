@@ -27,18 +27,13 @@ export class LoginComponent implements OnInit {
   login() {
     if (this.userForm.valid) {
       this.auth.login(this.userForm.value).subscribe(data => {
-        if (data.role == 'ADMIN') {
           this.toaster.success('Login Success', 'Success');
           this.auth.setAuthToken(data.token);
           this.loginChange.emit(true);
-        } else {
-          this.toaster.show('Feature pending', 'Psst');
-        }
       }, error => {
         this.toaster.error(error.error.message, 'Error');
       });
     }
   }
-
 }
 

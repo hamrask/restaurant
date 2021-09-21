@@ -45,4 +45,10 @@ export class CommonService {
     const url = environment.apiurl + '/profile';
     return this.http.post(url, body);
   }
+  abilityToSettle(roleCode) {
+    if (roleCode == 'ADMIN') {
+      return true;
+    }
+    return false;
+  }
 }

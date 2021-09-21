@@ -33,9 +33,12 @@ import { WaiterOrderComponent } from './waiter-order/waiter-order.component';
 import { MatCardModule } from '@angular/material/card';
 import { OrderHomeComponent } from './order-home/order-home.component';
 import { MatStepperModule } from '@angular/material/stepper';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 
 import { MatChipsModule } from '@angular/material/chips';
 import { AuthModule } from '../auth/auth.module';
+import { MatNativeDateModule } from '@angular/material/core';
+import { OrderHistoryComponent } from './order-history/order-history.component';
 @NgModule({
   declarations: [
     HomeComponent,
@@ -52,7 +55,8 @@ import { AuthModule } from '../auth/auth.module';
     ProfileComponent,
     AddCustomerComponent,
     WaiterOrderComponent,
-    OrderHomeComponent
+    OrderHomeComponent,
+    OrderHistoryComponent
   ],
   imports: [
     CommonModule,
@@ -75,7 +79,9 @@ import { AuthModule } from '../auth/auth.module';
     MatCardModule,
     MatStepperModule,
     MatChipsModule,
-    AuthModule
+    AuthModule,
+    MatDatepickerModule,
+    MatNativeDateModule
   ]
 })
 export class HomeModule { }

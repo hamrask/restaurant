@@ -55,4 +55,7 @@ export class UserAddComponent implements OnInit {
       this.userForm.patchValue(data);
     });
   }
+  goback() {
+    this.router.navigate(["/home/user-management"]);
+  }
 } 

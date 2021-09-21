@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl } from '@angular/forms';
 import { ReportService } from 'src/app/shared/services/report.service';
 
 @Component({
@@ -7,17 +8,31 @@ import { ReportService } from 'src/app/shared/services/report.service';
   styleUrls: ['./bill-report.component.scss']
 })
 export class BillReportComponent implements OnInit {
-
+  date;
+  searchText = new FormControl('');
+  items = [];
   constructor(private report: ReportService) { }
 
   ngOnInit(): void {
     this.getReport();
+    this.searchText.valueChanges.subscribe(data => {
+      this.filterItems(data);
+    });
+  }
+  filterItems(text) {
+    this.dataSource = this.items.filter(x => x.itemName.toLowerCase().includes(text));
   }
   displayedColumns: string[] = ['position', 'item', 'total'];
   dataSource = [];
   getReport() {
-    this.report.getReport().subscribe(data => {
-      this.dataSource = data;
+    debugger;
+    if (!this.date) {
+      this.date = new Date().toISOString();
+    } else {
+      this.date = new Date(this.date).toISOString();
+    }
+    this.report.getReport(this.date).subscribe(data => {
+      this.dataSource = this.items = data;
     });
   }
 }

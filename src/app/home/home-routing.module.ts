@@ -15,6 +15,7 @@ import { ProfileComponent } from './profile/profile.component';
 import { AddCustomerComponent } from './add-customer/add-customer.component';
 import { WaiterOrderComponent } from './waiter-order/waiter-order.component';
 import { OrderHomeComponent } from './order-home/order-home.component';
+import { OrderHistoryComponent } from './order-history/order-history.component';
 
 const routes: Routes = [
   {
@@ -81,6 +82,10 @@ const routes: Routes = [
       {
         path:'add-customer',
         component: AddCustomerComponent
+      },
+      {
+        path: 'order-history',
+        component: OrderHistoryComponent
       }
     ]
   }

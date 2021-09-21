@@ -18,7 +18,8 @@ export class ItemQuantityComponent implements OnInit {
       _id: [null],
       itemName: [''],
       amount: [''],
-      quantity: [1, Validators.required]
+      quantity: [1, Validators.required],
+      sectionId: ['', Validators.required]
     });
     this.itemForm.patchValue(this.data);
   }

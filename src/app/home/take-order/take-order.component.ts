@@ -103,7 +103,7 @@ saveOrder(){
     }
     this.orderForm.patchValue({
       itemId:itemDetails._id,
-      amount: this.orderForm.get('rate').value * itemData.quantity,
+      amount: Number(this.orderForm.get('rate').value) * Number(itemDetails.quantity),
       itemName: itemDetails.itemName,
       sectionId: itemDetails.sectionId
     });
@@ -134,7 +134,6 @@ jumpToQuantity(value) {
   }
 }
 getOrderNumber() {
-  console.log('order nnumber');
   this.orderService.getOrderNumber().subscribe(data => {
     this.orderForm.get('orderNumber').setValue(data.orderNumber);
   });
@@ -165,7 +164,7 @@ deleteItem(item) {
   });
 }
 print() {
-  this.orderService.printOrderByOrderNumber(this.orderForm.get('orderNumber').value).subscribe(data => {
+  this.orderService.printOrderByOrderNumber(this.orderForm.get('orderNumber').value, '').subscribe(data => {
     this.orderDetails = [];
     this.getOrderNumber();
     this.totalAmount = null;

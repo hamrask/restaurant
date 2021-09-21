@@ -37,13 +37,22 @@ export class OrderService {
     const url = environment.apiurl + '/order/getRecentOrders';
     return this.http.get<any>(url);
   }
-  printOrderByOrderNumber(orderNumber) {
-    const url = environment.apiurl + '/order/printOrder/'+ orderNumber;
+  printOrderByOrderNumber(orderNumber, orderType) {
+    const url = environment.apiurl + '/order/printOrder/'+ orderNumber + '/'+ orderType;
     return this.http.put(url, {});
   }
   setOrderCustomer(orderNumber, customerDetails) {
     const url = environment.apiurl + '/order/setCustomer/'+ orderNumber;
     return this.http.put(url, customerDetails);
+  }
+  getTotalAmount(orderDetails) {
+    let total = 0;
+    if (orderDetails && orderDetails.length > 0) {
+      orderDetails.forEach(element => {
+        total += Number(element.amount);
+      });
+    }
+    return total;
   }
 }
 

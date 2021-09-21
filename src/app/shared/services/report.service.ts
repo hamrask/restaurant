@@ -9,8 +9,8 @@ export class ReportService {
 
   constructor(private http: HttpClient) { }
 
-  getReport() {
-    const url = environment.apiurl + '/order/getReport';
+  getReport(date) {
+    const url = environment.apiurl + '/order/getReport/' + date;
     return this.http.get<any>(url);
   }
 }
