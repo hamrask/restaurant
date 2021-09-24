@@ -6,13 +6,13 @@
         <div class="col-md-12" style="text-align: center;">
             <mat-form-field>
                 <mat-label>Quantity</mat-label>
-                <input type="number" #quantity matInput formControlName="quantity"/>
+                <input type="number" min="0" #quantity matInput formControlName="quantity"/>
             </mat-form-field>
         </div>
         <div class="col-md-12" style="text-align: center;">
             <mat-form-field>
                 <mat-label>Rate</mat-label>
-                <input type="number"  #rate matInput formControlName="amount"/>
+                <input type="number" min="0" #rate matInput formControlName="amount"/>
             </mat-form-field>
         </div>
         <!-- <div class="col-md-12">
@@ -21,7 +21,7 @@
             {{item}}</button>
         </div> -->
         <div class="col-md-12" style="margin-top: 10px;">
-            <button type="buttoo" (click)="closePopup()" mat-raised-button>Cancel</button>
+            <button type="button" (click)="closePopup()" mat-raised-button>Cancel</button>
             <button type="submit" mat-raised-button color="primary" style="margin-left: 5px;">Save</button>
         </div>
 

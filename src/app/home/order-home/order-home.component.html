@@ -7,7 +7,7 @@
         <div class="row">
             <div class="col-md-12">
                 <ng-template matStepLabel>Choose Order Type</ng-template>
-                <mat-radio-group
+                <mat-radio-group 
                           aria-label="Select an option"
                           class="order-margin"
                           formControlName="orderType"
@@ -24,7 +24,7 @@
                         </mat-radio-group>
             </div>
             <div class="col-md-12" style="margin-top: 10px;">
-                <button mat-raised-button color="primary" mat-button (click)="submitOrderType()">Next</button>
+                <button mat-raised-button color="primary" mat-button [disabled]="firstFormGroup.invalid" (click)="submitOrderType()">Next</button>
             </div>
         </div>
     </form>
