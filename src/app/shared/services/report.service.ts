@@ -13,4 +13,8 @@ export class ReportService {
     const url = environment.apiurl + '/order/getReport/' + date;
     return this.http.get<any>(url);
   }
+  getBillReport(date) {
+    const url = environment.apiurl + '/order/getBillReport/' + date;
+    return this.http.get<any>(url);
+  }
 }

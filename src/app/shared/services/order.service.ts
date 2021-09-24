@@ -17,6 +17,10 @@ export class OrderService {
     const url=environment.apiurl + '/order';
     return this.http.post(url,body);
   }
+  deleteOrder(orderNumber){
+    const url=environment.apiurl + '/order/' + orderNumber;
+    return this.http.delete(url);
+  }
   getOrderById(id){
     const url=environment.apiurl + '/order/getById/' + id;
     return this.http.get(url);
@@ -54,5 +58,6 @@ export class OrderService {
     }
     return total;
   }
+
 }
 

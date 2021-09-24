@@ -25,7 +25,6 @@ export class BillReportComponent implements OnInit {
   displayedColumns: string[] = ['position', 'item', 'total'];
   dataSource = [];
   getReport() {
-    debugger;
     if (!this.date) {
       this.date = new Date().toISOString();
     } else {

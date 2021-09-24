@@ -19,7 +19,7 @@ selectedCategory;
 orderForm: FormGroup;
 orderDetails = [];
 @ViewChild(OrderBillComponent) orderbill: OrderBillComponent;
-constructor(private item: ItemService, private popup: MatDialog,
+constructor(private item: ItemService, private popup: MatDialog, 
             private _formBuilder: FormBuilder, private orderService: OrderService) { }
 
   ngOnInit(): void {
@@ -98,6 +98,11 @@ getOrdersByOrderNumber(orderNumber) {
     this.orderbill.orderDetails = data;
     this.orderbill.TotalAmount = this.orderService.getTotalAmount(data);
     this.orderbill.OrderNumber = orderNumber;
+  });
+}
+deleteOrder(order) {
+  this.orderService.deleteOrderById(order._id).subscribe(data => {
+    this.getOrdersByOrderNumber(order.orderNumber);
   });
 }
 }

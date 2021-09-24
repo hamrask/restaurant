@@ -1,4 +1,6 @@
+import { Inject, Optional } from '@angular/core';
 import { Component, OnInit } from '@angular/core';
+import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ToastrService } from 'ngx-toastr';
 import { CommonService } from '../../services/common.service';
 import { OrderService } from '../../services/order.service';
@@ -12,7 +14,14 @@ export class OrderBillComponent implements OnInit {
   TotalAmount;
   orderDetails;
   OrderNumber;
-  constructor(private common: CommonService, private order: OrderService, private toaster: ToastrService) { }
+  constructor(private common: CommonService, private order: OrderService, private toaster: ToastrService,
+    @Optional() @Inject(MAT_DIALOG_DATA) public data:any) { 
+      if (data) {
+        this.orderDetails = data.orderList;
+        this.OrderNumber = data.orderNumber;
+        this.TotalAmount = data.total;
+      }
+    }
 
   ngOnInit(): void {
   }
