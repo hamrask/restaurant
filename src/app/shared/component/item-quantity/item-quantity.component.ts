@@ -43,6 +43,7 @@ export class ItemQuantityComponent implements OnInit {
     this.dialog.close();
   }
   saveItem() {
+    console.log(this.itemForm.value);
     if (this.itemForm.valid) {
       this.dialog.close(this.itemForm.value);
     }

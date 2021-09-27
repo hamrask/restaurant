@@ -16,6 +16,7 @@ import { AddCustomerComponent } from './add-customer/add-customer.component';
 import { WaiterOrderComponent } from './waiter-order/waiter-order.component';
 import { OrderHomeComponent } from './order-home/order-home.component';
 import { OrderHistoryComponent } from './order-history/order-history.component';
+import { MainOrderPageComponent } from './main-order-page/main-order-page.component';
 
 const routes: Routes = [
   {
@@ -41,6 +42,10 @@ const routes: Routes = [
       },
       {
         path: 'order',
+        component: OrderHomeComponent,
+      },
+      {
+        path: 'order/:orderNumber',
         component: OrderHomeComponent,
       },
       {
@@ -86,6 +91,10 @@ const routes: Routes = [
       {
         path: 'order-history',
         component: OrderHistoryComponent
+      },
+      {
+        path: 'main-order',
+        component: MainOrderPageComponent
       }
     ]
   }

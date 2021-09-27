@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { Router } from '@angular/router';
 import { OrderBillComponent } from 'src/app/shared/component/order-bill/order-bill.component';
 import { OrderService } from 'src/app/shared/services/order.service';
 import { ReportService } from 'src/app/shared/services/report.service';
@@ -14,10 +15,15 @@ export class OrderHistoryComponent implements OnInit {
   date;
   dataSource = [];
   displayedColumns = ['position', 'itemname', 'availability', 'addescription', 'amount', 'action', 'stock'];
-  constructor(private report: ReportService, private order: OrderService, private popup: MatDialog) { }
+  interval;
+  constructor(private report: ReportService, private order: OrderService,
+              private popup: MatDialog, private router: Router) { }
 
   ngOnInit(): void {
     this.getReport();
+    this.interval =  setInterval(() => {
+      this.getReport();
+    }, 5000);
   }
   
   getReport() {
@@ -35,9 +41,10 @@ export class OrderHistoryComponent implements OnInit {
       const billDetails = {
         orderList: data,
         orderNumber,
-        total: this.getTotal(data)
+        total: this.getTotal(data),
+        disableAction: true
       }
-      this.popup.open(OrderBillComponent, {data: billDetails, width: '380px'});
+      this.popup.open(OrderBillComponent, {data: billDetails, width: '300px'});
     });
   }
   getTotal(orderList) {
@@ -47,5 +54,26 @@ export class OrderHistoryComponent implements OnInit {
         total += Number(element.amount);
       });
     }
+    return total;
+  }
+  checkStatus(status) {
+    if (status == 'KOT_SENT') {
+      return 'info';
+    }
+    if (status == 'BILL_GENERATED') {
+      return 'warning';
+    }
+    if (status == 'SETTLED') {
+      return 'success';
+    }
+    if (status == 'ORDER_PENDING') {
+      return 'order-pending';
+    }
+  }
+  editOrder(orderNumber) {
+      this.router.navigate(['/home/order', orderNumber]);
+  }
+  ngOnDestroy() {
+    clearInterval(this.interval);
   }
 }

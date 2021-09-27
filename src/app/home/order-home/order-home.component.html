@@ -3,7 +3,7 @@
     <app-login (loginChange)="loginSuccess()"></app-login>
   </mat-step>
   <mat-step [stepControl]="firstFormGroup">
-    <form [formGroup]="firstFormGroup">
+    <form [formGroup]="firstFormGroup" #form>
         <div class="row">
             <div class="col-md-12">
                 <ng-template matStepLabel>Choose Order Type</ng-template>
@@ -36,7 +36,12 @@
     </form>
   </mat-step>
   <mat-step>
+    <ng-container *ngFor="let item of [1,2,3,4,5,6,7,8,9,10]">
+      <button style="margin-right:5px"  mat-raised-button (click)="setTableNumber(item)">{{item}}</button>
+    </ng-container>
+  </mat-step>
+  <mat-step>
     <ng-template matStepLabel>Take Order</ng-template>
-    <app-waiter-order></app-waiter-order>
+    <app-waiter-order (close)="closeOrder()"></app-waiter-order>
   </mat-step>
 </mat-horizontal-stepper>

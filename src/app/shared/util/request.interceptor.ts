@@ -16,7 +16,9 @@ export class RequestInterceptor implements HttpInterceptor {
   constructor(private loaderService: CommonService, private auth: UserManagementService) {}
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    this.loaderService.showLoader();
+    if (!req.url.includes('getBillReport')) {
+      this.loaderService.showLoader();
+    }
     const token = this.auth.getAuthToken();
     if (token) {
       req = req.clone({

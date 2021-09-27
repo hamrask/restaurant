@@ -1,0 +1,13 @@
+<mat-tab-group>
+    <mat-tab *ngFor="let items of tabs">
+        <ng-template mat-tab-label>
+            <div>
+                <span>Bill</span>
+            </div>
+            <div style="text-align: right;width: 100px;">
+                <button (click)="addTab()" mat-mini-fab>Add</button>
+            </div>
+        </ng-template>
+        <app-order-home></app-order-home>
+    </mat-tab>
+</mat-tab-group>

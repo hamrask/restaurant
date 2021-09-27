@@ -39,6 +39,9 @@ import { MatChipsModule } from '@angular/material/chips';
 import { AuthModule } from '../auth/auth.module';
 import { MatNativeDateModule } from '@angular/material/core';
 import { OrderHistoryComponent } from './order-history/order-history.component';
+import { MainOrderPageComponent } from './main-order-page/main-order-page.component';
+
+import { MatTabsModule } from '@angular/material/tabs';
 @NgModule({
   declarations: [
     HomeComponent,
@@ -56,7 +59,8 @@ import { OrderHistoryComponent } from './order-history/order-history.component';
     AddCustomerComponent,
     WaiterOrderComponent,
     OrderHomeComponent,
-    OrderHistoryComponent
+    OrderHistoryComponent,
+    MainOrderPageComponent
   ],
   imports: [
     CommonModule,
@@ -81,7 +85,8 @@ import { OrderHistoryComponent } from './order-history/order-history.component';
     MatChipsModule,
     AuthModule,
     MatDatepickerModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    MatTabsModule
   ]
 })
 export class HomeModule { }
