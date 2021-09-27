@@ -1,4 +1,4 @@
 export const environment = {
-  apiurl:"http://localhost:8000",
+  apiurl:"https://lm-restaurant.herokuapp.com",
   production: true
 };
