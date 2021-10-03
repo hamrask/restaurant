@@ -32,14 +32,12 @@ constructor(private item: ItemService, private popup: MatDialog,
     const orderNumber = this.route.snapshot.params.orderNumber;
     if (orderNumber) {
       this.getOrdersByOrderNumber(orderNumber);
-    } else {
-      this.getOrderNumber();
     }
   }
   initForm() {
     this.orderForm = this._formBuilder.group({
       _id:[null],
-      orderNumber:[null, Validators.required],
+      orderNumber:[null],
       orderType:['', Validators.required],
       tableNumber:[null],
       itemId: [null, Validators.required],
@@ -79,8 +77,10 @@ constructor(private item: ItemService, private popup: MatDialog,
   selectItem(itemDetails) {
     this.popup.open(ItemQuantityComponent, {data: itemDetails, width:'280px', disableClose: true})
     .afterClosed().subscribe(data => {
-      this.orderForm.get('itemName').setValue(data);
-      this.saveOrder();
+      if (data) {
+        this.orderForm.get('itemName').setValue(data);
+        this.saveOrder();
+      }
     });
   }
   saveOrder(){
@@ -94,10 +94,11 @@ constructor(private item: ItemService, private popup: MatDialog,
       quantity: Number(itemDetails.quantity),
       rate: Number(itemDetails.amount)
     });
-    console.log(this.orderForm.value);
     if (this.orderForm.valid) {
       this.orderService.saveOrder(this.orderForm.value).subscribe(data=>{
-        this.getOrdersByOrderNumber(this.orderForm.get('orderNumber').value);
+        if (data && (data as any).orderNumber) {
+          this.getOrdersByOrderNumber((data as any).orderNumber);
+        }
       });
     }
 }
