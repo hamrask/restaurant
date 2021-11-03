@@ -33,7 +33,7 @@ export class AddCustomerComponent implements OnInit {
     if (this.customerForm.valid) {
       this.customerService.saveCustomer(this.customerForm.value).subscribe(data => {
         this.customerData.emit(data);
-      })
+      });
     }
   }
   searchCustomer(mobile) {

@@ -48,15 +48,20 @@
 
   
       <!-- price Column -->
-      <ng-container matColumnDef="total">
+      <ng-container matColumnDef="total quantity">
           <th mat-header-cell *matHeaderCellDef> Qty </th>
           <td mat-cell *matCellDef="let element"> {{element.quantity}} </td>
         </ng-container>
 
-      
+      <ng-container matColumnDef="total amount">
+          <th mat-header-cell *matHeaderCellDef> Price </th>
+          <td mat-cell *matCellDef="let element"> {{element.amount}} </td>
+        </ng-container>
 
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
       <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      
     </table>
+    <label for="total" style="margin-left: 600px; font-family: 'Times New Roman', Times, serif; font-size: larger;"> <b>Total Expense :  {{netTotal}} only. </b></label>
     </div>  
 </div>

@@ -11,6 +11,7 @@ export class BillReportComponent implements OnInit {
   date;
   searchText = new FormControl('');
   items = [];
+  netTotal;
   constructor(private report: ReportService) { }
 
   ngOnInit(): void {
@@ -22,7 +23,7 @@ export class BillReportComponent implements OnInit {
   filterItems(text) {
     this.dataSource = this.items.filter(x => x.itemName.toLowerCase().includes(text));
   }
-  displayedColumns: string[] = ['position', 'item', 'total'];
+  displayedColumns: string[] = ['position', 'item', 'total quantity', 'total amount'];
   dataSource = [];
   getReport() {
     if (!this.date) {
@@ -31,8 +32,10 @@ export class BillReportComponent implements OnInit {
       this.date = new Date(this.date).toISOString();
     }
     this.report.getReport(this.date).subscribe(data => {
-      this.dataSource = this.items = data;
+      this.dataSource = this.items = data.list;
+    this.netTotal = data.total;
     });
+
   }
 }
 
