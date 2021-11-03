@@ -11,18 +11,18 @@ export class MenuService {
 
   getAllMenu(){
     const url=environment.apiurl + '/menu';
-    return this.http.get(url);
+    return this.http.get<any>(url);
   }
   saveMenu(body){
     const url=environment.apiurl + '/menu';
-    return this.http.post(url,body);
+    return this.http.post<any>(url,body);
   }
   getMenuById(id){
     const url=environment.apiurl + '/menu/getById/' + id;
-    return this.http.get(url);
+    return this.http.get<any>(url);
   }
   deleteMenuById(id){
     const url=environment.apiurl + '/menu/ById/' + id;
-    return this.http.delete(url);
+    return this.http.delete<any>(url);
   }
 }

@@ -1,0 +1,41 @@
+<div class="row">
+  <form [formGroup]="profileForm" (ngSubmit)="saveProfileform()">
+    <div class="col-md-12 col-sm-12">
+      <h3>Profile Page</h3>
+    </div>
+    <div class="col-md-12 col-sm-12">
+      <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label>Restaurant Name</mat-label>
+        <input matInput placeholder="Eg: Eatsy" formControlName="heading" />
+      </mat-form-field>
+    </div>
+    <div class="col-md-12 col-sm-12">
+      <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label>Heading 2</mat-label>
+        <input matInput placeholder="type here" formControlName="heading2" />
+      </mat-form-field>
+    </div>
+    <div class="col-md-12">
+      <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label>Sub 1</mat-label>
+        <input matInput placeholder="type here" formControlName="subHeading1" />
+      </mat-form-field>
+    </div>
+    <div class="col-auto">
+      <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label>Sub 2</mat-label>
+        <input matInput placeholder="type here" formControlName="subHeading2" />
+      </mat-form-field>
+    </div>
+    <div class="col-auto">
+      <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label>Sub 2</mat-label>
+        <input matInput placeholder="Thank you" formControlName="bottomText" />
+      </mat-form-field>
+    </div>
+    <div class="example-button-row">
+      <button type="reset" class="btn1" mat-raised-button color="primary">Cancel</button>
+      <button type="submit" class="btn2" mat-raised-button>Save</button>
+    </div>
+  </form>
+</div>

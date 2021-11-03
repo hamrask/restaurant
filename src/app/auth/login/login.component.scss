@@ -1,17 +1,17 @@
 
 .matcard-margin{
-    margin-top: 100px;
+    margin-top: 50px;
     margin-left:auto;
     margin-right: auto;
     width:400px;
-    height: 450px;
+    height: 390px;
 }.box{
     padding-top: 20px;
     padding-left: 55px;
     
 }
 .img{
-    padding-left: 70px;
+    padding-left: 20px;
 }
 h3{
     padding-left: 100px;
@@ -27,3 +27,14 @@ h3{
 .w-textbox{
     width: 250px;
 }
+@font-face {
+    font-family: 'password';
+    font-style: normal;
+    font-weight: 400;
+    src: url('/assets/password.ttf');
+  }
+  
+  input.key {
+    font-family: 'password';
+    width: 100px; height: 16px;  
+  }

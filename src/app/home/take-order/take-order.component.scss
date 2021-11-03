@@ -43,5 +43,16 @@
 
 }
 .row{
-    margin: 30px;
+    margin-left: 30px;
+}
+.order-list{
+    cursor: pointer;
+    margin-top: 10px;
+    border: solid 1px #ccc;
+    background-color: #ccc;
+    text-align: center;
+    padding-top: 5px;
+}
+.item {
+    width: 100%;
 }

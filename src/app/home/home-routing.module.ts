@@ -10,12 +10,24 @@ import { TakeOrderComponent } from './take-order/take-order.component';
 import { UpdateStockComponent } from './update-stock/update-stock.component';
 import { UserAddComponent } from './user-add/user-add.component';
 import { UserManagementComponent } from './user-management/user-management.component';
+import { PrinterComponent } from './printer/printer.component';
+import { ProfileComponent } from './profile/profile.component';
+import { AddCustomerComponent } from './add-customer/add-customer.component';
+import { WaiterOrderComponent } from './waiter-order/waiter-order.component';
+import { OrderHomeComponent } from './order-home/order-home.component';
+import { OrderHistoryComponent } from './order-history/order-history.component';
+import { MainOrderPageComponent } from './main-order-page/main-order-page.component';
 
 const routes: Routes = [
   {
     path: '',
     component: HomeComponent,
     children: [
+      {
+        path: '',
+        redirectTo: 'order',
+        pathMatch: 'full'
+      },
       {
         path: 'section',
         component: ItemSectionComponent,
@@ -30,7 +42,11 @@ const routes: Routes = [
       },
       {
         path: 'order',
-        component: TakeOrderComponent,
+        component: OrderHomeComponent,
+      },
+      {
+        path: 'order/:orderNumber',
+        component: OrderHomeComponent,
       },
       {
         path: 'category',
@@ -53,8 +69,32 @@ const routes: Routes = [
         component: UserAddComponent,
       },
       {
+        path: 'add-user/:userId',
+        component: UserAddComponent,
+      },
+      {
         path: 'bill-report',
         component: BillReportComponent,
+      },
+      {
+        path: 'printer',
+        component: PrinterComponent,
+      },
+      {
+        path:'restaurant',
+        component: ProfileComponent
+      },
+      {
+        path:'add-customer',
+        component: AddCustomerComponent
+      },
+      {
+        path: 'order-history',
+        component: OrderHistoryComponent
+      },
+      {
+        path: 'main-order',
+        component: MainOrderPageComponent
       }
     ]
   }

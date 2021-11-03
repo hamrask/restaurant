@@ -1,0 +1,23 @@
+<div class="row mr0">
+  <div class="col-md-12 col-sm-12" style="overflow-y: scroll; height: 75px;margin-bottom: 25px;">
+      <mat-chip-list>
+        <mat-chip class="btn" [ngClass]="item._id == selectedCategory ? 'btn-selected': 'btn'" 
+        mat-raised-button *ngFor="let item of categories" [selected]="item._id == selectedCategory"
+        (click)="filterItemsByCategory(item._id)">
+        {{item.categoryName}}</mat-chip>
+      </mat-chip-list>
+  </div>
+  <div class="col-md-9">
+    <div
+    class="cards"
+    style="overflow-y: scroll; max-width: 980px; height: 400px;"
+  >
+    <mat-card (click)="selectItem(item)" class="item-card" *ngFor="let item of filteredItems" style="min-height: 30px;margin-left: 10px;cursor: pointer;">
+      <mat-card-subtitle style="text-align: center; font-weight: 500;color: black;">{{item.itemName}} | ₹{{item.amount}}</mat-card-subtitle>
+    </mat-card>
+  </div>
+  </div>
+  <div class="col-md-3 col-sm-12">
+    <app-order-bill (action)="checkAction($event)"></app-order-bill>
+  </div>
+</div>

@@ -22,8 +22,26 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatDialogModule } from '@angular/material/dialog';
+import { PrinterComponent } from './printer/printer.component';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { ProfileComponent } from './profile/profile.component';
+import { AddCustomerComponent } from './add-customer/add-customer.component';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { SharedModule } from '../shared/shared.module';
+import { WaiterOrderComponent } from './waiter-order/waiter-order.component';
+import { MatCardModule } from '@angular/material/card';
+import { OrderHomeComponent } from './order-home/order-home.component';
+import { MatStepperModule } from '@angular/material/stepper';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 
+import { MatChipsModule } from '@angular/material/chips';
+import { AuthModule } from '../auth/auth.module';
+import { MatNativeDateModule } from '@angular/material/core';
+import { OrderHistoryComponent } from './order-history/order-history.component';
+import { MainOrderPageComponent } from './main-order-page/main-order-page.component';
 
+import { MatTabsModule } from '@angular/material/tabs';
 @NgModule({
   declarations: [
     HomeComponent,
@@ -35,7 +53,14 @@ import { MatToolbarModule } from '@angular/material/toolbar';
     TableConfigComponent,
     UserManagementComponent,
     UserAddComponent,
-    BillReportComponent
+    BillReportComponent,
+    PrinterComponent,
+    ProfileComponent,
+    AddCustomerComponent,
+    WaiterOrderComponent,
+    OrderHomeComponent,
+    OrderHistoryComponent,
+    MainOrderPageComponent
   ],
   imports: [
     CommonModule,
@@ -50,7 +75,18 @@ import { MatToolbarModule } from '@angular/material/toolbar';
     MatIconModule,
     MatRadioModule,
     MatCheckboxModule,
-    MatToolbarModule
+    MatToolbarModule,
+    MatDialogModule,
+    MatAutocompleteModule,
+    MatPaginatorModule,
+    SharedModule,
+    MatCardModule,
+    MatStepperModule,
+    MatChipsModule,
+    AuthModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatTabsModule
   ]
 })
 export class HomeModule { }

@@ -1,46 +1,45 @@
-<div class="row">
+<div class="row" style="margin-left: 15px;">
 <div class="col-md-12 col-sm-12">
   <h3>User management</h3>
-  </div>
-  <div class="col-md-4">
-  <section>
-    <button class="btn" mat-raised-button>New User</button>    
-</section>
 </div>
-<div class="col-md-8">
-<mat-form-field class="Search" appearance="fill" style="margin-left: 650px;">
+<div class="col-md-4">
+    <button class="btn" mat-raised-button routerLink="/home/add-user">New User</button>    
+</div>
+<div class="col-md-8" style="text-align: right;">
+<mat-form-field  appearance="fill" >
   <mat-label>Search</mat-label>
-  <input matInput placeholder="Alex" value="">
+  <input matInput placeholder="eg:Alex"  [formControl]="searchText"
+  autocomplete = "off">
 </mat-form-field>
-
 </div>
       <div class="col-md-12">
-      <table mat-table [dataSource]="dataSource" class="user-table">
+      <table mat-table [dataSource] ="filteredUser" class="user-table">
 
-        <!--- Note that these columns can be defined in any order.
+        <!--- Note that these columns can be de
+          ined in any order.
               The actual rendered columns are set as a property on the row definition" -->
       
        
         <ng-container matColumnDef="position">
           <th mat-header-cell *matHeaderCellDef> No. </th>
-          <td mat-cell *matCellDef="let element"> {{element.position}} </td>
+          <td mat-cell *matCellDef="let element; let i = index"> {{i + 1}} </td>
         </ng-container>
       
        
         <ng-container matColumnDef="username">
           <th mat-header-cell *matHeaderCellDef> User name</th>
-          <td mat-cell *matCellDef="let element"> {{element.username}} </td>
+          <td mat-cell *matCellDef="let element"> {{element.userName}} </td>
         </ng-container>
       
        
         <ng-container matColumnDef="password">
-          <th mat-header-cell *matHeaderCellDef> Password </th>
-          <td mat-cell *matCellDef="let element"> {{element.password}} </td>
+          <th mat-header-cell *matHeaderCellDef> Name </th>
+          <td mat-cell *matCellDef="let element"> {{element.fullName}} </td>
         </ng-container>
       
-        <ng-container matColumnDef="roll">
-            <th mat-header-cell *matHeaderCellDef> Roll </th>
-            <td mat-cell *matCellDef="let element"> {{element.roll}} </td>
+        <ng-container matColumnDef="role">
+            <th mat-header-cell *matHeaderCellDef> Role </th>
+            <td mat-cell *matCellDef="let element"> {{element.userRoleCode}} </td>
           </ng-container>
 
         <ng-container matColumnDef="active">
@@ -48,11 +47,19 @@
           <td mat-cell *matCellDef="let element"> {{element.active}} </td>
         </ng-container>
 
-        
-        <ng-container matColumnDef="action">
-            <th mat-header-cell *matHeaderCellDef> Action</th>
-            <td mat-cell *matCellDef="let element"> {{element.action}} </td>
-          </ng-container>
+      
+  <!-- action Column -->
+  <ng-container matColumnDef="action">
+    <th mat-header-cell *matHeaderCellDef>Action</th>
+    <td mat-cell *matCellDef="let element">
+      <button mat-mini-fab color="primary" (click)="editUser(element)">
+        <mat-icon>edit</mat-icon></button
+      >&nbsp;
+      <button mat-mini-fab color="warn" (click)="deleteUser(element._id)">
+        <mat-icon>delete</mat-icon>
+      </button>
+    </td>
+  </ng-container>
       
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>

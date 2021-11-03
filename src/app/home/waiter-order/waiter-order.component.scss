@@ -14,7 +14,8 @@
 .btn{
     margin-left: 10px;
     margin-top: 10px;
-    width: 100px;
+    min-width: 80px;
+    justify-content: center;
 }
 .cards{
     margin-top: 20px;
@@ -61,4 +62,7 @@
     display: flex;
     align-items: baseline;
     justify-content: center;
+}
+.btn-selected {
+    background-color: #ccc;
 }

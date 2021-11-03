@@ -48,7 +48,7 @@ export class ItemService {
   }
   saveCategory(body){
     const url=environment.apiurl +'/category';
-    return this.http.post<any>(url,body);
+     return this.http.post<any>(url,body);
   }
   getCategoryById(id){
     const url=environment.apiurl + '/category/getById/' + id;
@@ -62,5 +62,16 @@ export class ItemService {
     const url = environment.apiurl + '/print/getAllPrinters';
     return this.http.get<any>(url);
   }
-}
-
+  updateStock(body){
+    const url = environment.apiurl + '/item/updatestock';
+    return this.http.post<any>(url, body);
+  }
+  getAllPrinter() {
+    const url = environment.apiurl + 'printer';
+    return this.http.get(url);
+  }
+  getAllAvailableItems() {
+    const url =environment.apiurl + '/item/available';
+    return this.http.get<any>(url);
+  }
+}  

@@ -8,6 +8,7 @@ import { ItemService } from '../../shared/services/item.service';
   styleUrls: ['./item-category.component.scss']
 })
 export class ItemCategoryComponent implements OnInit {
+  title = 'Category';
 categoryForm: FormGroup;
 categories = [];
 displayedColumns: string[] = ['position', 'category', 'action'];
@@ -27,7 +28,11 @@ displayedColumns: string[] = ['position', 'category', 'action'];
       this.itemService.saveCategory(this.categoryForm.value).subscribe(data => {
         this.getAllCategories();
         this.categoryForm.reset();
-        this.toastr.success('Success', 'Category added successfully');
+        if (this.categoryForm.get('_id').value) {
+          this.toastr.success('Success', 'Category updated successfully');
+        } else {
+          this.toastr.success('Success', 'Category saved successfully');
+        }
       }, error=> {
         console.log(error);
         this.toastr.error('Error', error?.error?.message);
@@ -45,7 +50,7 @@ displayedColumns: string[] = ['position', 'category', 'action'];
     });
   }
   editCategory(categoryDetails) {
-    this.categoryForm.patchValue(categoryDetails);
+    this.categoryForm.patchValue(categoryDetails);    
   }
 }
 

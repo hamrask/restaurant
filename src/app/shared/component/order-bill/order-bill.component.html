@@ -1,36 +1,43 @@
-
-    <section>
-        <button class="btn-print" mat-raised-button>Print</button>    
-    </section>
+<div class="row">
+  <div class="col-md-12">
+    <button (click)="printBill('BILL')" class="btn-print" mat-raised-button>Print</button> 
+    <button (click)="printBill('SETTLE')" class="btn-print" mat-raised-button color="primary" *ngIf="enableSettlement()">Settle</button> 
+    <button (click)="printBill('KOT')" class="btn-print" mat-raised-button color="accent">KOT</button>  
+  </div>
+  <div class="col-md-12" style="margin-top: 10px;">
+    <strong>Order No: {{OrderNumber}}</strong>
     <div class="table">
       <table>
         <tr>
-          <th>Sl.no</th>
+          <th>Qty</th>
           <th>Item Name</th>
           <th>Price</th>
+          <th *ngIf="!disableActions">Edit</th>
+          <th *ngIf="!disableActions">Delete</th>
         </tr>
-        <tr>
-          <td>1</td>
-          <td>pineaple juice</td>
-          <td>100</td>
-        </tr>
-        <tr>
-          <td>2</td>
-          <td>biriyani</td>
-          <td>190</td>
-        </tr>
-        <tr>
-          <td>2</td>
-          <td>biriyani</td>
-          <td>190</td>
-        </tr>
-        <tr>
-          <td>2</td>
-          <td>biriyani</td>
-          <td>190</td>
+        <tr *ngFor="let item of orderDetails; index as i">
+          <td>{{item.quantity}}</td>
+          <td>{{item.itemName}}</td>
+          <td>{{item.amount}}</td>
+          <td *ngIf="!disableActions">
+            <span (click)="editOrder(item)"  style="cursor: pointer;"><img width="15px" src="assets/edit.png"/></span>
+          </td>
+          <td *ngIf="!disableActions">
+            <span (click)="deleteOrder(item)"  style="margin-left: 5px;cursor: pointer;"><img width="15px" src="assets/delete.png"/></span>
+          </td>
         </tr>
       </table>
+    </div>
   </div>
-      <mat-label class="total">Total</mat-label>
+  <div class="col-md-12" style="text-align: right; font-weight: 500;">
+    <mat-label class="total">Total : {{TotalAmount}}</mat-label>
+  </div>
+  <div class="col-md-12">
+    <button mat-raised-button color="warn" (click)="closeOrder()">Close Order</button>
+  </div>
+</div>
+ 
+    
+  
    
   

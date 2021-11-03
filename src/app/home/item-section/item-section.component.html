@@ -1,39 +1,48 @@
 <div class="row main">
   <form [formGroup]="sectionForm" (ngSubmit)="saveSection()">
     <div class="col-md-12">
-        <h3>Add Item Section</h3>
+      <h3>Add Item Section</h3>
     </div>
     <div class="col-md-3">
       <label for="">Name of section</label>
             <mat-form-field class="section-margin" appearance="fill">
-              <input formControlName="sectionName" matInput placeholder="Eg.Juice" value="">
+              <input 
+              formControlName="sectionName" 
+              matInput 
+              placeholder="Eg.Juice" 
+              (keyup.enter)="saveSection()"
+              />
             </mat-form-field>
-          
-          
     </div>
-    <div class="col-md-3 ">
-      <label for="" class="pmargin">Choose Printer</label>
-      <br>
-      <mat-form-field appearance="fill" class="drop-margin">
-        <mat-label>Printer </mat-label>
-        <mat-select formControlName="printerName" matNativeControl required>
-          <mat-option *ngFor ="let item of printers" [value]="item.id">{{item.name}}</mat-option>
-        </mat-select>
+    <div class="col-md-3">
+      <label for="" class="pmargin">Printer IP</label>
+      <br/>
+      <mat-form-field class="section-margin" appearance="fill">
+        <input 
+        formControlName="printerIP" 
+        matInput 
+        placeholder="Eg: 192.168.1.1" 
+        (keyup.enter)="saveSection()"
+        autocomplete="off"/>
       </mat-form-field>
-          
     </div>
-    <div class="col-md-6"></div>
+    <div class="col-md-3" style="margin-bottom: 10px;">
+      <mat-checkbox formControlName="isMainPrinter">is Main Printer</mat-checkbox>
+    </div>
+    <div class="col-md-3"></div>
     <div class="col-md-4">
-        <section>
-              <button type="submit" class="btn1" mat-raised-button color="primary">Add</button>
-              <button type="reset" class="btn2" mat-raised-button>Cancel</button>    
-          </section>
+      <section>
+        <button type="submit" class="btn1" mat-raised-button color="primary">
+          Add
+        </button>
+        <button type="reset" class="btn2" mat-raised-button>Cancel</button>
+      </section>
     </div>
+  </form>
     <div class="row-table">
-    <div class="col-md-6 ">
+      <div class="col-md-6">
         <table mat-table [dataSource]="sections" class="w100">
-
-            <!--- Note that these columns can be defined in any order.
+          <!--- Note that these columns can be defined in any order.
                   The actual rendered columns are set as a property on the row definition" -->
           
             <!-- Position Column -->
@@ -50,22 +59,29 @@
           
             <!-- Weight Column -->
             <ng-container matColumnDef="printer">
-              <th mat-header-cell *matHeaderCellDef>  Printer</th>
-              <td mat-cell *matCellDef="let element"> {{element.printerName}} </td>
+              <th mat-header-cell *matHeaderCellDef>  Printer IP</th>
+              <td mat-cell *matCellDef="let element"> {{element.printerIP}} </td>
             </ng-container>
-          
+            <!--Printer Column-->
+            <ng-container matColumnDef="mainprinter">
+              <th mat-header-cell *matHeaderCellDef> Main Printer</th>
+              <td mat-cell *matCellDef="let element"><span *ngIf="element.isMainPrinter">YES</span> 
+                <span *ngIf = "!element.isMainPrinter">NO</span></td>
+            </ng-container>
             <!-- Symbol Column -->
             <ng-container matColumnDef="action">
               <th mat-header-cell *matHeaderCellDef> Action </th>
-              <td mat-cell *matCellDef="let element">  <button mat-mini-fab color="primary">
+              <td mat-cell *matCellDef="let element">  
+              <button mat-mini-fab color="primary" (click)="editSection(element)">
                 <mat-icon>edit</mat-icon>
-              </button>&nbsp;<button mat-mini-fab color="warn">
+              </button>&nbsp;<button mat-mini-fab color="warn" (click)="deleteSection(element._id)">
                 <mat-icon>delete</mat-icon>
               </button></td>
             </ng-container>
-          
             <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
             <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
           </table>
     </div>
+  </div>
+  
 </div>
