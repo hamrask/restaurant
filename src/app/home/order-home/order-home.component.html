@@ -1,7 +1,4 @@
 <mat-horizontal-stepper labelPosition="bottom" #stepper [selectedIndex]="stepperIndex">
-  <mat-step>
-    <app-login (loginChange)="loginSuccess()"></app-login>
-  </mat-step>
   <mat-step [stepControl]="firstFormGroup">
     <form [formGroup]="firstFormGroup" #form>
         <div class="row">

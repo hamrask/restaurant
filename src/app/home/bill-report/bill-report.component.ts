@@ -32,8 +32,12 @@ export class BillReportComponent implements OnInit {
       this.date = new Date(this.date).toISOString();
     }
     this.report.getReport(this.date).subscribe(data => {
-      this.dataSource = this.items = data.list;
-    this.netTotal = data.total;
+      this.dataSource = this.items = data;
+      let total = 0;
+      data.forEach(element => {
+        total += Number(element.amount);
+      });
+      this.netTotal = total;
     });
 
   }

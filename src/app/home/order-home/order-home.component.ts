@@ -32,7 +32,7 @@ export class OrderHomeComponent implements OnInit {
     });
     const orderNumber = this.route.snapshot.params.orderNumber;
     if (orderNumber) {
-      this.stepperIndex = 4;
+      this.stepperIndex = 3;
     }
   }
   
@@ -40,33 +40,30 @@ export class OrderHomeComponent implements OnInit {
     this.stepper.selected.completed = true;
     this.order.orderForm.get('orderType').patchValue(this.firstFormGroup.get('orderType').value);
     if (this.firstFormGroup.get('orderType').value == 'HOME_DELIVERY') {
-      this.stepperIndex = 2;
+      this.stepperIndex = 1;
     } else if (this.firstFormGroup.get('orderType').value == 'DINING') {
-      this.stepperIndex = 3;
+      this.stepperIndex = 2;
     } else {
+      this.stepper.steps.get(0).completed = true;
       this.stepper.steps.get(1).completed = true;
-      this.stepper.steps.get(2).completed = true;
-      this.stepperIndex = 4;
+      this.stepperIndex = 3;
     }
   }
   setCustomerData(data) {
     if (data) {
       this.firstFormGroup.get('customer').setValue(data);
       this.order.orderForm.get('customer').patchValue(data);
-      this.stepper.steps.get(2).completed = true;
-      this.stepperIndex = 4;
+      this.stepper.steps.get(1).completed = true;
+      this.stepperIndex = 3;
     } else {
       this.firstFormGroup.get('customer').setValue(null);
-      this.stepperIndex = 1;
+      this.stepperIndex = 0;
     }
     
   }
-  loginSuccess() {
-    this.stepperIndex = 1;
-  }
   setTableNumber(tableNumber) {
     this.order.orderForm.get('tableNumber').setValue(tableNumber);
-    this.stepperIndex = 4;
+    this.stepperIndex = 3;
   }
   closeOrder() {
     this.stepperIndex = 0;

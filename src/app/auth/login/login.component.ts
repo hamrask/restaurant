@@ -30,6 +30,7 @@ export class LoginComponent implements OnInit {
           this.toaster.success('Login Success', 'Success');
           this.auth.setAuthToken(data.token);
           this.loginChange.emit(true);
+          this.router.navigate(["/home"]);
       }, error => {
         this.toaster.error(error.error.message, 'Error');
       });
