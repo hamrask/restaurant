@@ -4,6 +4,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ToastrService } from 'ngx-toastr';
 import { CommonService } from '../../services/common.service';
 import { OrderService } from '../../services/order.service';
+import { LocalPrintService } from '../../services/local-print.service';
 
 @Component({
   selector: 'app-order-bill',
@@ -18,7 +19,7 @@ export class OrderBillComponent implements OnInit {
   disableKot;
   fromBillView;
   @Output() action = new EventEmitter(true);
-  constructor(private common: CommonService, private order: OrderService, private toaster: ToastrService,
+  constructor(private common: CommonService, private order: OrderService, private toaster: ToastrService, private localPrinter: LocalPrintService,
     @Optional() @Inject(MAT_DIALOG_DATA) public data:any,@Optional() private dialog: MatDialogRef<OrderBillComponent>) { 
       if (data) {
         this.orderDetails = data.orderList;
@@ -38,8 +39,15 @@ export class OrderBillComponent implements OnInit {
     return this.common.abilityToSettle(this.common.getUserData());
   }
   printBill(orderType) {
-    this.order.printOrderByOrderNumber(this.OrderNumber, orderType).subscribe(data => {
-      this.toaster.success('Bill Printed Successfully');
+    this.order.printOrderByOrderNumber(this.OrderNumber, orderType).subscribe(async(data: any) => {
+      if (orderType == "KOT") {
+        this.localPrinter.printKot(data.data).subscribe((response: any) => {
+          this.order.updatePrintStatus(response.orderNumber).subscribe();
+        });
+      } else {
+        this.localPrinter.printReciept(data.data);
+      }
+      this.toaster.success('Bill Printed Successfullyyy');
     });
   }
   checkKotStatus() {

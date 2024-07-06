@@ -1,8 +1,9 @@
 <div class="row">
   <div class="col-md-12">
     <button (click)="printBill('BILL')" class="btn-print" mat-raised-button>Print</button> 
-    <button (click)="printBill('SETTLE')" class="btn-print" mat-raised-button color="primary" *ngIf="enableSettlement()">Settle</button> 
-    <button (click)="printBill('KOT')" class="btn-print" mat-raised-button color="accent">KOT</button>  
+    <button (click)="printBill('CASH_SETTLE')" class="btn-print" mat-raised-button color="primary" *ngIf="enableSettlement()">Cash Settle</button>
+    <button (click)="printBill('CARD_SETTLE')" class="btn-print" mat-raised-button color="warn" *ngIf="enableSettlement()">Card Settle</button>  
+    <!-- <button (click)="printBill('KOT')" class="btn-print" mat-raised-button color="accent">KOT</button>   -->
   </div>
   <div class="col-md-12" style="margin-top: 10px;">
     <strong>Order No: {{OrderNumber}}</strong>
@@ -33,7 +34,7 @@
     <mat-label class="total">Total : {{TotalAmount}}</mat-label>
   </div>
   <div class="col-md-12">
-    <button mat-raised-button color="warn" (click)="closeOrder()">Close Order</button>
+    <button mat-raised-button color="warn" (click)="closeOrder()">Close</button>
   </div>
 </div>
  

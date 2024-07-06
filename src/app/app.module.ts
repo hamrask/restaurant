@@ -13,6 +13,7 @@ import {MatButtonModule} from '@angular/material/button';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { CommonService } from './shared/services/common.service';
 import { RequestInterceptor } from './shared/util/request.interceptor';
+import { DatePipe } from '@angular/common';
 
 
 
@@ -31,7 +32,7 @@ import { RequestInterceptor } from './shared/util/request.interceptor';
     MatButtonModule,
     MatProgressSpinnerModule
   ],
-  providers: [CommonService , { provide: HTTP_INTERCEPTORS, useClass: RequestInterceptor, multi: true }],
+  providers: [CommonService , { provide: HTTP_INTERCEPTORS, useClass: RequestInterceptor, multi: true }, DatePipe],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

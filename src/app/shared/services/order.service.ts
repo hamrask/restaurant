@@ -58,6 +58,9 @@ export class OrderService {
     }
     return total;
   }
-
+  updatePrintStatus(orderNumber) {
+    const url = environment.apiurl + '/order/updatePrintStatus/'+ orderNumber;
+    return this.http.get(url);
+  }
 }
 
